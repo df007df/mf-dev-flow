@@ -1,0 +1,4 @@
+interface:
+  display_name: "mf-dev-flow · 原型与产品流程"
+  short_description: "按当前目标路由原型、需求、规划、系统与交付流程"
+  default_prompt: "使用 $mf-dev-flow，根据本次明确目标或已绑定任务选择一个流程，只读当前流程入口和必要协议，遵守已有范围与命令门禁。"

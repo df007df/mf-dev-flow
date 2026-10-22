@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "miniapp-product",
+  "version": 1,
+  "title": "小程序产品四阶段交付流程",
+  "taskPhase": "delivery",
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "reportFiles": [
+    {"file": "plan.md", "label": "开发计划", "sections": ["实施切片", "技术方案与实施决策"]},
+    {"file": "implementation.md", "label": "实现记录", "sections": ["关键技术方案", "实际改动与行为", "未完成项和风险"]},
+    {"file": "verification.md", "label": "测试与原型回归", "sections": ["测试执行记录", "逻辑复核与原型对照", "截图证据与偏差处理"]}
+  ],
+  "stages": [
+    {
+      "id": "prototype_alignment",
+      "title": "原型对齐（逐区 UI 与交互）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在实际 UI 项目复刻原型的页面、样式、交互、状态与展示字段。",
+      "agentFile": "agents/prototype-alignment.md",
+      "documentation": {"description": "以同一业务状态的原型图与真实 UI 截图逐区对齐，持续修复差异，直到所有业务区块通过。", "process": [{"id": "pair-screenshots", "title": "建立一一对应的截图对", "detail": "为每个待验收业务状态归档一张原型参考图和一张真实 UI 结果图；小程序结果图必须来自微信开发者工具 simulator_screenshot。"}, {"id": "review-regions", "title": "按区块识别并比对差异", "detail": "从上到下核对每个业务区块的存在性、顺序、布局、文案、视觉和交互，明确记录 failed 或 uncertain 的差异。"}, {"id": "repair-and-repeat", "title": "修复后重新对比", "detail": "依据差异修复 UI，重新采集同状态截图并逐区审查；循环执行，直到所有业务区块均为 passed。"}], "outputs": [{"id": "paired-screenshots", "title": "原型图 / UI 图一一对应", "detail": "每个业务状态输出一组固定截图对，页面中并排展示原型图与 UI 图，并保留状态、复现动作和来源。"}, {"id": "difference-comparisons", "title": "差异对照与逐区结论", "detail": "发现差异时，在同一截图对旁展示差异对照和逐区审查结论；已修复项须由新的截图对与 passed 结论替代，不能只写文字说明。"}]},
+      "acceptanceCriteria": [{"id": "same-state-screenshot-pair", "title": "同状态固定截图对", "detail": "必须归档一张关联原型的参考截图，以及一张绑定 ui-client 项目实际产出的结果截图；两图须是同一业务状态。小程序项目的结果图必须来自微信开发者工具 simulator_screenshot，不能以 H5、接口页面或原型演示图替代。"}, {"id": "all-business-regions-passed", "title": "全部业务区块逐区通过", "detail": "先从上到下识别两图的业务区块，再逐块核对存在性、顺序、布局、文案、视觉与交互；所有业务区块均为 passed 才可确认。仅原生状态栏、宿主胶囊、Home Indicator 与原型演示工具可排除，业务底部导航必须保留。"}],
+      "evidenceGates": ["miniapp_ui_evidence", "visual_validation_pair", "visual_region_review"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "technical_solution",
+      "title": "技术方案（superpowers）",
+      "ownerRoles": ["ui-client"],
+      "objective": "用 superpowers 形成可实施的小程序技术方案，固定既有接口复用边界与本地状态策略。",
+      "agentFile": "agents/technical-solution.md",
+      "documentation": {"description": "在不新增接口、不改动后端的约束下，先用 superpowers 组织技术方案，再把可影响实施的未决点限定为最多三个最相关问题。", "process": [{"id": "inspect-existing-boundaries", "title": "核对已有客户端与接口边界", "detail": "仅引用当前小程序已有登录、数据与导航能力；明确哪些状态必须保存在 Taro localStorage，不能以 Mock 或候选接口替代事实。"}, {"id": "write-superpowers-plan", "title": "使用 superpowers 编写方案", "detail": "输出页面承接、状态迁移、失败与恢复路径、文件改动范围和验证方法；不把方案拆成后端或新增接口工作。"}, {"id": "record-focused-questions", "title": "收敛最相关的问题", "detail": "只有确实影响实现的事项才记录，最多三个；每项说明影响、默认处理和需要的决定，并更新到本阶段产出。"}], "outputs": [{"id": "implementation-plan", "title": "小程序技术方案", "detail": "列出既有接口调用点、页面与回跳、持久化状态版本/迁移/清理、错误恢复、写入范围和验证路径。"}, {"id": "focused-questions", "title": "最相关问题（最多三个）", "detail": "没有会阻断实施的问题时明确写“无”；不得以泛泛问题替代可执行方案。"}]},
+      "acceptanceCriteria": [{"id": "superpowers-plan", "title": "superpowers 技术方案已落盘", "detail": "方案明确沿用的已有接口、客户端状态边界、实现范围和验证方式，不包含新增接口或后端改造。"}, {"id": "focused-questions-limit", "title": "问题已收敛", "detail": "阶段产出中的未决问题不超过三个，且每项都与本功能实施直接相关。"}],
+      "evidenceGates": [],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "development",
+      "title": "开发（既有接口与小程序本地状态）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在小程序中实现已确认方案，只调用既有接口，并完成相关自动化和手工验证。",
+      "agentFile": "agents/development.md",
+      "documentation": {"description": "实现页面、登录承接、回跳和本地状态；不得新增后端接口、服务端 Mock 或把临时数据散落到页面。", "process": [{"id": "implement-client-flow", "title": "实现客户端流程", "detail": "按方案改动小程序页面、服务适配和持久化状态，保证中断后可恢复且重复动作幂等。"}, {"id": "verify-existing-api-paths", "title": "核验既有接口路径", "detail": "验证现有登录与数据调用的成功、失败和回跳分支；接口不可用时记录真实阻塞，不新增替代接口。"}], "outputs": [{"id": "implemented-client-flow", "title": "可运行的小程序流程", "detail": "实现改动、实际测试结果和已知风险记录在本运行内。"}]},
+      "evidenceGates": [],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "end_to_end_acceptance",
+      "title": "端到端验收（真实小程序）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在真实小程序界面和既有接口路径上验收完整用户流程，完成同状态截图逐区审查。",
+      "agentFile": "agents/e2e-acceptance.md",
+      "evidenceGates": ["miniapp_ui_evidence", "visual_validation_pair", "visual_region_review"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ]
+}

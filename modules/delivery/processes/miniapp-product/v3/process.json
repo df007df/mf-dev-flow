@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "miniapp-product",
+  "version": 3,
+  "title": "小程序产品四阶段交付流程（数据流转图/风险台账/验收截图门禁）（技术要求确认链）",
+  "taskPhase": "delivery",
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "reportFiles": [
+    {"file": "plan.md", "label": "开发计划", "sections": ["实施切片", "技术方案与实施决策"]},
+    {"file": "impl.md", "label": "实现记录", "sections": ["关键技术方案", "实际改动与行为", "未完成项和风险"]},
+    {"file": "verification.md", "label": "测试与原型回归", "sections": ["测试执行记录", "逻辑复核与原型对照", "截图证据与偏差处理"]}
+  ],
+  "stages": [
+    {
+      "id": "prototype_alignment",
+      "title": "原型对齐（逐区 UI 与交互）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在实际 UI 项目复刻原型的页面、样式、交互、状态与展示字段。",
+      "agentFile": "agents/prototype-alignment.md",
+      "documentation": {"description": "以同一业务状态的原型图与真实 UI 截图逐区对齐，持续修复差异，直到所有业务区块通过。", "process": [{"id": "pair-screenshots", "title": "建立一一对应的截图对", "detail": "为每个待验收业务状态归档一张原型参考图和一张真实 UI 结果图；小程序结果图必须来自微信开发者工具 simulator_screenshot。"}, {"id": "review-regions", "title": "按区块识别并比对差异", "detail": "从上到下核对每个业务区块的存在性、顺序、布局、文案、视觉和交互，明确记录 failed 或 uncertain 的差异。"}, {"id": "repair-and-repeat", "title": "修复后重新对比", "detail": "依据差异修复 UI，重新采集同状态截图并逐区审查；循环执行，直到所有业务区块均为 passed。"}], "outputs": [{"id": "paired-screenshots", "title": "原型图 / UI 图一一对应", "detail": "每个业务状态输出一组固定截图对，页面中并排展示原型图与 UI 图，并保留状态、复现动作和来源。"}, {"id": "difference-comparisons", "title": "差异对照与逐区结论", "detail": "发现差异时，在同一截图对旁展示差异对照和逐区审查结论；已修复项须由新的截图对与 passed 结论替代，不能只写文字说明。"}]},
+      "acceptanceCriteria": [{"id": "same-state-screenshot-pair", "title": "同状态固定截图对", "detail": "必须归档一张关联原型的参考截图，以及一张绑定 ui-client 项目实际产出的结果截图；两图须是同一业务状态。小程序项目的结果图必须来自微信开发者工具 simulator_screenshot，不能以 H5、接口页面或原型演示图替代。"}, {"id": "all-business-regions-passed", "title": "全部业务区块逐区通过", "detail": "先从上到下识别两图的业务区块，再逐块核对存在性、顺序、布局、文案、视觉与交互；所有业务区块均为 passed 才可确认。仅原生状态栏、宿主胶囊、Home Indicator 与原型演示工具可排除，业务底部导航必须保留。"}],
+      "evidenceGates": ["miniapp_ui_evidence", "visual_validation_pair", "visual_region_review", "risk_ledger"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "technical_solution",
+      "title": "技术方案（superpowers + 数据系统流转图）",
+      "ownerRoles": ["ui-client"],
+      "objective": "用 superpowers 形成可实施的小程序技术方案，固定既有接口复用边界与本地状态策略，并输出技术方案结论与至少一张数据系统流转 SVG。",
+      "agentFile": "agents/technical-solution.md",
+      "documentation": {"description": "在不新增接口、不改动后端的约束下，先用 superpowers 组织技术方案并给出明确结论，再绘制数据系统流转图（系统+数据+对应接口，可多张）经命令登记为本阶段门禁证据，最后把可影响实施的未决点限定为最多三个最相关问题。", "process": [{"id": "inspect-existing-boundaries", "title": "核对已有客户端与接口边界", "detail": "仅引用当前小程序已有登录、数据与导航能力；明确哪些状态必须保存在 Taro localStorage，不能以 Mock 或候选接口替代事实。"}, {"id": "write-superpowers-plan", "title": "使用 superpowers 编写方案", "detail": "输出页面承接、状态迁移、失败与恢复路径、文件改动范围和验证方法；不把方案拆成后端或新增接口工作。"}, {"id": "draw-dataflow-svg", "title": "绘制数据系统流转图（SVG）", "detail": "根据方案结论绘制一张或多张 SVG：节点为参与系统（小程序页面/本地存储/老后端/content-service 等），连线标注在该系统间流转的数据与对应接口（方法+路径），标明读取、写入与回跳方向；文件保存到运行目录，并用 delivery stage-artifact --kind dataflow_svg --file <svg> --caption <说明> 登记到本阶段，发布审查时缺图不得确认。"}, {"id": "record-focused-questions", "title": "收敛最相关的问题", "detail": "只有确实影响实现的事项才记录，最多三个；每项说明影响、默认处理和需要的决定，并更新到本阶段产出。"}], "outputs": [{"id": "impl-plan", "title": "小程序技术方案结论", "detail": "列出既有接口调用点、页面与回跳、持久化状态版本/迁移/清理、错误恢复、写入范围和验证路径；阶段总结必须以明确的技术方案结论开头。"}, {"id": "dataflow-diagrams", "title": "数据系统流转 SVG（至少一张）", "detail": "每张图展示系统、数据与对应接口的主要交互流程；经 delivery stage-artifact --kind dataflow_svg 登记后是本阶段发布审查的门禁证据，文字描述不能替代。"}, {"id": "focused-questions", "title": "最相关问题（最多三个）", "detail": "没有会阻断实施的问题时明确写“无”；不得以泛泛问题替代可执行方案。"}]},
+      "acceptanceCriteria": [{"id": "superpowers-plan", "title": "superpowers 技术方案已落盘", "detail": "方案明确沿用的已有接口、客户端状态边界、实现范围和验证方式，不包含新增接口或后端改造。"}, {"id": "dataflow-svg-archived", "title": "数据系统流转 SVG 已登记", "detail": "至少一张 .svg 已通过 delivery stage-artifact --kind dataflow_svg 登记在本阶段，图面展示系统+数据+对应接口的交互流程；可登记多张，文字或 Mermaid 描述不构成门禁证据。"}, {"id": "focused-questions-limit", "title": "问题已收敛", "detail": "阶段产出中的未决问题不超过三个，且每项都与本功能实施直接相关。"}],
+      "evidenceGates": ["dataflow_svg_evidence", "risk_ledger", "technical_requirement_confirmed", "dev_plan_evidence"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "development",
+      "title": "开发（既有接口与小程序本地状态）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在小程序中实现已确认方案，只调用既有接口，完成相关自动化和手工验证，并把“风险/下一步”逐条登记为功能点独立台账。",
+      "agentFile": "agents/development.md",
+      "documentation": {"description": "实现页面、登录承接、回跳和本地状态；不得新增后端接口、服务端 Mock 或把临时数据散落到页面。总结中留下的每项风险/下一步必须用 --risk 登记到功能点，成为下一次运行的输入，不能只留在阶段文案里。", "process": [{"id": "implement-client-flow", "title": "实现客户端流程", "detail": "按方案改动小程序页面、服务适配和持久化状态，保证中断后可恢复且重复动作幂等。"}, {"id": "verify-existing-api-paths", "title": "核验既有接口路径", "detail": "验证现有登录与数据调用的成功、失败和回跳分支；接口不可用时记录真实阻塞，不新增替代接口。"}, {"id": "register-feature-risks", "title": "风险/下一步登记到功能点", "detail": "阶段总结“风险/下一步”中的每条留项通过 delivery stage --risk \"<条目>\" 逐条登记到关联功能点（可多个 --risk）；确无留项时总结该项写“无”。登记的独立条目在下一次同功能交付运行时自动作为输入注入。"}], "outputs": [{"id": "implemented-client-flow", "title": "可运行的小程序流程", "detail": "实现改动、实际测试结果和已知风险记录在本运行内。"}, {"id": "feature-risk-ledger", "title": "功能点风险台账", "detail": "“风险/下一步”以独立条目挂在功能点上（含来源运行、任务与阶段），供看板单独展示并作为二次运行的输入来源。"}]},
+      "acceptanceCriteria": [{"id": "implemented-client-flow-ok", "title": "方案范围已实现并验证", "detail": "页面与既有接口路径按方案接通，自动化与手工验证结果如实记录；未执行的验证不得写为通过。"}, {"id": "risks-ledgered-on-feature", "title": "风险已独立登记到功能点", "detail": "阶段总结“风险/下一步”含具体留项时，每条均已通过 --risk 登记到关联功能点；不得只把风险写在文案里就确认本阶段。"}],
+      "evidenceGates": ["risk_ledger"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "end_to_end_acceptance",
+      "title": "端到端验收（真实小程序 + 截图门禁）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在真实小程序界面和既有接口路径上验收完整用户流程，归档本阶段 E2E 截图证据并完成同状态截图逐区审查。",
+      "agentFile": "agents/e2e-acceptance.md",
+      "documentation": {"description": "只在真实小程序与既有接口路径上复现完整用户旅程；验收阶段必须把本阶段实际产生的截图经命令登记为门禁证据，早期阶段的截图证据不自动继承为本阶段证据。", "process": [{"id": "replay-real-journey", "title": "复现真实用户旅程", "detail": "在绑定 ui-client 的项目上从入口走到终点复现完整流程，覆盖成功、失败与恢复分支；结果如实记录。"}, {"id": "archive-e2e-screenshots", "title": "归档并登记 E2E 截图", "detail": "对验收旅程的关键结果采集真实截图（小程序必须来自微信开发者工具 simulator_screenshot），保存到运行目录，并用 delivery stage-artifact --kind e2e_screenshot --file <png> --caption <流程与状态说明> 登记到本阶段。"}, {"id": "region-review-pairs", "title": "同状态截图逐区审查", "detail": "用 visual archive/compare 完成原型参考图与结果图的逐区审查；验证失败给出可复现缺陷并退回开发阶段。"}], "outputs": [{"id": "e2e-screenshot-ledger", "title": "本阶段 E2E 截图证据", "detail": "至少一张在本验收阶段经 delivery stage-artifact --kind e2e_screenshot 登记的真实截图，附流程、状态与复现动作说明；这是确认本阶段的门禁证据。"}, {"id": "acceptance-conclusion", "title": "端到端验收结论", "detail": "完整用户流程的通过/缺陷结论，与逐区审查结果、测试执行记录互相印证。"}]},
+      "acceptanceCriteria": [{"id": "e2e-screenshots-archived-in-stage", "title": "E2E 截图证据已登记在本阶段", "detail": "确认或完成本阶段时，本阶段必须已登记至少一张 e2e_screenshot 产物（png/jpg/webp，小程序来自 simulator_screenshot）；早期阶段的截图登记不能替代本阶段门禁。"}, {"id": "same-state-screenshot-pair", "title": "同状态固定截图对", "detail": "必须归档一张关联原型的参考截图，以及一张绑定 ui-client 项目实际产出的结果截图；两图须是同一业务状态。小程序项目的结果图必须来自微信开发者工具 simulator_screenshot，不能以 H5、接口页面或原型演示图替代。"}, {"id": "all-business-regions-passed", "title": "全部业务区块逐区通过", "detail": "先从上到下识别两图的业务区块，再逐块核对存在性、顺序、布局、文案、视觉与交互；所有业务区块均为 passed 才可确认。仅原生状态栏、宿主胶囊、Home Indicator 与原型演示工具可排除，业务底部导航必须保留。"}],
+      "evidenceGates": ["miniapp_ui_evidence", "visual_validation_pair", "visual_region_review", "e2e_screenshot_evidence", "risk_ledger"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ]
+}

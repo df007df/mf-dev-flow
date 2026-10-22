@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "web-runtime",
+  "version": 1,
+  "capabilities": {
+    "sourceDiscovery": false,
+    "sourceModes": ["url", "local-preview"],
+    "navigation": { "selector": true },
+    "screenshots": { "png": true },
+    "archival": { "trace": true }
+  },
+  "overlays": [
+    {
+      "stageId": "runtime-observe",
+      "agentFile": "agents/runtime-observe.md"
+    }
+  ]
+}

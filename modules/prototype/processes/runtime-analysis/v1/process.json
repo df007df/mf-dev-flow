@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "runtime-analysis",
+  "version": 1,
+  "initialStageId": "scope-snapshot",
+  "stages": [
+    {
+      "id": "scope-snapshot",
+      "agentFile": "agents/scope-snapshot.md",
+      "commands": ["init"],
+      "transitions": ["structure-model"]
+    },
+    {
+      "id": "structure-model",
+      "agentFile": "agents/structure-model.md",
+      "commands": ["put", "checkpoint"],
+      "transitions": ["runtime-observe"]
+    },
+    {
+      "id": "runtime-observe",
+      "agentFile": "agents/runtime-observe.md",
+      "commands": ["put", "capture", "evidence", "checkpoint"],
+      "transitions": ["structure-model", "audit-accept"]
+    },
+    {
+      "id": "audit-accept",
+      "agentFile": "agents/audit-accept.md",
+      "commands": ["audit", "checkpoint", "accept"],
+      "transitions": ["structure-model", "runtime-observe"],
+      "terminal": true
+    }
+  ]
+}

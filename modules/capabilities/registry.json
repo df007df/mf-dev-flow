@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "kernelGates": [
+    "risk_ledger",
+    "dataflow_svg_evidence",
+    "e2e_screenshot_evidence",
+    "technical_requirement_confirmed",
+    "dev_plan_evidence",
+    "feature_map_fresh",
+    "refinement_context_frozen",
+    "entry_coverage_patched",
+    "impact_closure_frozen",
+    "impact_reviews_complete",
+    "reassessment_cleared",
+    "prd_sources_frozen",
+    "prd_findings_verbatim_evidence",
+    "prd_check_passed",
+    "system_readonly_evidence",
+    "system_card_snapshot",
+    "system_publish_fingerprint"
+  ],
+  "capabilities": [
+    {
+      "id": "visual-compare",
+      "version": 1,
+      "title": "同状态截图对与逐区差异判定",
+      "agentFile": "visual-compare/v1/agents/judgment.md",
+      "gates": ["visual_validation_pair", "visual_region_review"],
+      "commands": ["visual archive", "visual archive-additional", "visual compare"],
+      "provider": "modules/runtime/delivery.mjs#visualCompare"
+    },
+    {
+      "id": "miniapp-evidence",
+      "version": 1,
+      "title": "微信开发者工具真机截图取证",
+      "agentFile": "miniapp-evidence/v1/agents/judgment.md",
+      "gates": ["miniapp_ui_evidence"],
+      "commands": ["miniapp evidence"],
+      "provider": "modules/runtime/delivery.mjs#miniappEvidenceCommand"
+    },
+    {
+      "id": "api-mock-evidence",
+      "version": 1,
+      "title": "接口契约取证（真实请求/响应/截图）",
+      "agentFile": "api-mock-evidence/v1/agents/judgment.md",
+      "gates": [],
+      "commands": ["api-mock evidence"],
+      "provider": "modules/runtime/delivery.mjs#apiMockEvidenceCommand"
+    },
+    {
+      "id": "content-diff",
+      "version": 1,
+      "title": "文件/快照内容比对（字节哈希与归一化行差）",
+      "agentFile": "content-diff/v1/agents/judgment.md",
+      "gates": [],
+      "commands": ["content hash", "content compare"],
+      "provider": "modules/runtime/content.mjs"
+    },
+    {
+      "id": "git-diff",
+      "version": 1,
+      "title": "Git 仓库变更文件清单（基线 ref → 工作区/指定 ref）",
+      "agentFile": "git-diff/v1/agents/judgment.md",
+      "gates": [],
+      "commands": ["capability git-diff"],
+      "provider": "modules/runtime/capabilities.mjs#capabilityGitDiff"
+    },
+    {
+      "id": "runtime-observe",
+      "version": 1,
+      "title": "运行态页面观察（web/小程序/iOS 适配器）",
+      "agentFile": "runtime-observe/v1/agents/judgment.md",
+      "gates": [],
+      "commands": ["prototype init/next/audit/accept"],
+      "provider": "modules/prototype/adapters"
+    }
+  ]
+}

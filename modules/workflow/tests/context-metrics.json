@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "measuredAt": "2026-09-12T06:38:59.145Z",
+  "source": "tool files and synthetic temporary context",
+  "baselineEntryBytes": 15634,
+  "entryBytes": 2477,
+  "entryReductionPercent": 84.2,
+  "flowListBytes": 3187,
+  "routes": {
+    "prototype": {
+      "flowEntryBytes": 7009,
+      "skillPlusFlowBytes": 9486,
+      "hookContextBytes": 498
+    },
+    "prd": {
+      "flowEntryBytes": 2290,
+      "skillPlusFlowBytes": 4767,
+      "hookContextBytes": 480
+    },
+    "planning": {
+      "flowEntryBytes": 2741,
+      "skillPlusFlowBytes": 5218,
+      "hookContextBytes": 490
+    },
+    "delivery": {
+      "flowEntryBytes": 3869,
+      "skillPlusFlowBytes": 6346,
+      "hookContextBytes": 487
+    },
+    "system": {
+      "flowEntryBytes": 1193,
+      "skillPlusFlowBytes": 3670,
+      "hookContextBytes": 482
+    },
+    "project": {
+      "flowEntryBytes": 873,
+      "skillPlusFlowBytes": 3350,
+      "hookContextBytes": 485
+    },
+    "overview": {
+      "flowEntryBytes": 832,
+      "skillPlusFlowBytes": 3309,
+      "hookContextBytes": 490
+    },
+    "maintenance": {
+      "flowEntryBytes": 964,
+      "skillPlusFlowBytes": 3441,
+      "hookContextBytes": 465
+    }
+  },
+  "boundDeliveryHookBytes": 635,
+  "hookHardLimitBytes": 2048,
+  "currentStageBriefBytes": {
+    "prototype_alignment": 4149,
+    "api_mock": 2894,
+    "technical_implementation": 1518,
+    "end_to_end_acceptance": 2446
+  },
+  "limitation": "UTF-8 byte measurements, not tokenizer counts or measured model usage; first operation may read its own additional protocol."
+}

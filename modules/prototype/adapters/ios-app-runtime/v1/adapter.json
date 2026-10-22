@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "ios-app-runtime",
+  "version": 1,
+  "title": "iOS 原生 App 模拟器",
+  "sourceModes": ["ios-simulator"],
+  "capabilities": {
+    "sourceDiscovery": false,
+    "operations": [
+      "screenState",
+      "elementAction",
+      "simulatorScreenshot",
+      "traceArchive",
+      "appLaunch"
+    ],
+    "evidence": { "screenshot": "png", "trace": true }
+  },
+  "overlays": [
+    {
+      "stageId": "runtime-observe",
+      "agentFile": "agents/runtime-observe.md"
+    }
+  ]
+}

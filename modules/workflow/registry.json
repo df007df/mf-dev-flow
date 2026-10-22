@@ -1,0 +1,721 @@
+{
+  "schemaVersion": 1,
+  "flows": [
+    {
+      "id": "prototype",
+      "title": "原型、问题与需求",
+      "entry": "flows/prototype/entry.md",
+      "commands": [
+        "prototype"
+      ],
+      "start": "prototype status --json",
+      "resume": "prototype next --limit 10 --json",
+      "outputs": [
+        "prototype/catalog.sqlite",
+        "prototype/analyses/"
+      ],
+      "handoff": "planning",
+      "goal": {
+        "mode": "analyze",
+        "allowedWrites": [
+          "prototype/"
+        ],
+        "completion": "只补充到保存结束；分析到审计、人工复核及接受"
+      }
+    },
+    {
+      "id": "prd",
+      "title": "PRD 阅读与取证",
+      "entry": "flows/prd/entry.md",
+      "commands": [
+        "prd"
+      ],
+      "start": "prd status --json",
+      "resume": "prd status --json",
+      "outputs": [
+        "prd/manifest.json",
+        "prd/sources/",
+        "prd/analyses/"
+      ],
+      "handoff": "planning",
+      "goal": {
+        "mode": "analyze",
+        "allowedWrites": [
+          "prd/"
+        ],
+        "completion": "来源冻结且 findings.json 通过 check 后 render 会议材料；PRD 只读，不授权开发"
+      }
+    },
+    {
+      "id": "planning",
+      "title": "功能规划与变更复评",
+      "entry": "flows/planning/entry.md",
+      "commands": [
+        "feature",
+        "graph"
+      ],
+      "start": "graph sync --json",
+      "resume": "run context --id <ID>",
+      "outputs": [
+        "planning/feature-map.json",
+        "refinement-runs/"
+      ],
+      "handoff": "delivery",
+      "goal": {
+        "mode": "plan",
+        "allowedWrites": [
+          "planning/",
+          "graph/",
+          "refinement-runs/"
+        ],
+        "completion": "发布通过复评的功能地图"
+      }
+    },
+    {
+      "id": "delivery",
+      "title": "产品交付与回归",
+      "entry": "flows/delivery/entry.md",
+      "commands": [
+        "delivery",
+        "work",
+        "visual",
+        "api-mock",
+        "miniapp",
+        "gate"
+      ],
+      "start": "feature status",
+      "resume": "work delivery-brief --run <ID> --task <ID>",
+      "outputs": [
+        "delivery-runs/",
+        "planning/feature-history.json"
+      ],
+      "handoff": "prototype",
+      "goal": {
+        "mode": "deliver",
+        "allowedWrites": [
+          "任务声明的代码根与写范围",
+          "delivery-runs/",
+          "planning/feature-history.json"
+        ],
+        "completion": "任务、合并验证与运行均完成"
+      }
+    },
+    {
+      "id": "system",
+      "title": "外部系统事实",
+      "entry": "flows/system/entry.md",
+      "commands": [
+        "system"
+      ],
+      "start": "system status",
+      "resume": "run context --id <ID>",
+      "outputs": [
+        "system/cards.json",
+        "system-runs/"
+      ],
+      "handoff": "planning",
+      "goal": {
+        "mode": "verify_system",
+        "allowedWrites": [
+          "system/",
+          "system-runs/"
+        ],
+        "completion": "发布已核验系统结论；外部系统只读"
+      }
+    },
+    {
+      "id": "project",
+      "title": "项目与环境登记",
+      "entry": "flows/project/entry.md",
+      "commands": [
+        "init",
+        "project"
+      ],
+      "start": "project status",
+      "resume": "project status",
+      "outputs": [
+        "project.json",
+        "projects/"
+      ],
+      "handoff": "planning",
+      "goal": {
+        "mode": "register_project",
+        "allowedWrites": [
+          "project.json",
+          "projects/"
+        ],
+        "completion": "登记与当前范围的环境核验完成"
+      }
+    },
+    {
+      "id": "overview",
+      "title": "上下文与看板",
+      "entry": "flows/overview/entry.md",
+      "commands": [
+        "current",
+        "dashboard",
+        "run",
+        "check",
+        "compact",
+        "tasktype",
+        "graph",
+        "capability",
+        "kernel"
+      ],
+      "start": "flow route --json",
+      "resume": "run context --id <ID>",
+      "outputs": [],
+      "handoff": null,
+      "goal": {
+        "mode": "inspect",
+        "allowedWrites": [],
+        "completion": "返回所需分页信息；重建需明确请求"
+      }
+    },
+    {
+      "id": "maintenance",
+      "title": "技能与流程工具维护",
+      "entry": "flows/maintenance/entry.md",
+      "commands": [],
+      "start": null,
+      "resume": null,
+      "outputs": [],
+      "handoff": null,
+      "goal": {
+        "mode": "maintain",
+        "allowedWrites": [
+          ".codex/skills/mf-dev-flow/",
+          ".codex/hooks.json",
+          "隔离 fixture"
+        ],
+        "completion": "工具修改与隔离验证完成；不进入真实产品流程"
+      }
+    }
+  ],
+  "commandRoutes": [
+    {
+      "command": "init",
+      "module": "modules/runtime/project.mjs",
+      "export": "init"
+    },
+    {
+      "command": "current",
+      "module": "modules/runtime/archive.mjs",
+      "export": "current"
+    },
+    {
+      "command": "project",
+      "subcommand": "add",
+      "module": "modules/runtime/project.mjs",
+      "export": "projectAdd"
+    },
+    {
+      "command": "project",
+      "subcommand": "check",
+      "module": "modules/runtime/project.mjs",
+      "export": "projectCheck"
+    },
+    {
+      "command": "project",
+      "subcommand": "status",
+      "module": "modules/runtime/project.mjs",
+      "export": "projectStatus"
+    },
+    {
+      "command": "prototype",
+      "subcommand": "init",
+      "module": "modules/runtime/prototype-legacy.mjs",
+      "export": "prototypeInit"
+    },
+    {
+      "command": "prototype",
+      "subcommand": "status",
+      "module": "modules/runtime/prototype-legacy.mjs",
+      "export": "prototypeStatus"
+    },
+    {
+      "command": "prototype",
+      "subcommand": "map",
+      "module": "modules/runtime/prototype-legacy.mjs",
+      "export": "prototypeMapCommand"
+    },
+    {
+      "command": "prototype",
+      "subcommand": "audit",
+      "module": "modules/runtime/prototype-legacy.mjs",
+      "export": "prototypeAuditCommand"
+    },
+    {
+      "command": "prototype",
+      "subcommand": "sync-tasks",
+      "module": "modules/runtime/prototype-legacy.mjs",
+      "export": "prototypeSyncTasks"
+    },
+    {
+      "command": "system",
+      "subcommand": "update",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemUpdate"
+    },
+    {
+      "command": "system",
+      "subcommand": "dedupe",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemDedupe"
+    },
+    {
+      "command": "system",
+      "subcommand": "status",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemStatus"
+    },
+    {
+      "command": "system",
+      "subcommand": "profile-address",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemProfileAddress"
+    },
+    {
+      "command": "system",
+      "subcommand": "api-use",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemApiUse"
+    },
+    {
+      "command": "system",
+      "subcommand": "api-remove",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemApiRemove"
+    },
+    {
+      "command": "system",
+      "subcommand": "issue-add",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemIssueAdd"
+    },
+    {
+      "command": "system",
+      "subcommand": "issue-set",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemIssueSet"
+    },
+    {
+      "command": "system",
+      "subcommand": "agreement-add",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemAgreementAdd"
+    },
+    {
+      "command": "system",
+      "subcommand": "agreement-set",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemAgreementSet"
+    },
+    {
+      "command": "run",
+      "subcommand": "new",
+      "module": "modules/runtime/archive.mjs",
+      "export": "newRun"
+    },
+    {
+      "command": "run",
+      "subcommand": "context",
+      "module": "modules/runtime/archive.mjs",
+      "export": "runContext"
+    },
+    {
+      "command": "run",
+      "subcommand": "set",
+      "module": "modules/runtime/archive.mjs",
+      "export": "setRun"
+    },
+    {
+      "command": "delivery",
+      "subcommand": "start",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "deliveryStart"
+    },
+    {
+      "command": "delivery",
+      "subcommand": "stage",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "deliveryStage"
+    },
+    {
+      "command": "delivery",
+      "subcommand": "stage-artifact",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "deliveryStageArtifact"
+    },
+    {
+      "command": "delivery",
+      "subcommand": "acceptance",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "deliveryAcceptance"
+    },
+    {
+      "command": "delivery",
+      "subcommand": "supersede",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "deliverySupersede"
+    },
+    {
+      "command": "feature",
+      "subcommand": "refine",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureRefine"
+    },
+    {
+      "command": "feature",
+      "subcommand": "proposal-patch",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureProposalPatch"
+    },
+    {
+      "command": "feature",
+      "subcommand": "status",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureStatus"
+    },
+    {
+      "command": "feature",
+      "subcommand": "impact",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureImpact"
+    },
+    {
+      "command": "feature",
+      "subcommand": "apply",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureApply"
+    },
+    {
+      "command": "feature",
+      "subcommand": "start",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureStart"
+    },
+    {
+      "command": "feature",
+      "subcommand": "link-task",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureLinkTask"
+    },
+    {
+      "command": "feature",
+      "subcommand": "new",
+      "module": "modules/runtime/archive.mjs",
+      "export": "newFeature"
+    },
+    {
+      "command": "feature",
+      "subcommand": "risk-add",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureRiskAdd"
+    },
+    {
+      "command": "feature",
+      "subcommand": "risk-resolve",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureRiskResolve"
+    },
+    {
+      "command": "feature",
+      "subcommand": "risks",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureRisks"
+    },
+    {
+      "command": "feature",
+      "subcommand": "impl-snapshot",
+      "module": "modules/runtime/planning.mjs",
+      "export": "featureImplSnapshot"
+    },
+    {
+      "command": "feature",
+      "subcommand": "acceptance",
+      "module": "modules/runtime/acceptance-cases.mjs",
+      "export": "featureAcceptance"
+    },
+    {
+      "command": "compact",
+      "subcommand": "audit",
+      "module": "modules/runtime/archive.mjs",
+      "export": "compactAudit"
+    },
+    {
+      "command": "compact",
+      "subcommand": "build",
+      "module": "modules/runtime/shared.mjs",
+      "export": "compactBuild"
+    },
+    {
+      "command": "compact",
+      "subcommand": "status",
+      "module": "modules/runtime/archive.mjs",
+      "export": "compactStatus"
+    },
+    {
+      "command": "work",
+      "subcommand": "plan",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workPlan"
+    },
+    {
+      "command": "work",
+      "subcommand": "claim",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workClaim"
+    },
+    {
+      "command": "work",
+      "subcommand": "bind-session",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workBindSession"
+    },
+    {
+      "command": "work",
+      "subcommand": "delivery-brief",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workDeliveryBrief"
+    },
+    {
+      "command": "work",
+      "subcommand": "lease",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workLease"
+    },
+    {
+      "command": "work",
+      "subcommand": "conflict-status",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workConflictStatus"
+    },
+    {
+      "command": "work",
+      "subcommand": "conflict-resolve",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workConflictResolve"
+    },
+    {
+      "command": "work",
+      "subcommand": "reconcile",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workReconcile"
+    },
+    {
+      "command": "work",
+      "subcommand": "replan",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workReplan"
+    },
+    {
+      "command": "work",
+      "subcommand": "finish",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workFinish"
+    },
+    {
+      "command": "work",
+      "subcommand": "checkpoint-gate",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workCheckpointGate"
+    },
+    {
+      "command": "work",
+      "subcommand": "supersede",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workSupersede"
+    },
+    {
+      "command": "work",
+      "subcommand": "merge-check",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workMergeCheck"
+    },
+    {
+      "command": "work",
+      "subcommand": "verify",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workVerify"
+    },
+    {
+      "command": "work",
+      "subcommand": "index",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "workIndex"
+    },
+    {
+      "command": "visual",
+      "subcommand": "archive",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "visualArchive"
+    },
+    {
+      "command": "visual",
+      "subcommand": "archive-additional",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "visualArchiveAdditional"
+    },
+    {
+      "command": "visual",
+      "subcommand": "compare",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "visualCompare"
+    },
+    {
+      "command": "visual",
+      "subcommand": "validate-report",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "visualValidateReport"
+    },
+    {
+      "command": "api-mock",
+      "subcommand": "evidence",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "apiMockEvidenceCommand"
+    },
+    {
+      "command": "miniapp",
+      "subcommand": "evidence",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "miniappEvidenceCommand"
+    },
+    {
+      "command": "gate",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "gateForStop"
+    },
+    {
+      "command": "check",
+      "module": "modules/runtime/archive.mjs",
+      "export": "check"
+    },
+    {
+      "command": "system",
+      "subcommand": "query",
+      "module": "modules/runtime/system.mjs",
+      "export": "systemQuery"
+    },
+    {
+      "command": "prd",
+      "subcommand": "ingest",
+      "module": "modules/runtime/prd.mjs",
+      "export": "prdIngest"
+    },
+    {
+      "command": "prd",
+      "subcommand": "status",
+      "module": "modules/runtime/prd.mjs",
+      "export": "prdStatus"
+    },
+    {
+      "command": "prd",
+      "subcommand": "check",
+      "module": "modules/runtime/prd.mjs",
+      "export": "prdCheck"
+    },
+    {
+      "command": "prd",
+      "subcommand": "render",
+      "module": "modules/runtime/prd.mjs",
+      "export": "prdRender"
+    },
+    {
+      "command": "content",
+      "subcommand": "hash",
+      "module": "modules/runtime/content.mjs",
+      "export": "contentHash"
+    },
+    {
+      "command": "content",
+      "subcommand": "compare",
+      "module": "modules/runtime/content.mjs",
+      "export": "contentCompare"
+    },
+    {
+      "command": "tasktype",
+      "subcommand": "list",
+      "module": "modules/runtime/tasktypes.mjs",
+      "export": "tasktypeList"
+    },
+    {
+      "command": "tasktype",
+      "subcommand": "show",
+      "module": "modules/runtime/tasktypes.mjs",
+      "export": "tasktypeShow"
+    },
+    {
+      "command": "graph",
+      "subcommand": "build",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphBuild"
+    },
+    {
+      "command": "graph",
+      "subcommand": "node",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphNode"
+    },
+    {
+      "command": "graph",
+      "subcommand": "impact",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphImpact"
+    },
+    {
+      "command": "graph",
+      "subcommand": "render",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphRender"
+    },
+    {
+      "command": "graph",
+      "subcommand": "flag",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphFlag"
+    },
+    {
+      "command": "graph",
+      "subcommand": "clear",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphClear"
+    },
+    {
+      "command": "graph",
+      "subcommand": "sync",
+      "module": "modules/runtime/graph.mjs",
+      "export": "graphSync"
+    },
+    {
+      "command": "object",
+      "subcommand": "locate",
+      "module": "modules/runtime/object.mjs",
+      "export": "objectLocate"
+    },
+    {
+      "command": "capability",
+      "subcommand": "list",
+      "module": "modules/runtime/capabilities.mjs",
+      "export": "capabilityList"
+    },
+    {
+      "command": "capability",
+      "subcommand": "show",
+      "module": "modules/runtime/capabilities.mjs",
+      "export": "capabilityShow"
+    },
+    {
+      "command": "capability",
+      "subcommand": "git-diff",
+      "module": "modules/runtime/capabilities.mjs",
+      "export": "capabilityGitDiff"
+    },
+    {
+      "command": "kernel",
+      "subcommand": "backfill",
+      "module": "modules/runtime/delivery.mjs",
+      "export": "kernelBackfill"
+    }
+  ]
+}

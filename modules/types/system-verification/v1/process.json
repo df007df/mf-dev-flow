@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "system-verification",
+  "version": 1,
+  "title": "外部系统事实核验任务（只读取证 / 整卡快照 / 指纹发布）",
+  "taskPhase": "system",
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "reportFiles": [
+    { "file": "overview.md", "label": "确认事实与证据", "sections": ["确认事实", "证据"] },
+    { "file": "impact-analysis.md", "label": "影响分析", "sections": ["原型影响", "技术方案影响", "数据模型影响", "测试影响"] }
+  ],
+  "stages": [
+    {
+      "id": "source_observe",
+      "title": "只读来源核验",
+      "ownerRoles": ["system-reader"],
+      "objective": "按卡片来源访问边界只读取证：代码库优先 CodeGraph、外部 DB 仅 SELECT 或只读事务；密钥值不得进入任何记录；同一代码库路径归并单卡。",
+      "agentFile": "agents/system-verification.md",
+      "evidenceGates": ["system_readonly_evidence"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "card_snapshot",
+      "title": "整卡当前快照与影响分析",
+      "ownerRoles": ["system-reader"],
+      "objective": "在运行 cards.json 放本轮涉及系统的完整当前快照（整卡替换语义：省略即删除）；overview 写确认事实，impact-analysis 分析原型/方案/数据/测试影响；派生任务保持 pending 或 decision_needed 直至授权实施。",
+      "agentFile": "agents/system-verification.md",
+      "evidenceGates": ["system_card_snapshot"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "publish_verify",
+      "title": "指纹审阅与发布",
+      "ownerRoles": ["system-reader"],
+      "objective": "system update --dry-run 分页审阅差异，用审阅时点 fingerprint 正式发布；执行记录、merge-check、work verify passed、check --type system 后才可 done。",
+      "agentFile": "agents/system-verification.md",
+      "evidenceGates": ["system_publish_fingerprint"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ],
+  "dispatch": [
+    {
+      "whenDirty": "system-card",
+      "affects": "feature",
+      "openTaskType": "feature-impact-review",
+      "autoCreate": false,
+      "batching": "per-trigger",
+      "reportSlot": "feature.reassessment + proposal.impactReviews"
+    }
+  ],
+  "extensions": {
+    "cardIds": [],
+    "removeCardIds": [],
+    "derivedTaskRefs": []
+  }
+}

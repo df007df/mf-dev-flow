@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "prd-analysis",
+  "version": 1,
+  "title": "PRD 阅读与取证任务（来源冻结 / 逐字 findings / 门禁渲染）",
+  "taskPhase": "prd",
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "reportFiles": [
+    { "file": "findings.json", "label": "发现批次（批次唯一真源）", "sections": ["summary", "sources", "items"] }
+  ],
+  "stages": [
+    {
+      "id": "source_freeze",
+      "title": "来源冻结与摄取",
+      "ownerRoles": ["prd-reader"],
+      "objective": "按文件/目录/在线快照通道摄取来源并冻结；原件与在线文档一律只读；同内容幂等复用，内容变化即新来源 ID 并存。",
+      "agentFile": "agents/prd-analysis.md",
+      "evidenceGates": ["prd_sources_frozen"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "findings",
+      "title": "findings 提炼与逐字取证",
+      "ownerRoles": ["prd-reader"],
+      "objective": "在 findings.json 产出矛盾/歧义/原则/红线条目；每条至少一条证据，quote 必须是冻结快照内逐字原文（空白折叠后匹配），转述与跨段拼接一律拒收。",
+      "agentFile": "agents/prd-analysis.md",
+      "evidenceGates": ["prd_findings_verbatim_evidence"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "check_render",
+      "title": "门禁核验与会议材料渲染",
+      "ownerRoles": ["prd-reader"],
+      "objective": "prd check 全量通过后 render 派生 contradictions.md 与 redlines.md；修改只改 findings.json 再重跑；来源漂移用 content compare 与 check --against 复核并列出 impactedItems。",
+      "agentFile": "agents/prd-analysis.md",
+      "evidenceGates": ["prd_check_passed"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ],
+  "dispatch": [
+    {
+      "whenDirty": "prd-source",
+      "affects": "prd-source",
+      "openTaskType": "prd-analysis",
+      "autoCreate": false,
+      "batching": "per-trigger",
+      "reportSlot": "prd/analyses/<batch>/findings.json"
+    }
+  ],
+  "extensions": {
+    "batchId": null,
+    "sourceIds": [],
+    "impactedItems": []
+  }
+}

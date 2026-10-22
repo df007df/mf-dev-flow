@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "fixture": {
+    "sourceFiles": 7,
+    "candidates": 2651,
+    "nodes": 808,
+    "edges": 1654,
+    "occurrences": 28406,
+    "controlDefinitions": 36
+  },
+  "staticCache": {
+    "cold": {
+      "files": 7,
+      "hits": 0,
+      "parsed": 7,
+      "sourceBytes": 146517
+    },
+    "warm": {
+      "files": 7,
+      "hits": 7,
+      "parsed": 0,
+      "sourceBytes": 146517
+    },
+    "versionChange": {
+      "files": 7,
+      "hits": 0,
+      "parsed": 7,
+      "sourceBytes": 146517
+    }
+  },
+  "context": {
+    "defaultRows": 20,
+    "defaultUtf8Bytes": 5214,
+    "maxBytes": 16384,
+    "filteredRows": 7,
+    "filteredUtf8Bytes": 1879,
+    "filteredMaxBytes": 2048,
+    "fullExpandedSyntheticOccurrenceBytes": 24856022,
+    "normalizedOccurrenceBodyBytes": 2345846
+  },
+  "queryMilliseconds": 5.32,
+  "databaseBytes": 16478208,
+  "elapsedMilliseconds": 5003.11,
+  "limitation": "UTF-8 output size and synthetic repeated definitions are proxies, not measured token savings or a migrated real history."
+}

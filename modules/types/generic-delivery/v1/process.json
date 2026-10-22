@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "generic-delivery",
+  "version": 1,
+  "title": "通用交付任务（修复、工具与无四阶段契约的交付）",
+  "taskPhase": "delivery",
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "reportFiles": [],
+  "stages": [
+    {
+      "id": "execute",
+      "title": "执行与如实记录",
+      "ownerRoles": ["root"],
+      "objective": "按任务契约完成改动；work finish 时声明 --files/--tests，与 hook 观测对账；风险/下一步逐条登记，不把未执行的验证写为通过。",
+      "agentFile": "agents/generic-delivery.md",
+      "evidenceGates": [],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ],
+  "extensions": {
+    "taskKind": null,
+    "noFeatureJustification": null
+  }
+}

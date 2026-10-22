@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "wechat-miniapp-runtime",
+  "version": 1,
+  "title": "微信开发者工具小程序模拟器",
+  "sourceModes": ["wechat-devtools-simulator"],
+  "capabilities": {
+    "sourceDiscovery": false,
+    "operations": [
+      "pageStack",
+      "selectorAction",
+      "simulatorScreenshot",
+      "traceArchive",
+      "compileRefresh"
+    ],
+    "evidence": {
+      "screenshot": "png",
+      "trace": true
+    }
+  },
+  "overlays": [
+    {
+      "stageId": "runtime-observe",
+      "agentFile": "agents/runtime-observe.md"
+    }
+  ]
+}

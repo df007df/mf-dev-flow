@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "feature-impact-review",
+  "version": 1,
+  "title": "功能点影响复评任务（机器闭包 / 逐功能结论 / 发布清脏）",
+  "taskPhase": "planning",
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "reportFiles": [
+    { "file": "analysis.md", "label": "复评依据", "sections": ["变动与归属", "逐功能判断依据", "保持不变的理由"] }
+  ],
+  "stages": [
+    {
+      "id": "impact_closure",
+      "title": "机器影响闭包",
+      "ownerRoles": ["planner"],
+      "objective": "feature impact 只读计算指纹差异与关联闭包（新旧两侧分组、parent 后代、dependsOn 反向、迁移链），冻结影响清单；不按开发状态过滤，不自动建运行。",
+      "agentFile": "agents/feature-impact-review.md",
+      "evidenceGates": ["impact_closure_frozen"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "item_review",
+      "title": "逐功能影响判断",
+      "ownerRoles": ["planner"],
+      "objective": "对全部受影响旧叶子与新增功能逐项产出 impactReviews（keep/revise/split/merge/retire/add）；保持不变也必须给理由；对执行中任务给 taskDecisions，不擅自取消任务。",
+      "agentFile": "agents/feature-impact-review.md",
+      "evidenceGates": ["impact_reviews_complete"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "apply_fresh",
+      "title": "重算发布与清脏",
+      "ownerRoles": ["planner"],
+      "objective": "feature apply 前重算影响清单，不信任删减；真源再变则提案作废并入下一轮；发布保留复评与旧规划快照，清对应 reassessment 触发，feature status 确认 fresh 才能继续开发。",
+      "agentFile": "agents/feature-impact-review.md",
+      "evidenceGates": ["feature_map_fresh", "reassessment_cleared"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ],
+  "dispatch": [
+    {
+      "whenDirty": ["prototype-group", "prototype-entry", "prd-source", "system-card"],
+      "affects": "feature",
+      "openTaskType": "feature-impact-review",
+      "autoCreate": false,
+      "batching": "per-trigger",
+      "reportSlot": "feature.reassessment + proposal.impactReviews"
+    }
+  ],
+  "extensions": {
+    "prototypeImpactId": null,
+    "impactReviews": [],
+    "taskDecisions": []
+  }
+}

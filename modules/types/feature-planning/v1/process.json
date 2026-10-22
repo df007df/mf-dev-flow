@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "feature-planning",
+  "version": 1,
+  "title": "功能规划任务（事实冻结 / 业务域补丁 / 校验发布功能地图）",
+  "taskPhase": "planning",
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "reportFiles": [
+    { "file": "analysis.md", "label": "拆分判断", "sections": ["耦合与拆分依据", "优先级与波次", "阻塞与历史迁移"] }
+  ],
+  "stages": [
+    {
+      "id": "context_snapshot",
+      "title": "事实冻结与分页读取",
+      "ownerRoles": ["planner"],
+      "objective": "feature refine 冻结当时原型、任务、系统卡片与代码根事实；只按 brief 与分页 detail 读取，禁止整读 context/prototype-impact/previous-map/proposal。",
+      "agentFile": "agents/feature-planning.md",
+      "evidenceGates": ["refinement_context_frozen"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "map_proposal",
+      "title": "业务域补丁与叶子功能提案",
+      "ownerRoles": ["planner"],
+      "objective": "按业务域小补丁 feature proposal-patch 增量合并；先业务域后叶子，每个叶子至少一个当前原型入口、显式 rank 与依赖 DAG；不以页面/接口数量当功能边界。",
+      "agentFile": "agents/feature-planning.md",
+      "evidenceGates": ["entry_coverage_patched"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "apply_publish",
+      "title": "统一校验发布",
+      "ownerRoles": ["planner"],
+      "objective": "feature apply 校验入口覆盖、observed 截图、迁移、引用与 DAG 后发布整张地图；证据已变化即拒绝应用；feature status 确认 fresh。",
+      "agentFile": "agents/feature-planning.md",
+      "evidenceGates": ["feature_map_fresh"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ],
+  "extensions": {
+    "refinementRunId": null,
+    "groups": [],
+    "migrations": []
+  }
+}

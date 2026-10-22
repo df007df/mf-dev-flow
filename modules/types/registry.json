@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "types": [
+    { "id": "prototype-analysis", "version": 1, "flow": "prototype", "legacyProcessId": true, "processFile": "../prototype/processes/runtime-analysis/v1/process.json" },
+    { "id": "prd-analysis", "version": 1, "flow": "prd", "processFile": "prd-analysis/v1/process.json" },
+    { "id": "feature-planning", "version": 1, "flow": "planning", "processFile": "feature-planning/v1/process.json" },
+    { "id": "feature-impact-review", "version": 1, "flow": "planning", "processFile": "feature-impact-review/v1/process.json" },
+    { "id": "feature-development", "version": 1, "flow": "delivery", "status": "superseded", "legacyProcessId": true, "processFile": "../delivery/processes/miniapp-product/v1/process.json" },
+    { "id": "feature-development", "version": 2, "flow": "delivery", "status": "superseded", "legacyProcessId": true, "processFile": "../delivery/processes/miniapp-product/v2/process.json" },
+    { "id": "feature-development", "version": 3, "flow": "delivery", "legacyProcessId": true, "processFile": "../delivery/processes/miniapp-product/v3/process.json" },
+    { "id": "generic-delivery", "version": 1, "flow": "delivery", "processFile": "generic-delivery/v1/process.json" },
+    { "id": "system-verification", "version": 1, "flow": "system", "processFile": "system-verification/v1/process.json" }
+  ]
+}
