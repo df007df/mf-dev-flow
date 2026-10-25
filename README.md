@@ -90,7 +90,7 @@ pnpm --dir ../../dashboard install
 node ../../scripts/mf-dev-flow.mjs dashboard
 ```
 
-浏览器打开 <http://127.0.0.1:4173/>，然后依次看“功能点看板”和“功能点分组列表”。完整的场景背景、五分钟操作、验收标准和把流程迁移到自己项目的方式见 [`examples/five-minute-cycle/README.md`](examples/five-minute-cycle/README.md)；对照说明见 [`docs/five-minute-demo.md`](docs/five-minute-demo.md)。
+浏览器打开 <http://127.0.0.1:4173/>，然后依次看“功能点看板”和“功能点分组列表”。完整的场景背景、五分钟操作、验收标准和把流程迁移到自己项目的方式见 [`examples/five-minute-cycle/README.md`](examples/five-minute-cycle/README.md)；功能、case、页面区域与真实截图的一一映射见 [`examples/five-minute-cycle/cases.md`](examples/five-minute-cycle/cases.md)；对照说明见 [`docs/five-minute-demo.md`](docs/five-minute-demo.md)。
 
 这个示例特意只展示一个叶子功能。它适合判断你是否需要这套流程：若要把需求、开发范围和验收证据留在同一条链路上，就继续接入；如果只是临时改一行样式，则无需启用完整闭环。
 

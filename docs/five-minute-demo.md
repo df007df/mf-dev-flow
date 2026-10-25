@@ -38,6 +38,8 @@ node ../../scripts/mf-dev-flow.mjs dashboard
 
 ![示例状态在本地观察台中的实际呈现](images/five-minute-dashboard.png)
 
+页面结果按功能和验收 case 的逐条截图映射见 [`examples/five-minute-cycle/cases.md`](../examples/five-minute-cycle/cases.md)。
+
 ## 从需求到交付（约 3 分钟）
 
 当这个场景出现在你的项目中，最小实践并不要求一次用完所有流程。只做以下四件事即可：

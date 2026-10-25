@@ -10,6 +10,8 @@
 
 对应的示例功能点、验收用例和阶段状态已经写在 [`.mf-dev-flow/`](.mf-dev-flow/) 中。可交互的目标页面在 [`app/index.html`](app/index.html)。
 
+功能、case、页面区域与真实截图的逐条映射见 [`cases.md`](cases.md)。
+
 ## 两分钟打开观察台
 
 从本目录执行：
@@ -37,3 +39,5 @@ node ../../scripts/mf-dev-flow.mjs dashboard
 ## 示例数据边界
 
 `.mf-dev-flow/` 下的数据是专门提交的公开 fixture，用于驱动看板截图和文档，不是真实运行状态。真实项目的 `.mf-dev-flow/` 仍应保持在本地且不提交版本库。
+
+`screenshots/` 中的图片来自本示例页面的真实浏览器运行，专用于说明 case 与页面结果的对应关系；它们不表示该合成任务已经通过交付阶段门禁。
