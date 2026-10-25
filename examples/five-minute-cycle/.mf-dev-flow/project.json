@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "name": "旅行清单示例",
+    "background": "用一个独立筛选功能演示需求、范围与验收如何形成最小闭环。"
+  },
+  "prototype": {
+    "primary": true,
+    "kind": "html",
+    "location": "app/index.html",
+    "access": "本地公开示例",
+    "version": "demo-v1"
+  },
+  "codeRoots": [{ "path": "app", "role": "primary", "writeBoundary": "仅 app/index.html" }],
+  "testCommands": { "unit": "浏览器手工验证", "e2e": "浏览器手工验证" },
+  "confirmedAt": "2026-10-25T09:00:00.000Z",
+  "createdAt": "2026-10-25T09:00:00.000Z",
+  "changeLog": [{ "at": "2026-10-25T09:00:00.000Z", "summary": "创建公开、合成的最小闭环示例。" }]
+}

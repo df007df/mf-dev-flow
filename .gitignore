@@ -18,6 +18,10 @@ playwright-report/
 .env*
 !.env.example
 .mf-dev-flow/
+!examples/
+!examples/five-minute-cycle/
+!examples/five-minute-cycle/.mf-dev-flow
+!examples/five-minute-cycle/.mf-dev-flow/**
 
 # Local logs
 *.log

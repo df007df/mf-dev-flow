@@ -73,6 +73,27 @@ node "$D" coordination status --json
 
 各流程的第一条命令、可写位置和完成条件由 [`modules/workflow/registry.json`](modules/workflow/registry.json) 统一登记。只在选定流程的入口文档及其链接协议中继续阅读，避免将全部历史和数据加载进上下文。
 
+## 五分钟看懂一次闭环
+
+不必先接入真实项目。仓库附带一个可公开、可运行的示例项目：用户提出“旅行清单只看已完成项目”，流程把它固定为一个功能点、两条验收用例和明确的实现边界，再由开发任务完成实现与回归。
+
+![旅行清单筛选场景的本地观察台](docs/images/five-minute-dashboard.png)
+
+```bash
+git clone <repository-url> mf-dev-flow
+cd mf-dev-flow/examples/five-minute-cycle
+
+# 首次运行时安装看板依赖；之后可跳过。
+pnpm --dir ../../dashboard install
+
+# 看板只读取当前示例的合成状态，不写入它。
+node ../../scripts/mf-dev-flow.mjs dashboard
+```
+
+浏览器打开 <http://127.0.0.1:4173/>，然后依次看“功能点看板”和“功能点分组列表”。完整的场景背景、五分钟操作、验收标准和把流程迁移到自己项目的方式见 [`examples/five-minute-cycle/README.md`](examples/five-minute-cycle/README.md)；对照说明见 [`docs/five-minute-demo.md`](docs/five-minute-demo.md)。
+
+这个示例特意只展示一个叶子功能。它适合判断你是否需要这套流程：若要把需求、开发范围和验收证据留在同一条链路上，就继续接入；如果只是临时改一行样式，则无需启用完整闭环。
+
 ## 本地看板
 
 看板读取消费项目的 `.mf-dev-flow/` 数据并只监听本机回环地址。
