@@ -10,7 +10,7 @@
 
 对应的示例功能点、验收用例和阶段状态已经写在 [`.mf-dev-flow/`](.mf-dev-flow/) 中。可交互的目标页面在 [`app/index.html`](app/index.html)。
 
-功能、case、页面区域与真实截图的逐条映射见 [`cases.md`](cases.md)。
+功能、case、页面区域与真实截图的逐条映射见 [`cases.md`](cases.md)，其中先展示包含验收 case 卡片与功能卡片的看板分组区块，再分别展示页面状态。
 
 ## 两分钟打开观察台
 
