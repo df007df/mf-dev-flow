@@ -81,9 +81,9 @@ node "$D" coordination status --json
 
 真实使用时，推荐先和 Agent 对话，而不是自己逐条拼 CLI：
 
-> 请基于已确认的旅行清单功能和 AC 开始开发。写入范围只允许在 `app/`。先说明实现方案，再修改代码；完成后运行测试，在真实浏览器里验证，并告诉我每条 AC 对应的证据。
+> 开始开发第一个功能。完成后告诉我改了什么、测试是否通过，并给我看最终页面。
 
-Agent 负责调用 `mf-dev-flow`、修改业务代码和组织验证；你负责确认目标、范围和验收标准。完整的基本流程图、五轮示例对话以及 Agent/代码分工见[旅行清单演进 Demo](examples/travel-checklist-evolution/README.md)。下面的命令只用于在五分钟内观察已冻结的真实结果：
+Agent 会读取此前确认的功能、验收标准和项目规则，负责调用 `mf-dev-flow`、修改业务代码和组织验证；你负责确认目标、范围和验收标准。完整的基本流程图、五轮示例对话以及 Agent/代码分工见[旅行清单演进 Demo](examples/travel-checklist-evolution/README.md)。下面的命令只用于在五分钟内观察已冻结的真实结果：
 
 ```bash
 git clone <repository-url> mf-dev-flow
