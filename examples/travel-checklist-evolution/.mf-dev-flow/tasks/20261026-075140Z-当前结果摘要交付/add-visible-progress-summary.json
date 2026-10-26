@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "kind": "task",
+  "id": "20261026-075140Z-当前结果摘要交付/add-visible-progress-summary",
+  "runId": "20261026-075140Z-当前结果摘要交付",
+  "typeRef": {
+    "id": "feature-development",
+    "version": 1
+  },
+  "title": "增加当前结果进度摘要",
+  "status": "completed",
+  "agent": "end_to_end_acceptance",
+  "sessionId": "case05-summary-e2e",
+  "parentTask": null,
+  "subtasks": [],
+  "sourceRefs": [
+    "feature:visible-progress-summary"
+  ],
+  "touchedRefs": [
+    {
+      "ref": "code:app/index.html",
+      "provenance": "declared"
+    },
+    {
+      "ref": "code:app/filter-state.mjs",
+      "provenance": "declared"
+    },
+    {
+      "ref": "code:app/filter-state.test.mjs",
+      "provenance": "declared"
+    }
+  ],
+  "outputs": {
+    "reports": [
+      {
+        "file": "plan.md"
+      },
+      {
+        "file": "impl.md"
+      },
+      {
+        "file": "verification.md"
+      }
+    ],
+    "artifacts": []
+  },
+  "processData": {
+    "hookHealth": "unknown",
+    "provenance": "declared",
+    "complete": false
+  },
+  "phaseRef": "end_to_end_acceptance",
+  "extensions": {
+    "legacy": {
+      "targetPhase": "end_to_end_acceptance",
+      "stages": {
+        "solution_design": {
+          "status": "confirmed",
+          "summary": "结论：从当前可见集合统一派生可见数与完成数；证据：PRD-v2和两个原型状态；变更：状态模块新增summary并在页面展示双指标卡；验证：默认4/3与筛选3/3；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:51:56.802Z"
+        },
+        "development": {
+          "status": "confirmed",
+          "summary": "结论：摘要区已随筛选即时更新当前项与完成项；证据：filter-state测试通过3/3；变更：app/index.html、filter-state模块和测试；验证：默认4/3、筛选3/3；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:52:00.731Z"
+        },
+        "end_to_end_acceptance": {
+          "status": "confirmed",
+          "summary": "结论：默认与筛选后的进度摘要均通过真实浏览器验收；证据：两张1200x1000完整卡片截图绑定两条冻结AC；变更：无；验证：4/3与3/3即时更新；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:52:18.603Z"
+        }
+      },
+      "checkpoints": [
+        {
+          "at": "2026-10-26T07:51:56.802Z",
+          "targetPhase": "solution_design",
+          "status": "validated",
+          "summary": "结论：从当前可见集合统一派生可见数与完成数；证据：PRD-v2和两个原型状态；变更：状态模块新增summary并在页面展示双指标卡；验证：默认4/3与筛选3/3；风险/下一步：无",
+          "validatedAt": "2026-10-26T07:51:58.099Z"
+        },
+        {
+          "at": "2026-10-26T07:52:00.731Z",
+          "targetPhase": "development",
+          "status": "validated",
+          "summary": "结论：摘要区已随筛选即时更新当前项与完成项；证据：filter-state测试通过3/3；变更：app/index.html、filter-state模块和测试；验证：默认4/3、筛选3/3；风险/下一步：无",
+          "validatedAt": "2026-10-26T07:52:02.026Z"
+        },
+        {
+          "at": "2026-10-26T07:52:18.603Z",
+          "targetPhase": "end_to_end_acceptance",
+          "status": "reached",
+          "summary": "结论：默认与筛选后的进度摘要均通过真实浏览器验收；证据：两张1200x1000完整卡片截图绑定两条冻结AC；变更：无；验证：4/3与3/3即时更新；风险/下一步：无"
+        }
+      ],
+      "summary": "当前结果与已完成数量摘要已通过自动化和浏览器验收",
+      "tests": "node--test通过3/3；Playwright默认和筛选摘要通过"
+    }
+  },
+  "timeline": [
+    {
+      "at": "2026-10-26T07:51:55.468Z",
+      "event": "claimed",
+      "by": "agent:end_to_end_acceptance"
+    },
+    {
+      "at": "2026-10-26T07:51:55.469Z",
+      "event": "attempt:attempt-1:start",
+      "by": "agent:solution_design"
+    },
+    {
+      "at": "2026-10-26T07:51:58.099Z",
+      "event": "attempt:attempt-1:end",
+      "by": "agent:solution_design"
+    },
+    {
+      "at": "2026-10-26T07:51:59.405Z",
+      "event": "attempt:attempt-2:start",
+      "by": "agent:development"
+    },
+    {
+      "at": "2026-10-26T07:52:02.026Z",
+      "event": "attempt:attempt-2:end",
+      "by": "agent:development"
+    },
+    {
+      "at": "2026-10-26T07:52:03.331Z",
+      "event": "attempt:attempt-3:start",
+      "by": "agent:end_to_end_acceptance"
+    },
+    {
+      "at": "2026-10-26T07:52:20.551Z",
+      "event": "attempt:attempt-3:end",
+      "by": "agent:end_to_end_acceptance"
+    }
+  ],
+  "createdAt": "2026-10-26T07:51:55.468Z",
+  "updatedAt": "2026-10-26T07:52:20.551Z",
+  "legacy": {
+    "executionFile": "delivery-runs/20261026-075140Z-当前结果摘要交付/executions/add-visible-progress-summary.json"
+  }
+}

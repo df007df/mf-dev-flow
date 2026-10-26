@@ -21,6 +21,8 @@
 
 `workspaceRoot` 可省略（默认为命令工作区），`location` 支持绝对路径。当前只实现本地 HTML 入口；入口目录内 HTML/JS/TS/CSS/JSON 文件组成保守来源集合，`.git`、`node_modules`、`.mf-dev-flow` 不进入集合。符号链接、解析失败、外部引用和未知动态依赖需要明确核对。输出固定在工作区 `.mf-dev-flow/prototype/analyses/<批次ID>/`，必须在来源树之外。
 
+本地 HTML 项目可以整体移动或复制。目录打开后，CLI 会用初始化时 `workspaceRoot → location` 的安全相对关系在当前工作区重定位来源；只有相对入口确实存在时才使用新位置，目录外来源、缺失入口或内容变化仍按 stale 处理。持久化记录保留原始登记位置用于审计，不因重定位改写历史。
+
 静态 HTML 的 `analysisAdapters` 与运行态 `runtimeAdapters` 分开登记。只读发现使用 `prototype process list`、`prototype adapter list` 和 `prototype adapter capabilities --adapter web-runtime@1`；流程列表只给出 ID、版本、标题、阶段 ID 和哈希，适配器只给出声明能力，均不泄露 Agent 指令文本。
 
 `runtime-analysis@1` 配合 `web-runtime@1` 的 init 额外传 `--process runtime-analysis@1 --adapter web-runtime@1 --evidence-profile runtime-only --agent scope-snapshot`。其输入来源形状为：

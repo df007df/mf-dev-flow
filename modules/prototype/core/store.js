@@ -6,7 +6,9 @@ import { digest, discoverPrototypeSource, EXTRACTOR_REVISION } from './html-sour
 import { graphProblems } from './graph-audit.js';
 import { requirementsBrief } from './analysis-requirements.mjs';
 import { normalizeRuntimeSource, runtimeSourceMap } from './runtime-source.mjs';
+import { resolvePortableHtmlSource } from './source-location.mjs';
 import { assertWorkflowCommand, initialWorkflowState, workflowBrief, workflowSummary } from './workflow.mjs';
+import { STORE_DIRECTORY } from '../../skill-identity.mjs';
 
 export const CONTRACT_VERSION = 1;
 export const TYPES = ['file', 'candidate', 'node', 'edge', 'space', 'vector', 'control', 'occurrence', 'sweep', 'entry', 'group', 'question', 'evidence'];
@@ -27,12 +29,22 @@ const identityOf = (type, item) => {
   return null;
 };
 
+function inferredWorkspaceRoot(directory) {
+  const analyses = path.dirname(directory);
+  const prototype = path.dirname(analyses);
+  const store = path.dirname(prototype);
+  return path.basename(analyses) === 'analyses' && path.basename(prototype) === 'prototype' && path.basename(store) === STORE_DIRECTORY
+    ? path.dirname(store)
+    : null;
+}
+
 export { boundedPage } from './paging.js';
 import { boundedPage } from './paging.js';
 
 export class AnalysisStore {
-  constructor(directory, { readOnly = false } = {}) {
+  constructor(directory, { readOnly = false, workspaceRoot = null } = {}) {
     this.directory = path.resolve(directory);
+    this.workspaceRoot = workspaceRoot ? path.resolve(workspaceRoot) : inferredWorkspaceRoot(this.directory);
     if (!fs.existsSync(path.join(this.directory, 'index.sqlite'))) throw new Error('Analysis index missing; init first');
     this.db = new DatabaseSync(path.join(this.directory, 'index.sqlite'), { readOnly });
     this.db.exec('PRAGMA busy_timeout=5000');
@@ -51,7 +63,7 @@ export class AnalysisStore {
   source() { const bytes = fs.readFileSync(path.join(this.directory, 'source-map.json')); if (digest(bytes) !== this.meta('sourceMapHash')) throw new Error('Frozen source map changed'); return { bytes, map: JSON.parse(bytes) }; }
   freshness() {
     const { map } = this.source();
-    const source = this.meta('source');
+    const source = resolvePortableHtmlSource(this.meta('source'), this.workspaceRoot);
     if (source?.type === 'runtime') {
       const corruptedEvidence = [...this.rows('evidence')].some(evidence => !this.evidenceValid([evidence.id]));
       const changed = corruptedEvidence;
@@ -68,7 +80,7 @@ export class AnalysisStore {
       };
     }
     const metrics = {};
-    const current = discoverPrototypeSource({ ...this.meta('source'), metrics });
+    const current = discoverPrototypeSource({ ...source, metrics });
     const changedFiles = [];
     const before = new Map(map.sourceFiles.map(f => [f.path, f.sha256]));
     const after = new Map(current.sourceFiles.map(f => [f.path, f.sha256]));

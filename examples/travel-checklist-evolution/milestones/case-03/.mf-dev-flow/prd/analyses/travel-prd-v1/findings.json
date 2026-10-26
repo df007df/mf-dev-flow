@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "batchId": "travel-prd-v1",
+  "title": "旅行清单 PRD v1 分析",
+  "summary": {
+    "background": "旅行者需要在出发前核对有限的准备事项，并在需要时只查看已完成项。",
+    "direction": "先交付一个无持久化的最小筛选闭环，再根据后续 PRD 变化评估功能扩展。"
+  },
+  "sources": ["v1-a1650f2cd8d2"],
+  "items": [
+    {
+      "id": "P-01",
+      "kind": "principle",
+      "title": "最小清单与完成态筛选",
+      "statement": "首版只覆盖三项固定事项、完成态筛选和可见数量反馈。",
+      "severity": "high",
+      "evidence": [
+        {
+          "source": "v1-a1650f2cd8d2",
+          "locator": "需求",
+          "quote": "默认显示三项旅行准备事项及完成状态。"
+        },
+        {
+          "source": "v1-a1650f2cd8d2",
+          "locator": "需求",
+          "quote": "用户可以开启“仅看已完成”，此时只显示两项已完成事项。"
+        },
+        {
+          "source": "v1-a1650f2cd8d2",
+          "locator": "需求",
+          "quote": "页面要显示当前可见项目数与总项目数。"
+        }
+      ]
+    },
+    {
+      "id": "R-01",
+      "kind": "redline",
+      "title": "首版范围边界",
+      "statement": "不得在 v1 擅自加入分组、进度摘要、编辑、持久化或远程同步。",
+      "severity": "high",
+      "evidence": [
+        {
+          "source": "v1-a1650f2cd8d2",
+          "locator": "范围边界",
+          "quote": "本版不包含分组、进度摘要、编辑、持久化或远程同步。"
+        }
+      ]
+    },
+    {
+      "id": "P-02",
+      "kind": "principle",
+      "title": "筛选闭环可恢复",
+      "statement": "筛选必须可开启并可关闭，关闭后恢复三项完整列表。",
+      "severity": "medium",
+      "evidence": [
+        {
+          "source": "v1-a1650f2cd8d2",
+          "locator": "验收标准",
+          "quote": "关闭筛选后恢复显示三项事项。"
+        }
+      ]
+    }
+  ]
+}

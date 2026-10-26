@@ -28,6 +28,28 @@ function accepted(t) {
   return f;
 }
 
+test('accepted local HTML source remains ready after the project workspace is relocated', t => {
+  const f = accepted(t);
+  const relocated = fs.mkdtempSync(path.join(os.tmpdir(), 'mf-dev-flow-relocated-'));
+  t.after(() => fs.rmSync(relocated, { recursive: true, force: true }));
+  fs.cpSync(f.root, relocated, { recursive: true });
+  fs.renameSync(path.join(f.root, 'source'), path.join(f.root, 'source-away'));
+
+  const catalog = new PrototypeCatalog(relocated);
+  try {
+    const status = catalog.status();
+    assert.equal(status.status, 'ready');
+    assert.equal(status.source.location, path.join(relocated, 'source/index.html'));
+    assert.deepEqual(status.sourceProblems, []);
+    assert.equal(catalog.planningRevision().planningReadiness.status, 'ready');
+  } finally {
+    catalog.close();
+  }
+  const planning = planningPrototype(relocated);
+  assert.equal(planning.coverage.length, 2);
+  assert.ok(planning.coverage.every(entry => entry.evidence.length > 0));
+});
+
 function seedLegacyPartialAcceptance(f) {
   const local = {
     id: 'recovery-local', actor: 'fixture-user', origin: 'user',

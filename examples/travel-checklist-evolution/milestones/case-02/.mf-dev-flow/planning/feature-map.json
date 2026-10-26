@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 4,
+  "sourceRun": "20261026-064908Z-功能演进拆解",
+  "prototypeRun": "analysis-1cb1b985c917c0fde5d2a804",
+  "evidenceCursor": "7ae4a1970bcb6b37e4cbec24130e1cd9b07c00e6fa95cd637a2e4184cb5cd0e5",
+  "refinementEvidenceCursor": "7ae4a1970bcb6b37e4cbec24130e1cd9b07c00e6fa95cd637a2e4184cb5cd0e5",
+  "prototypeBaseline": {
+    "schemaVersion": 1,
+    "semanticRevision": 2,
+    "global": "0ed5f4c3e52963e64744878da6aacc87eb689dba078bc3e23138dae9620534a2",
+    "files": {
+      "semantic": "0a3aaa59268e042063e9f190c9d88c7a58a10bafe6bb77a8384ed29e4bcffa35"
+    },
+    "sourceProblems": [],
+    "planningReadiness": {
+      "status": "ready",
+      "acceptedBatch": "analysis-1cb1b985c917c0fde5d2a804",
+      "activeBatch": "analysis-1cb1b985c917c0fde5d2a804",
+      "scopeProblems": []
+    },
+    "fingerprint": "542935534ab334a401195bdca2303e49c9f6e33b6938b9cee14cae2967d3d970",
+    "sourceProblemCount": 0,
+    "groups": [
+      {
+        "id": "trip-list",
+        "entryIds": [
+          "trip-list-completed",
+          "trip-list-default"
+        ],
+        "hash": "45625c5995b068911b9a3949c218682ca3e3f44a0bd3b81acb06c39222ba5f49"
+      }
+    ],
+    "entries": [
+      {
+        "id": "trip-list-completed",
+        "groupId": "trip-list",
+        "hash": "501c43c434e0ee8bfda277be83f4cfc43683100f9b4e02de56ad88fcf2ef2698"
+      },
+      {
+        "id": "trip-list-default",
+        "groupId": "trip-list",
+        "hash": "2789af0ce7ecc8ae3c4b0ad86b19b100f5ab53f3ce545b282ddddaf06fa8c7a2"
+      }
+    ],
+    "requirements": [],
+    "questions": [],
+    "sourceFiles": [
+      {
+        "id": "prototype/v1-init.json",
+        "path": "prototype/v1-init.json",
+        "hash": "11dd47504e6a3d1809b2032e9d2d64289014096e25d54e492b293f1fc51ec1a4"
+      },
+      {
+        "id": "prototype/v1.html",
+        "path": "prototype/v1.html",
+        "hash": "6c539dd9122ab1f8a3417c014c5dc1b48cf9b80b14728249ef310ae8050afd7a"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "id": "trip-preparation",
+      "title": "旅行准备",
+      "rank": 10,
+      "sourceFeatureIds": [
+        "trip-list"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "trip-list-filter",
+      "title": "清单完成态筛选",
+      "parentId": "trip-preparation",
+      "rank": 10,
+      "outcome": "旅行者可以查看三项准备事项，并在全部项目与两项已完成项目之间往返切换。",
+      "description": "提供固定旅行清单、完成状态、可见数量和可恢复的仅已完成筛选闭环。",
+      "developmentRequirements": [
+        "默认状态必须展示三项事项和 3 / 3 数量。",
+        "开启筛选后只展示两项已完成事项和 2 / 3 数量。",
+        "关闭筛选后必须恢复三项完整列表。",
+        "v1 不加入分组、进度摘要、编辑、持久化或远程同步。"
+      ],
+      "sourceEntries": [
+        "trip-list-default",
+        "trip-list-completed"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v1"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html"
+      ],
+      "systemCardRefs": [],
+      "priority": "P0",
+      "priorityReason": "这是 PRD v1 的唯一核心用户闭环，也是后续清单演进的基础。",
+      "wave": "W0",
+      "waveReason": "首个开发批次先验证无持久化的最小筛选能力。",
+      "status": "not_started",
+      "dependsOn": [],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "原型已观察默认三项、仅已完成两项和恢复三项三个状态；两个入口属于同一可恢复筛选结果。",
+        "code": "app/index.html 提供静态候选实现，但当前没有 mf-dev-flow 交付任务或完成证据，因此功能保持 not_started。",
+        "systems": "当前示例无外部系统卡片；数据固定在本地页面，PRD 明确排除持久化和远程同步。",
+        "scope": "本轮只覆盖固定清单、完成态展示、数量反馈和筛选往返；分组、进度摘要、编辑与同步均为非目标。",
+        "gaps": [
+          "尚未通过 delivery 工作流形成实现任务、测试证据和完成记录。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-list-default,trip-list-completed",
+            "note": "支持默认、筛选和恢复三个可观察状态。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/index.html",
+            "note": "定位当前静态候选实现与未来写入边界。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认本地 HTML、单代码根且无外部系统依赖的项目边界。"
+          }
+        ]
+      },
+      "kind": "product",
+      "planningRevision": null,
+      "reassessment": null,
+      "labelHistory": [
+        {
+          "at": "2026-10-26T06:50:46.940Z",
+          "runId": "20261026-064908Z-功能演进拆解",
+          "from": {
+            "priority": null,
+            "wave": null
+          },
+          "to": {
+            "priority": "P0",
+            "wave": "W0"
+          },
+          "priorityReason": "这是 PRD v1 的唯一核心用户闭环，也是后续清单演进的基础。",
+          "waveReason": "首个开发批次先验证无持久化的最小筛选能力。"
+        }
+      ],
+      "stages": {
+        "prototype_alignment": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        },
+        "api_mock": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        },
+        "technical_implementation": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        },
+        "end_to_end_acceptance": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        }
+      },
+      "updatedAt": "2026-10-26T06:50:46.940Z"
+    }
+  ],
+  "migrations": [
+    {
+      "type": "split",
+      "from": [
+        "trip-list"
+      ],
+      "to": [
+        "trip-list-filter"
+      ],
+      "reason": "把原型业务分组落为可独立验收的筛选叶子功能；两个页面状态保持为同一用户闭环。"
+    }
+  ],
+  "updatedAt": "2026-10-26T06:50:46.940Z"
+}

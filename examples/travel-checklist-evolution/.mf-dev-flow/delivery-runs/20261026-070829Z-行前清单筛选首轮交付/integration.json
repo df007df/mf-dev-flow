@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-070829Z-行前清单筛选首轮交付",
+  "status": "passed",
+  "commands": "node--test-app/filter-state.test.mjs；Playwright-1200x1000-default-completed-restored",
+  "summary": "单元状态闭环与真实浏览器三态验收全部通过",
+  "verifiedAt": "2026-10-26T07:19:42.230Z",
+  "auditWarnings": [],
+  "reconciliation": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

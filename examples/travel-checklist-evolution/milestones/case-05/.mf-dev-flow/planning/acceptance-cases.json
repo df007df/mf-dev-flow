@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "revision": 11,
+  "records": [
+    {
+      "id": "AC-trip-list-completed",
+      "featureId": "trip-list-filter",
+      "title": "筛选仅显示已完成事项",
+      "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+      "evidenceHints": [
+        "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+      ],
+      "status": "superseded",
+      "origin": "user",
+      "revision": 2,
+      "createdAt": "2026-10-26T06:51:27.895Z",
+      "updatedAt": "2026-10-26T07:44:42.654Z",
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-10-26T06:51:27.895Z",
+          "title": "筛选仅显示已完成事项",
+          "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+          "status": "active",
+          "statusReason": null,
+          "evidenceHints": [
+            "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+          ]
+        }
+      ],
+      "statusReason": "PRD v2 的完成态筛选必须保留两个分组并显示三项，旧两项口径失效。"
+    },
+    {
+      "id": "AC-trip-list-default",
+      "featureId": "trip-list-filter",
+      "title": "默认展示完整旅行清单",
+      "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+      "evidenceHints": [
+        "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+      ],
+      "status": "superseded",
+      "origin": "user",
+      "revision": 2,
+      "createdAt": "2026-10-26T06:51:26.411Z",
+      "updatedAt": "2026-10-26T07:44:42.319Z",
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-10-26T06:51:26.411Z",
+          "title": "默认展示完整旅行清单",
+          "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+          "status": "active",
+          "statusReason": null,
+          "evidenceHints": [
+            "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+          ]
+        }
+      ],
+      "statusReason": "PRD v2 改为两个分组共四项，旧三项默认态由 v2 AC 替代。"
+    },
+    {
+      "id": "AC-trip-list-restore",
+      "featureId": "trip-list-filter",
+      "title": "关闭筛选恢复完整列表",
+      "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+      "evidenceHints": [
+        "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+      ],
+      "status": "superseded",
+      "origin": "user",
+      "revision": 2,
+      "createdAt": "2026-10-26T06:51:29.490Z",
+      "updatedAt": "2026-10-26T07:44:43.027Z",
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-10-26T06:51:29.490Z",
+          "title": "关闭筛选恢复完整列表",
+          "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+          "status": "active",
+          "statusReason": null,
+          "evidenceHints": [
+            "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+          ]
+        }
+      ],
+      "statusReason": "PRD v2 恢复态改为两个分组共四项，由 v2 恢复 AC 替代。"
+    },
+    {
+      "id": "AC-v2-filter-completed",
+      "featureId": "trip-list-filter",
+      "title": "跨分组筛选仅显示三项已完成事项",
+      "detail": "点击仅看已完成后保留两个分组，只显示三项已完成事项，并提供显示全部项目按钮。",
+      "evidenceHints": [
+        "浏览器大截图包含两个分组、三项已完成事项与恢复按钮。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T07:44:43.641Z",
+      "updatedAt": "2026-10-26T07:44:43.641Z",
+      "history": [],
+      "statusReason": null
+    },
+    {
+      "id": "AC-v2-filter-restore",
+      "featureId": "trip-list-filter",
+      "title": "关闭筛选恢复两个分组和四项",
+      "detail": "点击显示全部项目后恢复出发前 3 项和旅途中 1 项，并恢复仅看已完成按钮。",
+      "evidenceHints": [
+        "恢复态大截图包含完整卡片、两个分组和四项事项。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T07:44:43.767Z",
+      "updatedAt": "2026-10-26T07:44:43.767Z",
+      "history": [],
+      "statusReason": null
+    },
+    {
+      "id": "AC-v2-groups-default",
+      "featureId": "trip-stage-groups",
+      "title": "默认按两个出行阶段展示四项",
+      "detail": "首次打开页面时显示出发前 3 项和旅途中 1 项，两个分组标题与事项完成状态均可见。",
+      "evidenceHints": [
+        "大截图包含完整卡片、两个分组标题和四项事项。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T07:44:43.396Z",
+      "updatedAt": "2026-10-26T07:44:43.396Z",
+      "history": [],
+      "statusReason": null
+    },
+    {
+      "id": "AC-v2-summary-completed",
+      "featureId": "visible-progress-summary",
+      "title": "筛选后摘要同步为当前三项已完成三项",
+      "detail": "仅看已完成状态的摘要立即更新为当前 3 项、已完成 3 项。",
+      "evidenceHints": [
+        "筛选态大截图同时包含摘要区、筛选按钮和两个分组。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T07:44:44.478Z",
+      "updatedAt": "2026-10-26T07:44:44.478Z",
+      "history": [],
+      "statusReason": null
+    },
+    {
+      "id": "AC-v2-summary-default",
+      "featureId": "visible-progress-summary",
+      "title": "默认摘要显示当前四项已完成三项",
+      "detail": "默认状态的当前结果摘要显示当前 4 项、已完成 3 项。",
+      "evidenceHints": [
+        "默认态大截图包含摘要区和完整分组卡片。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T07:44:43.917Z",
+      "updatedAt": "2026-10-26T07:44:43.917Z",
+      "history": [],
+      "statusReason": null
+    }
+  ],
+  "requests": [
+    {
+      "id": "case02-ac-default",
+      "hash": "da7b2dac0ca1de346788d5c8bd3510aa80092048649b2d4e24e6eadd5a061f43",
+      "result": {
+        "id": "AC-trip-list-default",
+        "action": "added",
+        "record": {
+          "id": "AC-trip-list-default",
+          "featureId": "trip-list-filter",
+          "title": "默认展示完整旅行清单",
+          "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+          "evidenceHints": [
+            "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T06:51:26.411Z",
+          "updatedAt": "2026-10-26T06:51:26.411Z",
+          "statusReason": null
+        },
+        "registryRevision": 1,
+        "fingerprint": "2e9ffb3abd75f2f77ab83531a3e8469c4b7929f8d68fffb336f4050f41d1671a"
+      }
+    },
+    {
+      "id": "case02-ac-completed",
+      "hash": "528a1a5b3890901ba9e0cca4c8fc7920ad10d230a03591a3b2638fbec6d57aaa",
+      "result": {
+        "id": "AC-trip-list-completed",
+        "action": "added",
+        "record": {
+          "id": "AC-trip-list-completed",
+          "featureId": "trip-list-filter",
+          "title": "筛选仅显示已完成事项",
+          "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+          "evidenceHints": [
+            "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T06:51:27.895Z",
+          "updatedAt": "2026-10-26T06:51:27.895Z",
+          "statusReason": null
+        },
+        "registryRevision": 2,
+        "fingerprint": "1cc9c419c6df63015f958677ca638c500b0db3d2dadad1f7123817a373758694"
+      }
+    },
+    {
+      "id": "case02-ac-restore",
+      "hash": "cbc926ee0af30638df9e4e99446ee46bc34962d8f104cba0e1a4916324ad7424",
+      "result": {
+        "id": "AC-trip-list-restore",
+        "action": "added",
+        "record": {
+          "id": "AC-trip-list-restore",
+          "featureId": "trip-list-filter",
+          "title": "关闭筛选恢复完整列表",
+          "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+          "evidenceHints": [
+            "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T06:51:29.490Z",
+          "updatedAt": "2026-10-26T06:51:29.490Z",
+          "statusReason": null
+        },
+        "registryRevision": 3,
+        "fingerprint": "fafc02c2f8d236e07686d1092c9cf9355d443fd6ae82cecdd463ae7fd517effc"
+      }
+    },
+    {
+      "id": "case05-supersede-v1-default",
+      "hash": "36d60def43fc6003dcc2571bdbd2231dcd7cd22aa56767c955d59d97d8581f8b",
+      "result": {
+        "id": "AC-trip-list-default",
+        "action": "revised",
+        "record": {
+          "id": "AC-trip-list-default",
+          "featureId": "trip-list-filter",
+          "title": "默认展示完整旅行清单",
+          "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+          "evidenceHints": [
+            "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+          ],
+          "status": "superseded",
+          "origin": "user",
+          "revision": 2,
+          "createdAt": "2026-10-26T06:51:26.411Z",
+          "updatedAt": "2026-10-26T07:44:42.319Z",
+          "statusReason": "PRD v2 改为两个分组共四项，旧三项默认态由 v2 AC 替代。"
+        },
+        "registryRevision": 4,
+        "fingerprint": "8c7281de1eddb469e49d55acca6e4d7a8869cb49e788e6730d0005552e8e084a"
+      }
+    },
+    {
+      "id": "case05-supersede-v1-completed",
+      "hash": "b4f7adc83a468cfb116e1a8b21685275a7e7f7b6774a54579fa38e4a9601f494",
+      "result": {
+        "id": "AC-trip-list-completed",
+        "action": "revised",
+        "record": {
+          "id": "AC-trip-list-completed",
+          "featureId": "trip-list-filter",
+          "title": "筛选仅显示已完成事项",
+          "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+          "evidenceHints": [
+            "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+          ],
+          "status": "superseded",
+          "origin": "user",
+          "revision": 2,
+          "createdAt": "2026-10-26T06:51:27.895Z",
+          "updatedAt": "2026-10-26T07:44:42.654Z",
+          "statusReason": "PRD v2 的完成态筛选必须保留两个分组并显示三项，旧两项口径失效。"
+        },
+        "registryRevision": 5,
+        "fingerprint": "11b1c6ce915d70c28f86d2a3e7b52efd0d37e10c8beae5099814cd81464c8bbe"
+      }
+    },
+    {
+      "id": "case05-supersede-v1-restore",
+      "hash": "f710bef261cff57d777860d3b555a316fb3d8a79990696c7fd8cad5bf2444362",
+      "result": {
+        "id": "AC-trip-list-restore",
+        "action": "revised",
+        "record": {
+          "id": "AC-trip-list-restore",
+          "featureId": "trip-list-filter",
+          "title": "关闭筛选恢复完整列表",
+          "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+          "evidenceHints": [
+            "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+          ],
+          "status": "superseded",
+          "origin": "user",
+          "revision": 2,
+          "createdAt": "2026-10-26T06:51:29.490Z",
+          "updatedAt": "2026-10-26T07:44:43.027Z",
+          "statusReason": "PRD v2 恢复态改为两个分组共四项，由 v2 恢复 AC 替代。"
+        },
+        "registryRevision": 6,
+        "fingerprint": "15dfd444acda0b8407e3a4eefb1a31152356ae44aeae0a839e212a8df15761d7"
+      }
+    },
+    {
+      "id": "case05-add-groups-default",
+      "hash": "c2416d393f082c6a509ba41cb1ab02f1a37e2e791bba48afc408143e1f7a9854",
+      "result": {
+        "id": "AC-v2-groups-default",
+        "action": "added",
+        "record": {
+          "id": "AC-v2-groups-default",
+          "featureId": "trip-stage-groups",
+          "title": "默认按两个出行阶段展示四项",
+          "detail": "首次打开页面时显示出发前 3 项和旅途中 1 项，两个分组标题与事项完成状态均可见。",
+          "evidenceHints": [
+            "大截图包含完整卡片、两个分组标题和四项事项。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T07:44:43.396Z",
+          "updatedAt": "2026-10-26T07:44:43.396Z",
+          "statusReason": null
+        },
+        "registryRevision": 7,
+        "fingerprint": "05bdc5d7adfaa55e3c65445428f25360f2390e6eae052eb6c33a8f0444c60dd0"
+      }
+    },
+    {
+      "id": "case05-add-filter-completed",
+      "hash": "5315e2e47df2b48b74be57504071b2bfcc6ca71b1ceafc9e491bba66f22c3103",
+      "result": {
+        "id": "AC-v2-filter-completed",
+        "action": "added",
+        "record": {
+          "id": "AC-v2-filter-completed",
+          "featureId": "trip-list-filter",
+          "title": "跨分组筛选仅显示三项已完成事项",
+          "detail": "点击仅看已完成后保留两个分组，只显示三项已完成事项，并提供显示全部项目按钮。",
+          "evidenceHints": [
+            "浏览器大截图包含两个分组、三项已完成事项与恢复按钮。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T07:44:43.641Z",
+          "updatedAt": "2026-10-26T07:44:43.641Z",
+          "statusReason": null
+        },
+        "registryRevision": 8,
+        "fingerprint": "b5d3f415292028909effdf649d246ba58c1e8766321fc8f06eeaa1d2f13bdbbc"
+      }
+    },
+    {
+      "id": "case05-add-filter-restore",
+      "hash": "d27f8eaaf335529c42f8978d8bd869ebed00d03102b239c301afbfa72b1602fc",
+      "result": {
+        "id": "AC-v2-filter-restore",
+        "action": "added",
+        "record": {
+          "id": "AC-v2-filter-restore",
+          "featureId": "trip-list-filter",
+          "title": "关闭筛选恢复两个分组和四项",
+          "detail": "点击显示全部项目后恢复出发前 3 项和旅途中 1 项，并恢复仅看已完成按钮。",
+          "evidenceHints": [
+            "恢复态大截图包含完整卡片、两个分组和四项事项。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T07:44:43.767Z",
+          "updatedAt": "2026-10-26T07:44:43.767Z",
+          "statusReason": null
+        },
+        "registryRevision": 9,
+        "fingerprint": "ba39f6a0ff5c2d7e4f3fe2fbf50510a8be65f5d88c7e71bba6eef8bd2e5fed02"
+      }
+    },
+    {
+      "id": "case05-add-summary-default",
+      "hash": "388919c71d9a00cc69622c0c5928d1bfab9e6871fc9774610831676c187b90ed",
+      "result": {
+        "id": "AC-v2-summary-default",
+        "action": "added",
+        "record": {
+          "id": "AC-v2-summary-default",
+          "featureId": "visible-progress-summary",
+          "title": "默认摘要显示当前四项已完成三项",
+          "detail": "默认状态的当前结果摘要显示当前 4 项、已完成 3 项。",
+          "evidenceHints": [
+            "默认态大截图包含摘要区和完整分组卡片。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T07:44:43.917Z",
+          "updatedAt": "2026-10-26T07:44:43.917Z",
+          "statusReason": null
+        },
+        "registryRevision": 10,
+        "fingerprint": "57d7ff784772f167d2ed4f395054193b07783f6a9dd497d0e16a7efe4f394e50"
+      }
+    },
+    {
+      "id": "case05-add-summary-completed",
+      "hash": "15ba0a2e8dd9feac02266a4a4842a583b0db09934489e7fb2c3449886de9a4df",
+      "result": {
+        "id": "AC-v2-summary-completed",
+        "action": "added",
+        "record": {
+          "id": "AC-v2-summary-completed",
+          "featureId": "visible-progress-summary",
+          "title": "筛选后摘要同步为当前三项已完成三项",
+          "detail": "仅看已完成状态的摘要立即更新为当前 3 项、已完成 3 项。",
+          "evidenceHints": [
+            "筛选态大截图同时包含摘要区、筛选按钮和两个分组。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T07:44:44.478Z",
+          "updatedAt": "2026-10-26T07:44:44.478Z",
+          "statusReason": null
+        },
+        "registryRevision": 11,
+        "fingerprint": "857fa3a9e902b0320354be7a150b8e718fd1921355b63ea5ae4b0d9a9c6d8dec"
+      }
+    }
+  ],
+  "events": [
+    {
+      "revision": 1,
+      "at": "2026-10-26T06:51:26.411Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-trip-list-default"
+    },
+    {
+      "revision": 2,
+      "at": "2026-10-26T06:51:27.895Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-trip-list-completed"
+    },
+    {
+      "revision": 3,
+      "at": "2026-10-26T06:51:29.490Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-trip-list-restore"
+    },
+    {
+      "revision": 4,
+      "at": "2026-10-26T07:44:42.319Z",
+      "kind": "acceptance_case_revised",
+      "subject": "AC-trip-list-default"
+    },
+    {
+      "revision": 5,
+      "at": "2026-10-26T07:44:42.654Z",
+      "kind": "acceptance_case_revised",
+      "subject": "AC-trip-list-completed"
+    },
+    {
+      "revision": 6,
+      "at": "2026-10-26T07:44:43.027Z",
+      "kind": "acceptance_case_revised",
+      "subject": "AC-trip-list-restore"
+    },
+    {
+      "revision": 7,
+      "at": "2026-10-26T07:44:43.396Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-v2-groups-default"
+    },
+    {
+      "revision": 8,
+      "at": "2026-10-26T07:44:43.641Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-v2-filter-completed"
+    },
+    {
+      "revision": 9,
+      "at": "2026-10-26T07:44:43.767Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-v2-filter-restore"
+    },
+    {
+      "revision": 10,
+      "at": "2026-10-26T07:44:43.917Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-v2-summary-default"
+    },
+    {
+      "revision": 11,
+      "at": "2026-10-26T07:44:44.478Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-v2-summary-completed"
+    }
+  ],
+  "updatedAt": "2026-10-26T07:44:44.478Z"
+}

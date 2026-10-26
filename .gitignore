@@ -13,15 +13,19 @@ coverage/
 test-results/
 playwright-report/
 *.tsbuildinfo
+.worktrees/
 
 # Local environment and runtime state
 .env*
 !.env.example
 .mf-dev-flow/
 !examples/
-!examples/five-minute-cycle/
-!examples/five-minute-cycle/.mf-dev-flow
-!examples/five-minute-cycle/.mf-dev-flow/**
+!examples/travel-checklist-evolution/
+!examples/travel-checklist-evolution/.mf-dev-flow
+!examples/travel-checklist-evolution/.mf-dev-flow/**
+# The public demo's five milestone stores are intentional, sanitized fixtures.
+!examples/travel-checklist-evolution/milestones/*/.mf-dev-flow/
+!examples/travel-checklist-evolution/milestones/*/.mf-dev-flow/**
 
 # Local logs
 *.log

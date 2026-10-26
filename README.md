@@ -46,6 +46,8 @@ flowchart TD
 
 ```bash
 git clone <repository-url> /path/to/mf-dev-flow
+cd /path/to/mf-dev-flow
+npm --prefix modules/prototype ci
 cd /path/to/your-project
 mkdir -p .codex/skills
 ln -s /path/to/mf-dev-flow .codex/skills/mf-dev-flow
@@ -75,30 +77,37 @@ node "$D" coordination status --json
 
 ## 五分钟看懂一次闭环
 
-不必先接入真实项目。仓库附带一个可公开、可运行的示例项目：用户提出“旅行清单只看已完成项目”，流程把它固定为一个功能点、两条验收用例和明确的实现边界，再由开发任务完成实现与回归。
-
-![旅行清单筛选场景的本地观察台](docs/images/five-minute-dashboard.png)
+不必先接入真实项目。仓库附带一个可公开、可运行的旅行清单项目。它从 PRD 与原型基线开始，先交付简单筛选，再通过 PRD v2 演进为“阶段分组 → 跨分组筛选 → 当前结果摘要”三个功能。
 
 ```bash
 git clone <repository-url> mf-dev-flow
-cd mf-dev-flow/examples/five-minute-cycle
+cd mf-dev-flow/examples/travel-checklist-evolution
 
-# 首次运行时安装看板依赖；之后可跳过。
+# 首次运行时安装原型解析器和看板依赖；之后可跳过。
+npm --prefix ../../modules/prototype ci
 pnpm --dir ../../dashboard install
 
-# 看板只读取当前示例的合成状态，不写入它。
+# 选择五分钟最小闭环里程碑；看板只读，不改写状态。
+node scripts/select-case.mjs case-03
 node ../../scripts/mf-dev-flow.mjs dashboard
 ```
 
-浏览器打开 <http://127.0.0.1:4173/>，然后依次看“功能点看板”和“功能点分组列表”。完整的场景背景、五分钟操作、验收标准和把流程迁移到自己项目的方式见 [`examples/five-minute-cycle/README.md`](examples/five-minute-cycle/README.md)；功能、case、页面区域与真实截图的一一映射见 [`examples/five-minute-cycle/cases.md`](examples/five-minute-cycle/cases.md)；对照说明见 [`docs/five-minute-demo.md`](docs/five-minute-demo.md)。
+浏览器打开 <http://127.0.0.1:4173/>，依次看“功能点分组列表”和“运行历史”，再打开示例页面实际操作筛选。
 
-这个示例特意只展示一个叶子功能。它适合判断你是否需要这套流程：若要把需求、开发范围和验收证据留在同一条链路上，就继续接入；如果只是临时改一行样式，则无需启用完整闭环。
+![五分钟最小闭环的功能、AC 与阶段](examples/travel-checklist-evolution/screenshots/case-03/dashboard-feature-group.png)
+
+完整示例按五个 Case 编排，每个 Case 都有场景、操作、大截图和效果说明；最终看板保留旧 AC 被替代、三个功能依赖和全部交付证据。
+
+![复杂版本的最终应用效果](examples/travel-checklist-evolution/screenshots/case-05/app-v2-final-default.png)
+
+入口见 [`examples/travel-checklist-evolution/README.md`](examples/travel-checklist-evolution/README.md)，五分钟说明见 [`docs/five-minute-demo.md`](docs/five-minute-demo.md)。示例里程碑是在中性工作区实际执行 `mf-dev-flow` 后冻结的状态，不是手工拼装的演示 JSON。
 
 ## 本地看板
 
 看板读取消费项目的 `.mf-dev-flow/` 数据并只监听本机回环地址。
 
 ```bash
+npm --prefix .codex/skills/mf-dev-flow/modules/prototype ci
 pnpm --dir .codex/skills/mf-dev-flow/dashboard install
 node .codex/skills/mf-dev-flow/scripts/mf-dev-flow.mjs dashboard
 ```

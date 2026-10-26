@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "20261026-074645Z-旅行阶段分组交付",
+  "type": "delivery",
+  "title": "旅行阶段分组交付",
+  "scope": null,
+  "status": "done",
+  "prototypeRun": "travel-prototype-v2",
+  "deliveryInput": {
+    "file": "delivery-input.json",
+    "source": "feature-map",
+    "intensity": "focused",
+    "featureIds": [
+      "trip-stage-groups"
+    ],
+    "createdAt": "2026-10-26T07:46:45.750Z"
+  },
+  "createdAt": "2026-10-26T07:46:45.750Z",
+  "updatedAt": "2026-10-26T07:48:18.050Z",
+  "notes": [
+    {
+      "at": "2026-10-26T07:47:12.606Z",
+      "note": "方案确认（范围、状态与验证）：confirmed · 结论：先把扁平四项建模为出发前与旅途中两个分组；证据：PRD-v2与原型默认态；变更：限定app状态模块和页面分组结构；验证：单元测试加真实浏览器整卡截图；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:47:16.875Z",
+      "note": "开发与自动化验证：confirmed · 结论：页面已按两个阶段展示四项并保留完成状态；证据：filter-state测试通过1/1；变更：app/index.html与filter-state模块测试；验证：默认态得到两个分组和4/4；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:47:21.334Z",
+      "note": "阶段产物（end_to_end_acceptance/e2e_screenshot）：evidence/stage-artifacts/implement-trip-stage-groups/end_to_end_acceptance/20261026-074721Z-app-v2-groups.png · 默认状态完整卡片显示出发前3项和旅途中1项"
+    },
+    {
+      "at": "2026-10-26T07:47:23.163Z",
+      "note": "端到端验收（真实浏览器 + 截图）：confirmed · 结论：真实浏览器默认态完整展示两个阶段与四项；证据：1200x1000整卡截图并绑定冻结AC；变更：无；验证：页面文本与分组数量符合PRD-v2；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:47:25.264Z",
+      "note": "主任务状态派生：in_progress → done（全部子任务已终态）"
+    },
+    {
+      "at": "2026-10-26T07:48:18.050Z",
+      "note": "旅行阶段分组功能完成"
+    }
+  ]
+}

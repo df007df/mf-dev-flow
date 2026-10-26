@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "v1-a1650f2cd8d2",
+      "title": "v1",
+      "origin": {
+        "kind": "file",
+        "path": "/private/tmp/mf-dev-flow-travel-demo/prd/v1.md"
+      },
+      "format": "text",
+      "ingestedAt": "2026-10-26T06:44:08.749Z",
+      "sourceSha256": "a1650f2cd8d2305af7752757048790e063f0d730efb5ff1a41396583b6c321cc",
+      "snapshotSha256": "a1650f2cd8d2305af7752757048790e063f0d730efb5ff1a41396583b6c321cc",
+      "bytes": 636
+    },
+    {
+      "id": "v2-8cf1d449d0a9",
+      "title": "v2",
+      "origin": {
+        "kind": "file",
+        "path": "/private/tmp/mf-dev-flow-travel-demo/prd/v2.md"
+      },
+      "format": "text",
+      "ingestedAt": "2026-10-26T07:25:52.587Z",
+      "sourceSha256": "8cf1d449d0a97d8bcd21f113e5e53158947180777408e98bfd2afffe16a942d0",
+      "snapshotSha256": "8cf1d449d0a97d8bcd21f113e5e53158947180777408e98bfd2afffe16a942d0",
+      "bytes": 1293
+    }
+  ],
+  "updatedAt": "2026-10-26T07:25:52.588Z"
+}

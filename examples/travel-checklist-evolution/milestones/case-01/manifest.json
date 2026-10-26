@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "caseId": "case-01",
+  "capturedAt": "2026-10-26T06:44:11.644Z",
+  "files": [
+    {
+      "path": "current.json",
+      "sha256": "196fab9bf18b776fe5f103e483dd0a5cf2fa42c4ed9357995a59c274262044b7"
+    },
+    {
+      "path": "execution-index.json",
+      "sha256": "d1bfd8a2809d1c92106dc77bec870bff8a6a8df28a1dd9f57d34674eeb526843"
+    },
+    {
+      "path": "prd/manifest.json",
+      "sha256": "58b79c20243ef3015129208b2ede1cdc6f6837ea37e892e9a089456343156aa6"
+    },
+    {
+      "path": "prd/sources/v1-a1650f2cd8d2.md",
+      "sha256": "a1650f2cd8d2305af7752757048790e063f0d730efb5ff1a41396583b6c321cc"
+    },
+    {
+      "path": "project.json",
+      "sha256": "1abc8e52879a7e215ad1c25b011772e8a9f947c6d36490b8ffd32604e513ee57"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/index.sqlite",
+      "sha256": "a76e76527e59cd0ddaecce0c61034682353fc5b625d0969ad66842c9f1643764"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/source-map.json",
+      "sha256": "c51aceee5a6b20304e590120574479b77d4d0fdc5dc28147727a578aab178b39"
+    },
+    {
+      "path": "prototype/catalog.sqlite",
+      "sha256": "2603f92d40ed62a82a3f86c94e63c25fc92651a3dc6da9e1ab4325550d8ad95f"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b8d9716b73fd421c3784cf527d3ac4e6cfe5c249124b048720a372f1ca595ea5"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "run",
+  "id": "20261026-074915Z-跨分组筛选升级交付",
+  "typeRef": {
+    "id": "feature-development",
+    "version": 1
+  },
+  "title": "跨分组筛选升级交付",
+  "status": "completed",
+  "taskRefs": [
+    "task:20261026-074915Z-跨分组筛选升级交付/upgrade-cross-group-filter"
+  ],
+  "createdAt": "2026-10-26T07:49:15.788Z",
+  "updatedAt": "2026-10-26T07:50:02.578Z",
+  "legacy": {
+    "runDir": "delivery-runs/20261026-074915Z-跨分组筛选升级交付"
+  }
+}

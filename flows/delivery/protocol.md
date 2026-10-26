@@ -7,7 +7,7 @@
 1. 先运行 `feature status`。地图不存在或过期时交回规划流程；地图新鲜时通过 `delivery start --source feature-map --intensity <强度>` 提取可开发叶子。指定单一叶子使用 `feature start --id <ID>`，已有任务优先续做。兼容来源仍支持 `--source prototype` 和 `--source manual --task`。
 2. 读取 `delivery-input.json`、相关叶子规划及实际交付项目卡片。`focused`、`standard`、`high` 只影响范围和并发安排，不改变任务验收要求。
 3. 用 `work plan` 登记任务类型 `--kind`、输入范围、写入范围（运行内可共享）、依赖与 `--verify` 验收要求。产品任务仍只关联一个叶子功能；`--projects` 绑定实际涉及的代码根，不统一要求同时涉及前后端。无阶段任务省略 `--phase` 和 `--target-phase`。
-4. 从功能地图创建的小程序产品运行登记 `miniapp-product-delivery` 契约：`prototype_alignment` → `technical_solution` → `development` → `end_to_end_acceptance`。它只绑定 `ui-client`，沿用已有接口，不生成 API / Mock 阶段。`technical_solution` 必须使用 superpowers；输出中的相关未决问题最多三个。创建运行时会为每个功能冻结当时 active 的功能级最终验收用例（AC），并只注入其 `end_to_end_acceptance` 阶段；后续 AC 修改不回写既有任务。手工运行登记 `generic-task` 契约与空阶段列表。`--kind generic|api|ui|fix` 从类型注册表冻结版本与验收项；其他标签明确兜底通用类型。使用 `work types --json` 和 [类型协议](task-types.md) 查看当前能力。
+4. 从功能地图创建的小程序产品运行登记 `miniapp-product-delivery` 契约：`prototype_alignment` → `technical_solution` → `development` → `end_to_end_acceptance`。普通浏览器项目可用 `--process web-product@1` 登记 `web-product-delivery` 契约：`solution_design` → `development` → `end_to_end_acceptance`，不附加小程序专属门禁。两类连续交付都只绑定 `ui-client`，并在创建时冻结当时 active 的功能级最终验收用例（AC），只注入其 `end_to_end_acceptance` 阶段；后续 AC 修改不回写既有任务。手工运行登记 `generic-task` 契约与空阶段列表。`--kind generic|api|ui|fix` 从类型注册表冻结版本与验收项；其他标签明确兜底通用类型。使用 `work types --json` 和 [类型协议](task-types.md) 查看当前能力。
 5. 领取或绑定当前会话后执行 `work delivery-brief --run <运行ID> --task <任务ID>`，按输入与验收要求持续交付。涉及系统边界时读取相关系统卡片并记录决策；阻塞需说明事实、影响和需要解决的问题。
 
 ## 记录与验证

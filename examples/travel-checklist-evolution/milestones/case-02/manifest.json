@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "caseId": "case-02",
+  "capturedAt": "2026-10-26T06:51:43.076Z",
+  "files": [
+    {
+      "path": "compaction/index.json",
+      "sha256": "98596ca4cbc67a19f79fd730b737d1365114aeb453d4327e62195c3466b8fef4"
+    },
+    {
+      "path": "current.json",
+      "sha256": "0af655bd9f3ed7b10a048d6c70d3041e3d15588ed04175dcce9196cdd25bc8c3"
+    },
+    {
+      "path": "evidence/code-roots/e0e4e869d70253bd7624c4084000e74c17384b6af34ada41e7230e5d39071051.json",
+      "sha256": "3de183e4ee642cec2ded1207e40f595012cb0f7a9a911e173b317b06430d2886"
+    },
+    {
+      "path": "evidence/development/b8cce95f94bb3842447a35cad31d68789df636e11353ab4a75179d86761d804c.json",
+      "sha256": "a972891ebec1b6e49df497ef33b183d1fea035981b22b1f805695663643f7405"
+    },
+    {
+      "path": "evidence/systems/79c0335a4057889a36428a8ae4ef07128393bc762f908660453697ec618f6bba.json",
+      "sha256": "668e4db1f87e9a9a587c0fa1c9d6f26fb72e219106e67724aa6ba29b934727ea"
+    },
+    {
+      "path": "execution-index.json",
+      "sha256": "b14e7881669e32c2055b447a4fca89ce12dd168baaa0d714bd0375c1ddace722"
+    },
+    {
+      "path": "planning/acceptance-cases.json",
+      "sha256": "b290d126e6fdc16f0a8d9cd330829c277f646449bd678288bbfddd9e33403d6d"
+    },
+    {
+      "path": "planning/context-brief.md",
+      "sha256": "e428bf41204c8e738b5c88737ea3003cc1c6b591e30be67c16367f2f79d72f3a"
+    },
+    {
+      "path": "planning/feature-map.json",
+      "sha256": "477fcb20ca784503ea1cc8ff4a59608cf23e6b1abe2dcb2e3af9183cf2ab8cfb"
+    },
+    {
+      "path": "planning/功能演进地图.md",
+      "sha256": "045f78434bd7c4320d2a11f3b380a3023efbdcb61522594582736d2c2741962b"
+    },
+    {
+      "path": "prd/analyses/travel-prd-v1/contradictions.md",
+      "sha256": "8831f2efd99fc5c04eb7aee4643301c208843395ce9f6523d0fae07e2faf3362"
+    },
+    {
+      "path": "prd/analyses/travel-prd-v1/findings.json",
+      "sha256": "84974278b0bb4e5fcc263f39aaf0ec451c1864b56e8c3441b290d572369b4a99"
+    },
+    {
+      "path": "prd/analyses/travel-prd-v1/redlines.md",
+      "sha256": "c77828e4e223fda0cd0011ffe9f099b64c1e74e126f4c0439cae37b93ee8894d"
+    },
+    {
+      "path": "prd/manifest.json",
+      "sha256": "58b79c20243ef3015129208b2ede1cdc6f6837ea37e892e9a089456343156aa6"
+    },
+    {
+      "path": "prd/sources/v1-a1650f2cd8d2.md",
+      "sha256": "a1650f2cd8d2305af7752757048790e063f0d730efb5ff1a41396583b6c321cc"
+    },
+    {
+      "path": "project.json",
+      "sha256": "1abc8e52879a7e215ad1c25b011772e8a9f947c6d36490b8ffd32604e513ee57"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/audit.json",
+      "sha256": "df776e4ec0cc914c1a40f80a972c668eb04028984a25ad01574c6fe17fd40a04"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/brief.json",
+      "sha256": "6ce831c192dc68c654c7c7fac5814711da5a4cfacfdda76df762a7f2a8857a2b"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/index.sqlite",
+      "sha256": "5843578149bc68f1c5a4ac1afa5272cdd61f8c48705bf2296abd9cc6b5f7c456"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/report.md",
+      "sha256": "81a187b86e8f65a80147569c102787b77ee62945e07ab1bfe3197448a9930c34"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/screenshots/30bc01ce7cc8a6743305d67dfd876b4d3b74354af57aded03ffad11b65c2683c.png",
+      "sha256": "30bc01ce7cc8a6743305d67dfd876b4d3b74354af57aded03ffad11b65c2683c"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/screenshots/ee36d41213778e96c9f2f6fc3463084d8ead154e0d0869f3dccd7adc8ee6a019.png",
+      "sha256": "ee36d41213778e96c9f2f6fc3463084d8ead154e0d0869f3dccd7adc8ee6a019"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/source-map.json",
+      "sha256": "c51aceee5a6b20304e590120574479b77d4d0fdc5dc28147727a578aab178b39"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/traces/11eb97d84523ac96fad9a8da26a8ebf0df1e1b5317710c4997f806702c32d2c8.trace",
+      "sha256": "11eb97d84523ac96fad9a8da26a8ebf0df1e1b5317710c4997f806702c32d2c8"
+    },
+    {
+      "path": "prototype/analyses/analysis-1cb1b985c917c0fde5d2a804/traces/af9a78f25384927c95fed9cad1c74b4c634fda6c1ac2eef12eb0625b65825ddc.trace",
+      "sha256": "af9a78f25384927c95fed9cad1c74b4c634fda6c1ac2eef12eb0625b65825ddc"
+    },
+    {
+      "path": "prototype/catalog.sqlite",
+      "sha256": "ac4ed24a88784004e6dc69ae78afa9809484028803524e4145ea8e87e2673deb"
+    },
+    {
+      "path": "prototype/report.md",
+      "sha256": "3a6e19ef248fb88a71935e9bc81a4b4ed7b21c8a77123cc72b21768c8c4f7aa8"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b8d9716b73fd421c3784cf527d3ac4e6cfe5c249124b048720a372f1ca595ea5"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/analysis.md",
+      "sha256": "851ea92cfdeaf84d019f91ca33adb6e8dd48e4931bc97e041ac7a25a2e752531"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/application.json",
+      "sha256": "82ee000bc0f4147d78b56a164608b4fb85f83c59b3e7d5747c804b701b1ff16c"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/brief.md",
+      "sha256": "e428bf41204c8e738b5c88737ea3003cc1c6b591e30be67c16367f2f79d72f3a"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/context.json",
+      "sha256": "8b6266b01ed66266fbec0f91cc404e468563b857f3d6e9949320382d8ee842f9"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/delta.json",
+      "sha256": "8f6dcabd5853b34f19288cc372517593b53fed0c86045b32587c197f3289e855"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/previous-map.json",
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/proposal-patches/20261026-065026Z-3a1fc3eb.json",
+      "sha256": "29f43bb3cbf6e9d5c056938c0cd1d57079e38d01b9bf69db62954c765c9ea6e8"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/proposal-patches/20261026-065044Z-e7652847.json",
+      "sha256": "bb97b113bbba15a20cd841881474fc1d5d4eba03f6cdf1f24701a285f79d6997"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/proposal.json",
+      "sha256": "bfdb76ae8c638e70995b3b05b4deb76a8a79a200b35c5be3e1189033ba81ace5"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/prototype-impact.json",
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/run.json",
+      "sha256": "d23ed16f2f9a6af5203cb9b436becba9779407cc01d5ed0ad39660019b9cd0b9"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/validation.json",
+      "sha256": "37eacdd261509585802cbce955c936884746426174ff3256e878e18390fc62b5"
+    },
+    {
+      "path": "refinement-runs/20261026-064908Z-功能演进拆解/work-plan.json",
+      "sha256": "bcaf5dc8b73e273005364adceddeacff9644cac5ac247e551de1e7a1bbc39fff"
+    }
+  ]
+}

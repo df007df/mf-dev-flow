@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "problems": [],
+  "freshness": {
+    "fresh": true,
+    "changedFiles": [],
+    "extractorChanged": false,
+    "analysisRequirementsChanged": false,
+    "invalidation": "none",
+    "metrics": {
+      "files": 2,
+      "hits": 2,
+      "parsed": 0,
+      "sourceBytes": 3381
+    }
+  },
+  "revision": 4
+}

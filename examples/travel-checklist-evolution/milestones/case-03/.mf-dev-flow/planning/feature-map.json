@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 4,
+  "sourceRun": "20261026-064908Z-功能演进拆解",
+  "prototypeRun": "analysis-1cb1b985c917c0fde5d2a804",
+  "evidenceCursor": "179e5ab46e366ba10e1e28618b7756a69c51a5de4c3f7fc45c1b5f8e84c39b19",
+  "refinementEvidenceCursor": "7ae4a1970bcb6b37e4cbec24130e1cd9b07c00e6fa95cd637a2e4184cb5cd0e5",
+  "prototypeBaseline": {
+    "schemaVersion": 1,
+    "semanticRevision": 2,
+    "global": "0ed5f4c3e52963e64744878da6aacc87eb689dba078bc3e23138dae9620534a2",
+    "files": {
+      "semantic": "0a3aaa59268e042063e9f190c9d88c7a58a10bafe6bb77a8384ed29e4bcffa35"
+    },
+    "sourceProblems": [],
+    "planningReadiness": {
+      "status": "ready",
+      "acceptedBatch": "analysis-1cb1b985c917c0fde5d2a804",
+      "activeBatch": "analysis-1cb1b985c917c0fde5d2a804",
+      "scopeProblems": []
+    },
+    "fingerprint": "542935534ab334a401195bdca2303e49c9f6e33b6938b9cee14cae2967d3d970",
+    "sourceProblemCount": 0,
+    "groups": [
+      {
+        "id": "trip-list",
+        "entryIds": [
+          "trip-list-completed",
+          "trip-list-default"
+        ],
+        "hash": "45625c5995b068911b9a3949c218682ca3e3f44a0bd3b81acb06c39222ba5f49"
+      }
+    ],
+    "entries": [
+      {
+        "id": "trip-list-completed",
+        "groupId": "trip-list",
+        "hash": "501c43c434e0ee8bfda277be83f4cfc43683100f9b4e02de56ad88fcf2ef2698"
+      },
+      {
+        "id": "trip-list-default",
+        "groupId": "trip-list",
+        "hash": "2789af0ce7ecc8ae3c4b0ad86b19b100f5ab53f3ce545b282ddddaf06fa8c7a2"
+      }
+    ],
+    "requirements": [],
+    "questions": [],
+    "sourceFiles": [
+      {
+        "id": "prototype/v1-init.json",
+        "path": "prototype/v1-init.json",
+        "hash": "11dd47504e6a3d1809b2032e9d2d64289014096e25d54e492b293f1fc51ec1a4"
+      },
+      {
+        "id": "prototype/v1.html",
+        "path": "prototype/v1.html",
+        "hash": "6c539dd9122ab1f8a3417c014c5dc1b48cf9b80b14728249ef310ae8050afd7a"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "id": "trip-preparation",
+      "title": "旅行准备",
+      "rank": 10,
+      "sourceFeatureIds": [
+        "trip-list"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "trip-list-filter",
+      "title": "清单完成态筛选",
+      "parentId": "trip-preparation",
+      "rank": 10,
+      "outcome": "旅行者可以查看三项准备事项，并在全部项目与两项已完成项目之间往返切换。",
+      "description": "提供固定旅行清单、完成状态、可见数量和可恢复的仅已完成筛选闭环。",
+      "developmentRequirements": [
+        "默认状态必须展示三项事项和 3 / 3 数量。",
+        "开启筛选后只展示两项已完成事项和 2 / 3 数量。",
+        "关闭筛选后必须恢复三项完整列表。",
+        "v1 不加入分组、进度摘要、编辑、持久化或远程同步。"
+      ],
+      "sourceEntries": [
+        "trip-list-default",
+        "trip-list-completed"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v1"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html"
+      ],
+      "systemCardRefs": [],
+      "priority": "P0",
+      "priorityReason": "这是 PRD v1 的唯一核心用户闭环，也是后续清单演进的基础。",
+      "wave": "W0",
+      "waveReason": "首个开发批次先验证无持久化的最小筛选能力。",
+      "status": "done",
+      "dependsOn": [],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "原型已观察默认三项、仅已完成两项和恢复三项三个状态；两个入口属于同一可恢复筛选结果。",
+        "code": "app/index.html 提供静态候选实现，但当前没有 mf-dev-flow 交付任务或完成证据，因此功能保持 not_started。",
+        "systems": "当前示例无外部系统卡片；数据固定在本地页面，PRD 明确排除持久化和远程同步。",
+        "scope": "本轮只覆盖固定清单、完成态展示、数量反馈和筛选往返；分组、进度摘要、编辑与同步均为非目标。",
+        "gaps": [
+          "尚未通过 delivery 工作流形成实现任务、测试证据和完成记录。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-list-default,trip-list-completed",
+            "note": "支持默认、筛选和恢复三个可观察状态。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/index.html",
+            "note": "定位当前静态候选实现与未来写入边界。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认本地 HTML、单代码根且无外部系统依赖的项目边界。"
+          }
+        ]
+      },
+      "kind": "product",
+      "planningRevision": null,
+      "reassessment": null,
+      "labelHistory": [
+        {
+          "at": "2026-10-26T06:50:46.940Z",
+          "runId": "20261026-064908Z-功能演进拆解",
+          "from": {
+            "priority": null,
+            "wave": null
+          },
+          "to": {
+            "priority": "P0",
+            "wave": "W0"
+          },
+          "priorityReason": "这是 PRD v1 的唯一核心用户闭环，也是后续清单演进的基础。",
+          "waveReason": "首个开发批次先验证无持久化的最小筛选能力。"
+        }
+      ],
+      "stages": {
+        "solution_design": {
+          "status": "confirmed",
+          "summary": "结论：采用单页无依赖方案补齐可见数量并统一筛选状态更新；证据：冻结的PRD、原型三个状态与app/index.html现状；变更：限定写入app/index.html并新增行为测试；验证：自动化检查加真实浏览器默认、筛选、恢复三态；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:09:30.951Z"
+        },
+        "development": {
+          "status": "confirmed",
+          "summary": "结论：筛选状态、可见数量与恢复路径已实现；证据：app/filter-state.test.mjs通过且真实页面三态可复现；变更：app/index.html、app/filter-state.mjs、app/filter-state.test.mjs；验证：node--test覆盖3/3到2/3再回3/3；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:14:52.944Z"
+        },
+        "end_to_end_acceptance": {
+          "status": "confirmed",
+          "summary": "结论：默认、仅已完成、恢复三个真实浏览器旅程全部通过；证据：本阶段登记三张1200x1000完整区块截图并绑定三条冻结AC；变更：无新增产品改动；验证：Playwright三态与控制台零错误且逐条AC为passed；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:15:46.907Z",
+          "acceptanceResults": {
+            "AC-trip-list-default": {
+              "status": "passed",
+              "summary": "首次打开显示三项并反馈3/3",
+              "evidence": [
+                "evidence/stage-artifacts/implement-trip-list-filter/end_to_end_acceptance/20261026-071516Z-app-v1-default.png"
+              ],
+              "updatedAt": "2026-10-26T07:15:26.525Z"
+            },
+            "AC-trip-list-completed": {
+              "status": "passed",
+              "summary": "开启筛选后仅显示两项已完成并反馈2/3",
+              "evidence": [
+                "evidence/stage-artifacts/implement-trip-list-filter/end_to_end_acceptance/20261026-071516Z-app-v1-completed.png"
+              ],
+              "updatedAt": "2026-10-26T07:15:27.585Z"
+            },
+            "AC-trip-list-restore": {
+              "status": "passed",
+              "summary": "关闭筛选后恢复三项并反馈3/3",
+              "evidence": [
+                "evidence/stage-artifacts/implement-trip-list-filter/end_to_end_acceptance/20261026-071516Z-app-v1-restored.png"
+              ],
+              "updatedAt": "2026-10-26T07:15:28.646Z"
+            }
+          }
+        }
+      },
+      "updatedAt": "2026-10-26T07:15:57.254Z",
+      "stageDefinitions": [
+        {
+          "id": "solution_design",
+          "title": "方案确认（范围、状态与验证）",
+          "ownerRoles": [
+            "ui-client"
+          ],
+          "objective": "把需求与原型收敛为可实施的 Web 方案，明确状态变化、写入范围与验证方法。",
+          "documentation": {
+            "description": "核对冻结需求、原型状态和现有代码边界，形成最小可交付方案。"
+          },
+          "acceptanceCriteria": [
+            {
+              "id": "implementable-scope",
+              "title": "方案可直接实施",
+              "detail": "方案明确用户行为、页面状态、文件范围、失败恢复和验证路径。"
+            }
+          ],
+          "evidenceGates": [
+            "risk_ledger"
+          ],
+          "reportFields": [
+            "结论",
+            "证据",
+            "变更",
+            "验证",
+            "风险/下一步"
+          ],
+          "agent": {
+            "id": "solution_design",
+            "file": "agents/solution-design.md",
+            "sha256": "8f2d3d4a951117d3dae2bb732a01888728a8818d649196c199c2eb8a9e7aaff7",
+            "instructions": "# Web 方案确认 Agent\n\n读取冻结的功能输入、验收用例、原型证据和现有页面代码，将本次功能收敛为可直接实施的方案。\n\n必须说明用户动作、状态变化、写入文件、失败与恢复路径、自动化和浏览器验收方法。不得把未验证的假设写成既有事实；总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+          }
+        },
+        {
+          "id": "development",
+          "title": "开发与自动化验证",
+          "ownerRoles": [
+            "ui-client"
+          ],
+          "objective": "按已确认方案实现浏览器端功能，并运行与改动风险匹配的自动化验证。",
+          "documentation": {
+            "description": "在声明写范围内实现功能，记录真实文件和测试结果。"
+          },
+          "acceptanceCriteria": [
+            {
+              "id": "implemented-and-tested",
+              "title": "功能已实现并验证",
+              "detail": "实现与方案一致，自动化测试结果如实记录。"
+            }
+          ],
+          "evidenceGates": [
+            "risk_ledger"
+          ],
+          "reportFields": [
+            "结论",
+            "证据",
+            "变更",
+            "验证",
+            "风险/下一步"
+          ],
+          "agent": {
+            "id": "development",
+            "file": "agents/development.md",
+            "sha256": "71ee00b8f216bd606d0096e517678e3afc083993e66bb9f40c474411c8990a45",
+            "instructions": "# Web 开发 Agent\n\n只在任务声明的写入范围内按已确认方案实现功能。优先用行为测试固定用户可观察结果，再完成最小实现；运行与改动风险匹配的自动化检查，并如实记录文件和命令。\n\n不得用静态截图替代可运行页面，也不得把未执行的测试写为通过。总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+          }
+        },
+        {
+          "id": "end_to_end_acceptance",
+          "title": "端到端验收（真实浏览器 + 截图）",
+          "ownerRoles": [
+            "ui-client"
+          ],
+          "objective": "在真实浏览器中复现用户旅程，归档本阶段大图并逐条记录冻结验收用例结论。",
+          "documentation": {
+            "description": "用真实页面完成关键状态与恢复路径，截图包含功能卡片及所在区块。"
+          },
+          "acceptanceCriteria": [
+            {
+              "id": "e2e-screenshot-archived",
+              "title": "真实浏览器截图已登记",
+              "detail": "至少一张本阶段产生的大图通过 stage-artifact 登记，并说明状态与复现动作。"
+            },
+            {
+              "id": "AC-trip-list-completed",
+              "title": "筛选仅显示已完成事项",
+              "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+              "evidenceHints": [
+                "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+              ],
+              "origin": "feature-acceptance-case",
+              "revision": 1
+            },
+            {
+              "id": "AC-trip-list-default",
+              "title": "默认展示完整旅行清单",
+              "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+              "evidenceHints": [
+                "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+              ],
+              "origin": "feature-acceptance-case",
+              "revision": 1
+            },
+            {
+              "id": "AC-trip-list-restore",
+              "title": "关闭筛选恢复完整列表",
+              "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+              "evidenceHints": [
+                "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+              ],
+              "origin": "feature-acceptance-case",
+              "revision": 1
+            }
+          ],
+          "evidenceGates": [
+            "e2e_screenshot_evidence",
+            "risk_ledger"
+          ],
+          "reportFields": [
+            "结论",
+            "证据",
+            "变更",
+            "验证",
+            "风险/下一步"
+          ],
+          "terminal": true,
+          "agent": {
+            "id": "end_to_end_acceptance",
+            "file": "agents/e2e-acceptance.md",
+            "sha256": "d2aa131cd80c4797c71db4726e7d72f4ae3bb5e2ad08dc5b0af0a83b61b3b891",
+            "instructions": "# Web 端到端验收 Agent\n\n在真实浏览器中从入口复现完整用户旅程，覆盖功能的关键状态和恢复路径。结果截图必须包含目标卡片及其所在页面区块，不能裁成只剩控件的小图。\n\n把本阶段截图保存后执行 `delivery stage-artifact --stage end_to_end_acceptance --kind e2e_screenshot` 登记；随后用 `delivery acceptance` 逐条记录冻结验收用例。失败必须给出可复现步骤，不得以文字自述替代截图和测试证据。总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+          },
+          "featureAcceptanceSnapshot": {
+            "featureId": "trip-list-filter",
+            "registryRevision": 3,
+            "fingerprint": "c250db8572afb195c00e4358eaf33a45cdb2abda049f7710a7a7d9bafd7d2fff"
+          }
+        }
+      ]
+    }
+  ],
+  "migrations": [
+    {
+      "type": "split",
+      "from": [
+        "trip-list"
+      ],
+      "to": [
+        "trip-list-filter"
+      ],
+      "reason": "把原型业务分组落为可独立验收的筛选叶子功能；两个页面状态保持为同一用户闭环。"
+    }
+  ],
+  "updatedAt": "2026-10-26T07:15:57.254Z"
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-074049Z-功能演进拆解",
+  "previousRunId": "20261026-064908Z-功能演进拆解",
+  "generatedAt": "2026-10-26T07:44:01.170Z",
+  "changedSections": [
+    "prototype",
+    "development"
+  ],
+  "sections": {
+    "prototype": {
+      "bytes": 4418,
+      "sha256": "706cb49ac53f433c26b1b551e6dab6af6a5a8e4dd34eed5ebc76fb5b56120db6"
+    },
+    "development": {
+      "bytes": 610,
+      "sha256": "1fa8a48967493745afd91f848470b9aa41d955d46e6e36b44d6444ea17a6f985"
+    },
+    "systems": {
+      "bytes": 221,
+      "sha256": "78ab3aed972004d390abe0f44503a384dc5a5a12e9bc17100d715fc057376c3f"
+    },
+    "codeRoots": {
+      "bytes": 455,
+      "sha256": "811a9a27e8f0ba9909437c60113b0540e567d5feed34e9342dc84e07ca15cfce"
+    },
+    "documents": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  }
+}

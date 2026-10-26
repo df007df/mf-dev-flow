@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-074049Z-功能演进拆解",
+  "target": "planning/feature-map.json",
+  "status": "applied",
+  "appliedAt": "2026-10-26T07:43:58.966Z",
+  "prototypeImpactId": "f2ccba699026d423140694203aa2f5b52214bc179d400c91be63986f7e8217fc",
+  "impactReviews": [
+    {
+      "featureId": "trip-list-filter",
+      "decision": "split",
+      "deliveryImpact": "revalidate",
+      "targets": [
+        "trip-stage-groups",
+        "trip-list-filter",
+        "visible-progress-summary"
+      ],
+      "reason": "PRD v2 新增阶段分组与结果摘要，旧筛选的数据结构、统计口径和验收范围均发生实质变化。",
+      "checks": {
+        "scope": "由扁平三项筛选扩展为分组基础、跨分组筛选和当前结果摘要。",
+        "status": "三个目标均回到 not_started，不能继承 v1 done。",
+        "dependencies": "分组是筛选前置，分组与筛选共同作为摘要前置。",
+        "priority": "分组和筛选保持 P0，摘要为 P1。",
+        "wave": "按 W0、W1、W2 顺序重新交付。",
+        "acceptance": "v1 三条 AC 将被替换为 v2 分组、筛选和摘要 AC。"
+      },
+      "evidence": [
+        {
+          "kind": "prototype",
+          "ref": "prototype:trip-groups-default,trip-groups-completed",
+          "note": "v2 observed 截图显示两个分组、四项和 4/3 摘要。"
+        },
+        {
+          "kind": "code",
+          "ref": "app/filter-state.mjs",
+          "note": "现有实现仅支持扁平三项和 3/2 口径。"
+        },
+        {
+          "kind": "system",
+          "ref": ".mf-dev-flow/project.json",
+          "note": "系统边界保持本地静态 Web，无外部变化。"
+        }
+      ],
+      "taskDecisions": [
+        {
+          "runId": "20261026-070829Z-行前清单筛选首轮交付",
+          "taskId": "implement-trip-list-filter",
+          "action": "historical",
+          "reason": "v1 交付已终态保留为历史证据，v2 不复用其完成结论。"
+        }
+      ]
+    },
+    {
+      "featureId": "trip-stage-groups",
+      "decision": "add",
+      "deliveryImpact": "revalidate",
+      "targets": [
+        "trip-stage-groups"
+      ],
+      "reason": "PRD v2 和原型 v2 新增两个出行阶段，是后续筛选和摘要的基础。",
+      "checks": {
+        "scope": "新增分组基础。",
+        "status": "not_started。",
+        "dependencies": "无前置。",
+        "priority": "P0。",
+        "wave": "W0。",
+        "acceptance": "新增分组 AC。"
+      },
+      "evidence": [
+        {
+          "kind": "prototype",
+          "ref": "prototype:trip-groups-default",
+          "note": "观察到两个阶段与四项事项。"
+        },
+        {
+          "kind": "code",
+          "ref": "app/filter-state.mjs",
+          "note": "现有扁平模型不支持阶段。"
+        },
+        {
+          "kind": "system",
+          "ref": ".mf-dev-flow/project.json",
+          "note": "无外部系统依赖。"
+        }
+      ],
+      "taskDecisions": []
+    },
+    {
+      "featureId": "visible-progress-summary",
+      "decision": "add",
+      "deliveryImpact": "revalidate",
+      "targets": [
+        "visible-progress-summary"
+      ],
+      "reason": "PRD v2 新增当前结果的可见数与完成数反馈。",
+      "checks": {
+        "scope": "新增结果摘要。",
+        "status": "not_started。",
+        "dependencies": "依赖分组和筛选。",
+        "priority": "P1。",
+        "wave": "W2。",
+        "acceptance": "新增筛选前后摘要 AC。"
+      },
+      "evidence": [
+        {
+          "kind": "prototype",
+          "ref": "prototype:trip-groups-default,trip-groups-completed",
+          "note": "观察到 4/3 与 3/3 两种摘要。"
+        },
+        {
+          "kind": "code",
+          "ref": "app/filter-state.mjs",
+          "note": "现有状态缺少完成数摘要。"
+        },
+        {
+          "kind": "system",
+          "ref": ".mf-dev-flow/project.json",
+          "note": "摘要是纯前端派生数据。"
+        }
+      ],
+      "taskDecisions": []
+    }
+  ]
+}

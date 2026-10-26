@@ -1206,6 +1206,29 @@ test("从功能地图启动交付不会让地图自我过期", () => {
   assert.match(status.stdout, /功能演进地图：fresh/);
 });
 
+test("连续任务在首阶段确认后允许同 agent 晚绑定缺失的 session", () => {
+  const item = fixture();
+  const refinement = startRefinement(item);
+  validProposal(refinement.dir, refinement.id);
+  assert.equal(run(item.cwd, "feature", "apply", "--from-run", refinement.id).status, 0);
+  const started = run(item.cwd, "delivery", "start", "--source", "feature-map", "--intensity", "focused", "--features", "leaf-a1");
+  assert.equal(started.status, 0, started.stderr);
+  const id = started.stdout.trim().split("\n").at(-1);
+  const call = (...args) => {
+    const result = run(item.cwd, ...args);
+    assert.equal(result.status, 0, result.stderr);
+    return result;
+  };
+  call("work", "plan", "--run", id, "--task", "pipeline", "--title", "阶段接力", "--kind", "ui", "--scope", "product", "--leaf-features", "leaf-a1", "--writes", "app.js", "--verify", "fixture verification");
+  call("work", "claim", "--run", id, "--task", "pipeline", "--agent", "prototype_alignment", "--target-phase", "prototype_alignment");
+  call("delivery", "stage", "--run", id, "--task", "pipeline", "--stage", "prototype_alignment", "--status", "not_applicable", "--summary", "结论：fixture 阶段已确认；证据：fixture；变更：无；验证：检查点；风险/下一步：无");
+
+  const bound = call("work", "bind-session", "--run", id, "--task", "pipeline", "--agent", "prototype_alignment", "--session", "late-session", "--target-phase", "prototype_alignment");
+  assert.match(bound.stdout, /已绑定/);
+  const checkpoint = call("work", "checkpoint-gate", "--session", "late-session", "--agent", "prototype_alignment");
+  assert.match(checkpoint.stdout, /"verdict":"pass"/);
+});
+
 test("功能地图启动的小程序产品任务写入四阶段 Todo", () => {
   const item = fixture();
   const refinement = startRefinement(item);

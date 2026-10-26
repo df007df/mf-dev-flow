@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "revision": 3,
+  "records": [
+    {
+      "id": "AC-trip-list-completed",
+      "featureId": "trip-list-filter",
+      "title": "筛选仅显示已完成事项",
+      "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+      "evidenceHints": [
+        "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T06:51:27.895Z",
+      "updatedAt": "2026-10-26T06:51:27.895Z",
+      "history": [],
+      "statusReason": null
+    },
+    {
+      "id": "AC-trip-list-default",
+      "featureId": "trip-list-filter",
+      "title": "默认展示完整旅行清单",
+      "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+      "evidenceHints": [
+        "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T06:51:26.411Z",
+      "updatedAt": "2026-10-26T06:51:26.411Z",
+      "history": [],
+      "statusReason": null
+    },
+    {
+      "id": "AC-trip-list-restore",
+      "featureId": "trip-list-filter",
+      "title": "关闭筛选恢复完整列表",
+      "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+      "evidenceHints": [
+        "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+      ],
+      "status": "active",
+      "origin": "user",
+      "revision": 1,
+      "createdAt": "2026-10-26T06:51:29.490Z",
+      "updatedAt": "2026-10-26T06:51:29.490Z",
+      "history": [],
+      "statusReason": null
+    }
+  ],
+  "requests": [
+    {
+      "id": "case02-ac-default",
+      "hash": "da7b2dac0ca1de346788d5c8bd3510aa80092048649b2d4e24e6eadd5a061f43",
+      "result": {
+        "id": "AC-trip-list-default",
+        "action": "added",
+        "record": {
+          "id": "AC-trip-list-default",
+          "featureId": "trip-list-filter",
+          "title": "默认展示完整旅行清单",
+          "detail": "首次打开页面时显示三项准备事项、各自完成状态以及 3 / 3 数量。",
+          "evidenceHints": [
+            "浏览器大截图应包含完整卡片、三项列表和 3 / 3 数量。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T06:51:26.411Z",
+          "updatedAt": "2026-10-26T06:51:26.411Z",
+          "statusReason": null
+        },
+        "registryRevision": 1,
+        "fingerprint": "2e9ffb3abd75f2f77ab83531a3e8469c4b7929f8d68fffb336f4050f41d1671a"
+      }
+    },
+    {
+      "id": "case02-ac-completed",
+      "hash": "528a1a5b3890901ba9e0cca4c8fc7920ad10d230a03591a3b2638fbec6d57aaa",
+      "result": {
+        "id": "AC-trip-list-completed",
+        "action": "added",
+        "record": {
+          "id": "AC-trip-list-completed",
+          "featureId": "trip-list-filter",
+          "title": "筛选仅显示已完成事项",
+          "detail": "点击仅看已完成后，只显示两项已完成事项、2 / 3 数量以及显示全部项目按钮。",
+          "evidenceHints": [
+            "浏览器追踪包含筛选点击，大截图包含完整卡片和两项已完成事项。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T06:51:27.895Z",
+          "updatedAt": "2026-10-26T06:51:27.895Z",
+          "statusReason": null
+        },
+        "registryRevision": 2,
+        "fingerprint": "1cc9c419c6df63015f958677ca638c500b0db3d2dadad1f7123817a373758694"
+      }
+    },
+    {
+      "id": "case02-ac-restore",
+      "hash": "cbc926ee0af30638df9e4e99446ee46bc34962d8f104cba0e1a4916324ad7424",
+      "result": {
+        "id": "AC-trip-list-restore",
+        "action": "added",
+        "record": {
+          "id": "AC-trip-list-restore",
+          "featureId": "trip-list-filter",
+          "title": "关闭筛选恢复完整列表",
+          "detail": "点击显示全部项目后，恢复三项准备事项、3 / 3 数量以及仅看已完成按钮。",
+          "evidenceHints": [
+            "浏览器追踪包含恢复点击，大截图包含恢复后的完整卡片。"
+          ],
+          "status": "active",
+          "origin": "user",
+          "revision": 1,
+          "createdAt": "2026-10-26T06:51:29.490Z",
+          "updatedAt": "2026-10-26T06:51:29.490Z",
+          "statusReason": null
+        },
+        "registryRevision": 3,
+        "fingerprint": "fafc02c2f8d236e07686d1092c9cf9355d443fd6ae82cecdd463ae7fd517effc"
+      }
+    }
+  ],
+  "events": [
+    {
+      "revision": 1,
+      "at": "2026-10-26T06:51:26.411Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-trip-list-default"
+    },
+    {
+      "revision": 2,
+      "at": "2026-10-26T06:51:27.895Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-trip-list-completed"
+    },
+    {
+      "revision": 3,
+      "at": "2026-10-26T06:51:29.490Z",
+      "kind": "acceptance_case_added",
+      "subject": "AC-trip-list-restore"
+    }
+  ],
+  "updatedAt": "2026-10-26T06:51:29.490Z"
+}

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "trip-preparation",
+      "title": "旅行准备",
+      "rank": 10,
+      "sourceFeatureIds": [
+        "trip-list"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "trip-list-filter",
+      "title": "清单完成态筛选",
+      "parentId": "trip-preparation",
+      "rank": 10,
+      "outcome": "旅行者可以查看三项准备事项，并在全部项目与两项已完成项目之间往返切换。",
+      "description": "提供固定旅行清单、完成状态、可见数量和可恢复的仅已完成筛选闭环。",
+      "developmentRequirements": [
+        "默认状态必须展示三项事项和 3 / 3 数量。",
+        "开启筛选后只展示两项已完成事项和 2 / 3 数量。",
+        "关闭筛选后必须恢复三项完整列表。",
+        "v1 不加入分组、进度摘要、编辑、持久化或远程同步。"
+      ],
+      "sourceEntries": [
+        "trip-list-default",
+        "trip-list-completed"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v1"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html"
+      ],
+      "systemCardRefs": [],
+      "priority": "P0",
+      "priorityReason": "这是 PRD v1 的唯一核心用户闭环，也是后续清单演进的基础。",
+      "wave": "W0",
+      "waveReason": "首个开发批次先验证无持久化的最小筛选能力。",
+      "status": "not_started",
+      "dependsOn": [],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "原型已观察默认三项、仅已完成两项和恢复三项三个状态；两个入口属于同一可恢复筛选结果。",
+        "code": "app/index.html 提供静态候选实现，但当前没有 mf-dev-flow 交付任务或完成证据，因此功能保持 not_started。",
+        "systems": "当前示例无外部系统卡片；数据固定在本地页面，PRD 明确排除持久化和远程同步。",
+        "scope": "本轮只覆盖固定清单、完成态展示、数量反馈和筛选往返；分组、进度摘要、编辑与同步均为非目标。",
+        "gaps": [
+          "尚未通过 delivery 工作流形成实现任务、测试证据和完成记录。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-list-default,trip-list-completed",
+            "note": "支持默认、筛选和恢复三个可观察状态。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/index.html",
+            "note": "定位当前静态候选实现与未来写入边界。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认本地 HTML、单代码根且无外部系统依赖的项目边界。"
+          }
+        ]
+      }
+    }
+  ],
+  "migrations": [
+    {
+      "type": "split",
+      "from": [
+        "trip-list"
+      ],
+      "to": [
+        "trip-list-filter"
+      ],
+      "reason": "把原型业务分组落为可独立验收的筛选叶子功能；两个页面状态保持为同一用户闭环。"
+    }
+  ],
+  "appliedAt": "2026-10-26T06:50:26.848Z",
+  "previousProposalUpdatedAt": "2026-10-26T06:49:08.593Z",
+  "source": "evidence/planning-v1-patch.json"
+}

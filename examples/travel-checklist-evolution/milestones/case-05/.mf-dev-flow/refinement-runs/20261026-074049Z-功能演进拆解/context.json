@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-26T07:40:49.616Z",
+  "prototype": {
+    "revision": {
+      "schemaVersion": 1,
+      "semanticRevision": 4,
+      "global": "2f10b182dee7cfa36c635db8617be4bca7e314d8fec871afaa7a3a51ba23a582",
+      "files": {
+        "semantic": "86cbf3b6b45a154a7b702d32e3e148e6f213bf9459a36dbf182600c37837533d"
+      },
+      "sourceProblems": [],
+      "planningReadiness": {
+        "status": "ready",
+        "acceptedBatch": "travel-prototype-v2",
+        "activeBatch": "travel-prototype-v2",
+        "scopeProblems": []
+      },
+      "fingerprint": "3b3eba1dddfd8dcf0e66552f6e09366461485a7ebd46aaad13ec3f735481d52f",
+      "sourceProblemCount": 0,
+      "groups": [
+        {
+          "id": "trip-groups",
+          "entryIds": [
+            "trip-groups-completed",
+            "trip-groups-default"
+          ],
+          "hash": "2bdb8dd47ca433bd2a5cbc0bc5fe165ce158f5186493ad3ab25a7ea45107fd61"
+        }
+      ],
+      "entries": [
+        {
+          "id": "trip-groups-completed",
+          "groupId": "trip-groups",
+          "hash": "d53562f1ab4b2cd9f68f5bd8a988b72d0fbae31350fa8fefdb5a0cd1e95852b7"
+        },
+        {
+          "id": "trip-groups-default",
+          "groupId": "trip-groups",
+          "hash": "6cb64f2c34943734ad0ca4b0391932c55e52ad26d67cf7402834d2978a12bfb6"
+        }
+      ],
+      "requirements": [],
+      "questions": [],
+      "sourceFiles": [
+        {
+          "id": "prototype/v1-init.json",
+          "path": "prototype/v1-init.json",
+          "hash": "11dd47504e6a3d1809b2032e9d2d64289014096e25d54e492b293f1fc51ec1a4"
+        },
+        {
+          "id": "prototype/v1.html",
+          "path": "prototype/v1.html",
+          "hash": "6c539dd9122ab1f8a3417c014c5dc1b48cf9b80b14728249ef310ae8050afd7a"
+        },
+        {
+          "id": "prototype/v2-init.json",
+          "path": "prototype/v2-init.json",
+          "hash": "21a76bb8b39ebb4ca95a32c0d5b05ecc7654f88f32b37a1afe303d73f22f408f"
+        },
+        {
+          "id": "prototype/v2.html",
+          "path": "prototype/v2.html",
+          "hash": "446ec6b337a3874fa2de5e484ce7c66dc4616940fccb4a1edd1a5820cb6b560d"
+        }
+      ]
+    },
+    "requirements": [],
+    "questions": [],
+    "task": {
+      "id": "prototype-main",
+      "status": "ready",
+      "source": {
+        "prototypeRun": "travel-prototype-v2",
+        "prototypeVersion": 4,
+        "storage": "catalog"
+      },
+      "updatedAt": null
+    },
+    "features": [
+      {
+        "id": "trip-groups",
+        "title": "旅行清单分组与筛选",
+        "purpose": "按出行阶段查看事项，并在筛选变化时同步当前结果摘要。",
+        "order": 0,
+        "entryNodeIds": [
+          "trip-groups-default",
+          "trip-groups-completed"
+        ],
+        "evidenceIds": [],
+        "sourceBatch": "travel-prototype-v2",
+        "origin": "observed",
+        "revision": 4,
+        "sourceEntries": [
+          "trip-groups-completed",
+          "trip-groups-default"
+        ]
+      }
+    ],
+    "sourceEntries": [
+      {
+        "id": "trip-groups-completed",
+        "feature": "trip-groups",
+        "evidenceIds": [
+          "evidence-c44c6ba8d9e0564ac05dc5d2"
+        ],
+        "sourceBatch": "travel-prototype-v2",
+        "origin": "observed",
+        "revision": 4
+      },
+      {
+        "id": "trip-groups-default",
+        "feature": "trip-groups",
+        "evidenceIds": [
+          "evidence-0cb0d1da87edad5aff18ad71"
+        ],
+        "sourceBatch": "travel-prototype-v2",
+        "origin": "observed",
+        "revision": 4
+      }
+    ],
+    "coverage": [
+      {
+        "id": "trip-groups-completed",
+        "status": "covered",
+        "evidence": [
+          {
+            "level": "observed",
+            "snapshotId": "dbc98e18-5422-49b9-9d26-e776e6d0ea2a",
+            "capturedAt": "2026-10-26T07:28:39.000Z",
+            "action": "点击仅看已完成，核对分组内筛选和当前结果摘要。",
+            "assertion": {
+              "expected": "两个分组保留，合计只显示三项已完成事项，摘要为当前显示 3 项、已完成 3 项。",
+              "actual": "两个分组保留，合计只显示三项已完成事项，摘要为当前显示 3 项、已完成 3 项。",
+              "passed": true
+            },
+            "path": "prototype/analyses/travel-prototype-v2/screenshots/cf422e4dcfbf6231f87a007e0d7ebea3273ff6f432c10182beb006df9aab45cc.png",
+            "pathHash": "cf422e4dcfbf6231f87a007e0d7ebea3273ff6f432c10182beb006df9aab45cc",
+            "trace": "prototype/analyses/travel-prototype-v2/traces/75501e8fe111b4a535defd38cd734c65afde00850a0a85dac90d37fed48acd0a.trace",
+            "traceHash": "75501e8fe111b4a535defd38cd734c65afde00850a0a85dac90d37fed48acd0a",
+            "id": "evidence-c44c6ba8d9e0564ac05dc5d2",
+            "revision": 2
+          }
+        ]
+      },
+      {
+        "id": "trip-groups-default",
+        "status": "covered",
+        "evidence": [
+          {
+            "level": "observed",
+            "snapshotId": "dbc98e18-5422-49b9-9d26-e776e6d0ea2a",
+            "capturedAt": "2026-10-26T07:28:34.000Z",
+            "action": "打开旅行清单原型 v2，核对默认分组和摘要。",
+            "assertion": {
+              "expected": "页面显示出发前和旅途中两个分组、四项事项，以及当前显示 4 项、已完成 3 项。",
+              "actual": "页面显示出发前和旅途中两个分组、四项事项，以及当前显示 4 项、已完成 3 项。",
+              "passed": true
+            },
+            "path": "prototype/analyses/travel-prototype-v2/screenshots/5de6036708f7dd6290107dd7b786951a8646d8716c3cf8cad8a4355dda7f8a9b.png",
+            "pathHash": "5de6036708f7dd6290107dd7b786951a8646d8716c3cf8cad8a4355dda7f8a9b",
+            "trace": "prototype/analyses/travel-prototype-v2/traces/75501e8fe111b4a535defd38cd734c65afde00850a0a85dac90d37fed48acd0a.trace",
+            "traceHash": "75501e8fe111b4a535defd38cd734c65afde00850a0a85dac90d37fed48acd0a",
+            "id": "evidence-0cb0d1da87edad5aff18ad71",
+            "revision": 1
+          }
+        ]
+      }
+    ]
+  },
+  "development": {
+    "evidenceRef": "evidence/development/03aee06abeae5953a4fb0c40d72406e9cc46968ce7a3a29a2f65c3e3b8f317c3.json",
+    "evidenceFingerprint": "03aee06abeae5953a4fb0c40d72406e9cc46968ce7a3a29a2f65c3e3b8f317c3",
+    "activeTasks": [],
+    "recentCompletedTasks": [
+      {
+        "runId": "20261026-070829Z-行前清单筛选首轮交付",
+        "runTitle": "行前清单筛选首轮交付",
+        "id": "implement-trip-list-filter",
+        "title": "实现清单筛选与可见数量",
+        "status": "done",
+        "continuationOpen": false,
+        "updatedAt": "2026-10-26T07:15:57.254Z",
+        "summary": null,
+        "features": [
+          "trip-list-filter"
+        ]
+      }
+    ],
+    "totalTaskCount": 1,
+    "activeTaskCount": 0,
+    "completedTaskCount": 1
+  },
+  "systems": {
+    "updatedAt": null,
+    "evidenceRef": "evidence/systems/79c0335a4057889a36428a8ae4ef07128393bc762f908660453697ec618f6bba.json",
+    "evidenceFingerprint": "79c0335a4057889a36428a8ae4ef07128393bc762f908660453697ec618f6bba",
+    "cards": []
+  },
+  "codeRoots": [
+    {
+      "path": "app",
+      "role": "primary",
+      "writeBoundary": "仅修改 app/ 下的公开合成示例",
+      "status": "not_git",
+      "head": null,
+      "branch": null,
+      "changedPathCount": 0,
+      "changedPathSample": [],
+      "evidenceRef": "evidence/code-roots/e0e4e869d70253bd7624c4084000e74c17384b6af34ada41e7230e5d39071051.json",
+      "changesFingerprint": "e0e4e869d70253bd7624c4084000e74c17384b6af34ada41e7230e5d39071051",
+      "fingerprint": "11c9e7685618f3e92d8c349cdc1d91099005ee2e51ff4cb468b3b26600f3ee45"
+    }
+  ],
+  "documents": [],
+  "evidenceCursor": "ce334549da42543c903dd0bfd436f1b54ec8d5608d7adaf6ab96d8bde4d8057b"
+}

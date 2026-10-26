@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-26T06:50:48.046Z",
+  "policy": {
+    "rawRecords": "preserved",
+    "defaultRead": "planning/context-brief.md",
+    "rawContext": "on_demand_by_section"
+  },
+  "currentRunId": "20261026-064908Z-功能演进拆解",
+  "runs": [
+    {
+      "runId": "20261026-064908Z-功能演进拆解",
+      "title": "功能演进拆解",
+      "status": "done",
+      "createdAt": "2026-10-26T06:49:08.593Z",
+      "rawContextBytes": 7132,
+      "estimatedTokens": 2229,
+      "brief": "refinement-runs/20261026-064908Z-功能演进拆解/brief.md",
+      "delta": "refinement-runs/20261026-064908Z-功能演进拆解/delta.json",
+      "previousRunId": null,
+      "changedSections": [
+        "prototype",
+        "development",
+        "systems",
+        "codeRoots",
+        "documents"
+      ],
+      "currentMapSource": true,
+      "supersededBy": null
+    }
+  ]
+}

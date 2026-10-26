@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "migrations": [
+    {
+      "type": "split",
+      "from": [
+        "trip-groups"
+      ],
+      "to": [
+        "trip-stage-groups",
+        "trip-list-filter",
+        "visible-progress-summary"
+      ],
+      "reason": "把 v2 原型业务块映射为分组基础、跨分组筛选和结果摘要三个有序叶子功能。"
+    }
+  ],
+  "appliedAt": "2026-10-26T07:43:57.705Z",
+  "previousProposalUpdatedAt": "2026-10-26T07:43:40.562Z",
+  "source": "evidence/planning-v2-prototype-migration.json"
+}

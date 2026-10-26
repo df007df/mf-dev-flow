@@ -101,7 +101,7 @@ test("流程选择器只接受显式的 id@版本 格式", () => {
   );
 });
 
-test("v3 流程加载且保留阶段结构；v2 已发布文件不可变", (t) => {
+test("v3 流程加载且保留阶段结构；v2 公开脱敏版本不可变", (t) => {
   const v3 = loadDeliveryProcess({ id: "miniapp-product", version: 3 });
   assert.equal(v3.version, 3);
   assert.deepEqual(v3.stages.map((s) => s.id),
@@ -128,4 +128,24 @@ test("默认 feature-map 运行解析到 @3，显式 @2 仍可选", () => {
   assert.deepEqual(parsed, { id: "miniapp-product", version: 3 });
   assert.deepEqual(parseDeliveryProcessSpecifier("miniapp-product@2"), { id: "miniapp-product", version: 2 });
   assert.equal(loadDeliveryProcess(parseDeliveryProcessSpecifier("miniapp-product@2")).version, 2);
+});
+
+test("web-product@1 提供普通 Web 项目的连续交付与真实截图门禁", () => {
+  const web = loadDeliveryProcess({ id: "web-product", version: 1 });
+
+  assert.equal(web.title, "Web 产品三阶段交付流程");
+  assert.deepEqual(
+    web.stages.map((stage) => stage.id),
+    ["solution_design", "development", "end_to_end_acceptance"],
+  );
+  assert.deepEqual(
+    web.stages.at(-1).evidenceGates,
+    ["e2e_screenshot_evidence", "risk_ledger"],
+  );
+  assert.equal(
+    web.stages.some((stage) =>
+      stage.evidenceGates.includes("miniapp_ui_evidence"),
+    ),
+    false,
+  );
 });

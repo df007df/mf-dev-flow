@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-26T07:52:49.573Z",
+  "runs": [
+    {
+      "id": "20261026-070829Z-行前清单筛选首轮交付",
+      "type": "delivery",
+      "title": "行前清单筛选首轮交付",
+      "tasks": [
+        {
+          "id": "implement-trip-list-filter",
+          "title": "实现清单筛选与可见数量",
+          "kind": "ui",
+          "features": [
+            "trip-list-filter"
+          ],
+          "writes": [
+            "app"
+          ],
+          "dependsOn": [],
+          "status": "done",
+          "continuationOpen": false,
+          "agent": "end_to_end_acceptance",
+          "executionFile": "delivery-runs/20261026-070829Z-行前清单筛选首轮交付/executions/implement-trip-list-filter.json",
+          "updatedAt": "2026-10-26T07:15:57.254Z"
+        }
+      ]
+    },
+    {
+      "id": "20261026-074645Z-旅行阶段分组交付",
+      "type": "delivery",
+      "title": "旅行阶段分组交付",
+      "tasks": [
+        {
+          "id": "implement-trip-stage-groups",
+          "title": "实现出发前与旅途中分组",
+          "kind": "ui",
+          "features": [
+            "trip-stage-groups"
+          ],
+          "writes": [
+            "app"
+          ],
+          "dependsOn": [],
+          "status": "done",
+          "continuationOpen": false,
+          "agent": "end_to_end_acceptance",
+          "executionFile": "delivery-runs/20261026-074645Z-旅行阶段分组交付/executions/implement-trip-stage-groups.json",
+          "updatedAt": "2026-10-26T07:47:25.248Z"
+        }
+      ]
+    },
+    {
+      "id": "20261026-074915Z-跨分组筛选升级交付",
+      "type": "delivery",
+      "title": "跨分组筛选升级交付",
+      "tasks": [
+        {
+          "id": "upgrade-cross-group-filter",
+          "title": "升级跨分组完成态筛选",
+          "kind": "ui",
+          "features": [
+            "trip-list-filter"
+          ],
+          "writes": [
+            "app"
+          ],
+          "dependsOn": [],
+          "status": "done",
+          "continuationOpen": false,
+          "agent": "end_to_end_acceptance",
+          "executionFile": "delivery-runs/20261026-074915Z-跨分组筛选升级交付/executions/upgrade-cross-group-filter.json",
+          "updatedAt": "2026-10-26T07:50:02.563Z"
+        }
+      ]
+    },
+    {
+      "id": "20261026-075140Z-当前结果摘要交付",
+      "type": "delivery",
+      "title": "当前结果摘要交付",
+      "tasks": [
+        {
+          "id": "add-visible-progress-summary",
+          "title": "增加当前结果进度摘要",
+          "kind": "ui",
+          "features": [
+            "visible-progress-summary"
+          ],
+          "writes": [
+            "app"
+          ],
+          "dependsOn": [],
+          "status": "done",
+          "continuationOpen": false,
+          "agent": "end_to_end_acceptance",
+          "executionFile": "delivery-runs/20261026-075140Z-当前结果摘要交付/executions/add-visible-progress-summary.json",
+          "updatedAt": "2026-10-26T07:52:20.551Z"
+        }
+      ]
+    },
+    {
+      "id": "20261026-064908Z-功能演进拆解",
+      "type": "refinement",
+      "title": "功能演进拆解",
+      "tasks": []
+    },
+    {
+      "id": "20261026-074049Z-功能演进拆解",
+      "type": "refinement",
+      "title": "功能演进拆解",
+      "tasks": []
+    }
+  ]
+}

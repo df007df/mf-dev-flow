@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "kind": "development",
+  "fingerprint": "6ba3166ef617368e017ddb3f5b3c27199b0df367ba3d4eabfd0d2615dcf3ffd3",
+  "value": {
+    "tasks": [
+      {
+        "runId": "20261026-070829Z-行前清单筛选首轮交付",
+        "runTitle": "行前清单筛选首轮交付",
+        "id": "implement-trip-list-filter",
+        "title": "实现清单筛选与可见数量",
+        "kind": "ui",
+        "features": [
+          "trip-list-filter"
+        ],
+        "writes": [
+          "app"
+        ],
+        "dependsOn": [],
+        "status": "in_progress",
+        "continuationOpen": true,
+        "agent": "solution_design",
+        "executionFile": "delivery-runs/20261026-070829Z-行前清单筛选首轮交付/executions/implement-trip-list-filter.json",
+        "updatedAt": "2026-10-26T07:08:55.760Z"
+      }
+    ]
+  }
+}

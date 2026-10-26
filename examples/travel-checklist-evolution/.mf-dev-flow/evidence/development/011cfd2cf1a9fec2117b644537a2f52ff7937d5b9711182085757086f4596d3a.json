@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "kind": "development",
+  "fingerprint": "011cfd2cf1a9fec2117b644537a2f52ff7937d5b9711182085757086f4596d3a",
+  "value": {
+    "tasks": [
+      {
+        "runId": "20261026-070829Z-行前清单筛选首轮交付",
+        "runTitle": "行前清单筛选首轮交付",
+        "id": "implement-trip-list-filter",
+        "title": "实现清单筛选与可见数量",
+        "kind": "ui",
+        "features": [
+          "trip-list-filter"
+        ],
+        "writes": [
+          "app"
+        ],
+        "dependsOn": [],
+        "status": "done",
+        "continuationOpen": false,
+        "agent": "end_to_end_acceptance",
+        "executionFile": "delivery-runs/20261026-070829Z-行前清单筛选首轮交付/executions/implement-trip-list-filter.json",
+        "updatedAt": "2026-10-26T07:15:57.254Z"
+      },
+      {
+        "runId": "20261026-074645Z-旅行阶段分组交付",
+        "runTitle": "旅行阶段分组交付",
+        "id": "implement-trip-stage-groups",
+        "title": "实现出发前与旅途中分组",
+        "kind": "ui",
+        "features": [
+          "trip-stage-groups"
+        ],
+        "writes": [
+          "app"
+        ],
+        "dependsOn": [],
+        "status": "in_progress",
+        "continuationOpen": true,
+        "agent": "solution_design",
+        "executionFile": "delivery-runs/20261026-074645Z-旅行阶段分组交付/executions/implement-trip-stage-groups.json",
+        "updatedAt": "2026-10-26T07:47:11.092Z"
+      }
+    ]
+  }
+}

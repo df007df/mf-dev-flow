@@ -366,6 +366,22 @@ export const MINIAPP_DELIVERY_CONTRACT = {
 
 export const MINIAPP_DELIVERY_STAGES = MINIAPP_DELIVERY_CONTRACT.stages;
 
+// Browser products share the continuous delivery semantics without inheriting
+// WeChat-only screenshot sources, local-storage constraints, or API rules.
+// The selected versioned process remains the source of truth for frozen stages.
+export const WEB_DELIVERY_CONTRACT = {
+  schemaVersion: 1,
+  version: 1,
+  id: "web-product-delivery",
+  title: "Web 产品任务连续交付契约",
+  taskPhase: "delivery",
+  requiredDeliveryRoles: ["ui-client"],
+  closedStatuses: DELIVERY_CONTRACT.closedStatuses,
+  statuses: DELIVERY_CONTRACT.statuses,
+  reportFiles: DELIVERY_CONTRACT.reportFiles,
+  stages: [],
+};
+
 export function isGenericDelivery(input) {
   return input?.deliveryContract?.id === GENERIC_DELIVERY_CONTRACT.id;
 }
@@ -374,7 +390,12 @@ export function isMiniappDelivery(input) {
   return input?.deliveryContract?.id === MINIAPP_DELIVERY_CONTRACT.id;
 }
 
+export function isWebDelivery(input) {
+  return input?.deliveryContract?.id === WEB_DELIVERY_CONTRACT.id;
+}
+
 export function deliveryContractForInput(input) {
+  if (isWebDelivery(input)) return WEB_DELIVERY_CONTRACT;
   if (isMiniappDelivery(input)) return MINIAPP_DELIVERY_CONTRACT;
   if (isGenericDelivery(input)) return GENERIC_DELIVERY_CONTRACT;
   return DELIVERY_CONTRACT;

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "run",
+  "id": "20261026-075140Z-当前结果摘要交付",
+  "typeRef": {
+    "id": "feature-development",
+    "version": 1
+  },
+  "title": "当前结果摘要交付",
+  "status": "completed",
+  "taskRefs": [
+    "task:20261026-075140Z-当前结果摘要交付/add-visible-progress-summary"
+  ],
+  "createdAt": "2026-10-26T07:51:40.276Z",
+  "updatedAt": "2026-10-26T07:52:20.563Z",
+  "legacy": {
+    "runDir": "delivery-runs/20261026-075140Z-当前结果摘要交付"
+  }
+}

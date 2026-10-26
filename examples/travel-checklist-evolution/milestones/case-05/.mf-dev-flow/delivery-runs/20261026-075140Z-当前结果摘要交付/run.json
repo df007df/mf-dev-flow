@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "20261026-075140Z-当前结果摘要交付",
+  "type": "delivery",
+  "title": "当前结果摘要交付",
+  "scope": null,
+  "status": "done",
+  "prototypeRun": "travel-prototype-v2",
+  "deliveryInput": {
+    "file": "delivery-input.json",
+    "source": "feature-map",
+    "intensity": "focused",
+    "featureIds": [
+      "visible-progress-summary"
+    ],
+    "createdAt": "2026-10-26T07:51:40.276Z"
+  },
+  "createdAt": "2026-10-26T07:51:40.276Z",
+  "updatedAt": "2026-10-26T07:52:49.485Z",
+  "notes": [
+    {
+      "at": "2026-10-26T07:51:56.802Z",
+      "note": "方案确认（范围、状态与验证）：confirmed · 结论：从当前可见集合统一派生可见数与完成数；证据：PRD-v2和两个原型状态；变更：状态模块新增summary并在页面展示双指标卡；验证：默认4/3与筛选3/3；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:52:00.731Z",
+      "note": "开发与自动化验证：confirmed · 结论：摘要区已随筛选即时更新当前项与完成项；证据：filter-state测试通过3/3；变更：app/index.html、filter-state模块和测试；验证：默认4/3、筛选3/3；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:52:04.202Z",
+      "note": "阶段产物（end_to_end_acceptance/e2e_screenshot）：evidence/stage-artifacts/add-visible-progress-summary/end_to_end_acceptance/20261026-075204Z-app-v2-final-default.png · 最终默认态完整卡片显示当前4项与已完成3项"
+    },
+    {
+      "at": "2026-10-26T07:52:04.289Z",
+      "note": "阶段产物（end_to_end_acceptance/e2e_screenshot）：evidence/stage-artifacts/add-visible-progress-summary/end_to_end_acceptance/20261026-075204Z-app-v2-final-completed.png · 最终筛选态完整卡片显示当前3项与已完成3项"
+    },
+    {
+      "at": "2026-10-26T07:52:18.603Z",
+      "note": "端到端验收（真实浏览器 + 截图）：confirmed · 结论：默认与筛选后的进度摘要均通过真实浏览器验收；证据：两张1200x1000完整卡片截图绑定两条冻结AC；变更：无；验证：4/3与3/3即时更新；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:52:20.563Z",
+      "note": "主任务状态派生：in_progress → done（全部子任务已终态）"
+    },
+    {
+      "at": "2026-10-26T07:52:49.485Z",
+      "note": "当前结果进度摘要完成"
+    }
+  ]
+}

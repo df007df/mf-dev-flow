@@ -130,6 +130,75 @@
   border-radius: 10px;
   background: #fcfbfe;
 }
+.feature-impact-review {
+  margin: 0 0 18px;
+  padding: 18px;
+  border: 1px solid #e6b36f;
+  border-left: 5px solid #c66b20;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fff9ef 0%, #fffdf8 68%, #f8f2ff 100%);
+}
+.feature-impact-review-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.feature-impact-review-heading h3 {
+  margin: 4px 0 6px;
+  font-size: 19px;
+}
+.feature-impact-review-heading p {
+  margin: 0;
+  max-width: 880px;
+  color: #6d4b2d;
+}
+.feature-impact-kicker {
+  color: #9b4f13;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.feature-impact-count {
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border: 1px solid #e6b36f;
+  border-radius: 999px;
+  color: #8a4510;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.feature-impact-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+.feature-impact-list article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 14px;
+  padding: 13px 14px;
+  border: 1px solid #ead8bd;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .86);
+}
+.feature-impact-list article > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.feature-impact-list article code {
+  color: var(--muted);
+  font-size: 11px;
+}
+.feature-impact-list article p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #6d4b2d;
+  font-size: 12px;
+}
 .feature-acceptance-cases-heading {
   display: flex;
   align-items: flex-start;

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "20261026-074915Z-跨分组筛选升级交付",
+  "type": "delivery",
+  "title": "跨分组筛选升级交付",
+  "scope": null,
+  "status": "done",
+  "prototypeRun": "travel-prototype-v2",
+  "deliveryInput": {
+    "file": "delivery-input.json",
+    "source": "feature-map",
+    "intensity": "focused",
+    "featureIds": [
+      "trip-list-filter"
+    ],
+    "createdAt": "2026-10-26T07:49:15.788Z"
+  },
+  "createdAt": "2026-10-26T07:49:15.788Z",
+  "updatedAt": "2026-10-26T07:50:28.988Z",
+  "notes": [
+    {
+      "at": "2026-10-26T07:49:35.333Z",
+      "note": "方案确认（范围、状态与验证）：confirmed · 结论：复用分组模型升级完成态筛选并保留空分组语义；证据：v2默认与完成态原型；变更：增加跨分组筛选行为测试；验证：3/4筛选与4/4恢复真实浏览器验收；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:49:39.943Z",
+      "note": "开发与自动化验证：confirmed · 结论：筛选后保留两个分组并只显示三项已完成事项，恢复后回到四项；证据：filter-state测试通过2/2；变更：app/filter-state.test.mjs；验证：3/4到4/4可逆；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:49:43.950Z",
+      "note": "阶段产物（end_to_end_acceptance/e2e_screenshot）：evidence/stage-artifacts/upgrade-cross-group-filter/end_to_end_acceptance/20261026-074943Z-app-v2-completed.png · 筛选状态完整卡片保留两个分组并显示三项已完成"
+    },
+    {
+      "at": "2026-10-26T07:49:44.054Z",
+      "note": "阶段产物（end_to_end_acceptance/e2e_screenshot）：evidence/stage-artifacts/upgrade-cross-group-filter/end_to_end_acceptance/20261026-074944Z-app-v2-restored.png · 恢复状态完整卡片重新显示两个分组共四项"
+    },
+    {
+      "at": "2026-10-26T07:50:00.130Z",
+      "note": "端到端验收（真实浏览器 + 截图）：confirmed · 结论：跨分组筛选和恢复旅程通过；证据：两张1200x1000完整卡片截图并绑定两条冻结AC；变更：无；验证：3/4筛选与4/4恢复符合v2；风险/下一步：无"
+    },
+    {
+      "at": "2026-10-26T07:50:02.578Z",
+      "note": "主任务状态派生：in_progress → done（全部子任务已终态）"
+    },
+    {
+      "at": "2026-10-26T07:50:28.988Z",
+      "note": "跨分组筛选升级完成"
+    }
+  ]
+}

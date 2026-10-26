@@ -1060,17 +1060,29 @@ export function workBindSession() {
   const nextProfile = nextStage
     ? stageAgentFor(task, nextStage.id)
     : null;
+  const latestCheckpoint = execution.checkpoints?.at(-1);
+  const lateBindCurrentCheckpoint =
+    execution.status === "in_progress" &&
+    execution.sessionId == null &&
+    execution.agent === agent &&
+    requestedTargetPhase === execution.targetPhase &&
+    latestCheckpoint?.targetPhase === execution.targetPhase &&
+    latestCheckpoint?.status === "reached";
   if (
     nextProfile &&
     requestedTargetPhase &&
-    requestedTargetPhase !== nextStage.id
+    requestedTargetPhase !== nextStage.id &&
+    !lateBindCurrentCheckpoint
   )
     fail(`当前应先执行 ${nextStage.id} 阶段，不能将目标设为 ${requestedTargetPhase}。`);
   const boundPhase =
-    nextProfile
+    lateBindCurrentCheckpoint
+      ? execution.targetPhase
+      : nextProfile
       ? nextStage.id
       : requestedTargetPhase || execution.targetPhase || stages.at(-1)?.id;
-  if (nextProfile) assertStageAgent(task, nextStage.id, agent);
+  if (lateBindCurrentCheckpoint) assertStageAgent(task, boundPhase, agent);
+  else if (nextProfile) assertStageAgent(task, nextStage.id, agent);
   else if (boundPhase) assertStageAgent(task, boundPhase, agent);
   assertSessionAvailable(run, plan, sessionId, taskId);
   const previousAgent = execution.agent;

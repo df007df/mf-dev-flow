@@ -88,3 +88,40 @@ test("功能地图启动的小程序产品运行冻结四阶段，手工运行�
     assert.ok(!input.stages.some(stage => stage.id === 'api_mock'));
   `);
 });
+
+test("功能地图可显式选择 Web 连续交付契约", () => {
+  isolated(`
+    const feature = { id: 'trip-list-filter', title: '按状态筛选行前事项' };
+    const id = shared.createDeliveryRun({ title: 'Web fixture', prototypeRun: 'p1', input: { source: 'feature-map', intensity: 'focused', deliveryProcess: 'web-product@1', taskDescription: '实现筛选闭环', features: [feature] } });
+    const input = JSON.parse(fs.readFileSync(path.join('.mf-dev-flow', 'delivery-runs', id, 'delivery-input.json')));
+    assert.equal(input.deliveryContract.id, 'web-product-delivery');
+    assert.equal(input.deliveryProcess.id, 'web-product');
+    assert.equal(input.deliveryProcess.version, 1);
+    assert.deepEqual(input.stages.map(stage => stage.id), ['solution_design', 'development', 'end_to_end_acceptance']);
+    assert.equal(input.stages.some(stage => stage.evidenceGates.includes('miniapp_ui_evidence')), false);
+    assert.deepEqual(input.stages.at(-1).evidenceGates, ['e2e_screenshot_evidence', 'risk_ledger']);
+  `);
+});
+
+test("总控验证接受最终阶段登记的 e2e_screenshot 作为归档截图", () => {
+  isolated(`
+    put('project.json', { project: { name: 'fixture' }, codeRoots: [{ path: 'app', role: 'primary' }] });
+    const feature = { id: 'trip-list-filter', title: '按状态筛选行前事项' };
+    const id = shared.createDeliveryRun({ title: 'Web fixture', prototypeRun: 'p1', input: { source: 'feature-map', intensity: 'focused', deliveryProcess: 'web-product@1', taskDescription: '实现筛选闭环', features: [feature] } });
+    const dir = path.join('.mf-dev-flow', 'delivery-runs', id);
+    const inputFile = path.join(dir, 'delivery-input.json');
+    const input = JSON.parse(fs.readFileSync(inputFile));
+    const final = input.stages.find(stage => stage.id === 'end_to_end_acceptance');
+    final.status = 'confirmed';
+    final.artifacts = [{ kind: 'e2e_screenshot', file: 'evidence/stage-artifacts/task/end_to_end_acceptance/result.png' }];
+    fs.mkdirSync(path.join(dir, 'evidence/stage-artifacts/task/end_to_end_acceptance'), { recursive: true });
+    fs.writeFileSync(path.join(dir, final.artifacts[0].file), 'png-fixture');
+    fs.writeFileSync(inputFile, JSON.stringify(input));
+    fs.writeFileSync(path.join(dir, 'plan.md'), '# 开发计划\\n\\n## 实施切片\\n真实切片。\\n\\n## 技术方案与实施决策\\n真实方案。\\n');
+    fs.writeFileSync(path.join(dir, 'implementation.md'), '# 实现记录\\n\\n## 关键技术方案\\n状态推导。\\n\\n## 实际改动与行为\\n功能完成。\\n\\n## 未完成项和风险\\n无。\\n');
+    fs.writeFileSync(path.join(dir, 'verification.md'), '# 测试与回归\\n\\n## 测试执行记录\\n命令通过。\\n\\n## 逻辑复核与原型对照\\n三态一致。\\n\\n## 截图证据与偏差处理\\n' + final.artifacts[0].file + '\\n');
+    const run = { id, type: 'delivery', dir: path.resolve(dir) };
+    const problems = shared.deliveryReportProblems(run);
+    assert.equal(problems.some(problem => /归档的 E2E 截图|未引用归档/.test(problem)), false, problems.join('\\n'));
+  `);
+});

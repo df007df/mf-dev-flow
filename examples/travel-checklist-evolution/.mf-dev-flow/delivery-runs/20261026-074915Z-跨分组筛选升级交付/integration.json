@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-074915Z-跨分组筛选升级交付",
+  "status": "passed",
+  "commands": "node--test-app/filter-state.test.mjs；Playwright-1200x1000-filter-restore",
+  "summary": "跨分组筛选和恢复浏览器验收通过",
+  "verifiedAt": "2026-10-26T07:50:27.735Z",
+  "auditWarnings": [],
+  "reconciliation": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

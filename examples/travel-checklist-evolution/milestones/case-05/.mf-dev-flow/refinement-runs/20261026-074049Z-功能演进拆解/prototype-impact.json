@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "from": "542935534ab334a401195bdca2303e49c9f6e33b6938b9cee14cae2967d3d970",
+  "to": "3b3eba1dddfd8dcf0e66552f6e09366461485a7ebd46aaad13ec3f735481d52f",
+  "status": "review_required",
+  "global": true,
+  "changedGroupIds": [
+    "trip-groups",
+    "trip-list"
+  ],
+  "changedEntryIds": [
+    "trip-groups-completed",
+    "trip-groups-default",
+    "trip-list-completed",
+    "trip-list-default"
+  ],
+  "changedRequirementIds": [],
+  "changedQuestionIds": [],
+  "assessedFeatureIds": [
+    "trip-list-filter"
+  ],
+  "affected": [
+    {
+      "id": "trip-list-filter",
+      "status": "done",
+      "reasons": [
+        "descendant:trip-preparation",
+        "global_or_unattributed_change",
+        "migration_descendant",
+        "prototype_entry_changed",
+        "prototype_group_changed"
+      ]
+    }
+  ],
+  "baselineMissing": false,
+  "id": "f2ccba699026d423140694203aa2f5b52214bc179d400c91be63986f7e8217fc"
+}

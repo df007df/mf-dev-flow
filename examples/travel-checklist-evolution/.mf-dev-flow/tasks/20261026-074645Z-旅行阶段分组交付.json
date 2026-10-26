@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "run",
+  "id": "20261026-074645Z-旅行阶段分组交付",
+  "typeRef": {
+    "id": "feature-development",
+    "version": 1
+  },
+  "title": "旅行阶段分组交付",
+  "status": "completed",
+  "taskRefs": [
+    "task:20261026-074645Z-旅行阶段分组交付/implement-trip-stage-groups"
+  ],
+  "createdAt": "2026-10-26T07:46:45.750Z",
+  "updatedAt": "2026-10-26T07:47:25.264Z",
+  "legacy": {
+    "runDir": "delivery-runs/20261026-074645Z-旅行阶段分组交付"
+  }
+}

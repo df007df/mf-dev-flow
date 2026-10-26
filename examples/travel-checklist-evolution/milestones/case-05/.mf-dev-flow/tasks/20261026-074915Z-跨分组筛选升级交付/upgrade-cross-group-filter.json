@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "kind": "task",
+  "id": "20261026-074915Z-跨分组筛选升级交付/upgrade-cross-group-filter",
+  "runId": "20261026-074915Z-跨分组筛选升级交付",
+  "typeRef": {
+    "id": "feature-development",
+    "version": 1
+  },
+  "title": "升级跨分组完成态筛选",
+  "status": "completed",
+  "agent": "end_to_end_acceptance",
+  "sessionId": "case05-filter-e2e",
+  "parentTask": null,
+  "subtasks": [],
+  "sourceRefs": [
+    "feature:trip-list-filter"
+  ],
+  "touchedRefs": [
+    {
+      "ref": "code:app/index.html",
+      "provenance": "declared"
+    },
+    {
+      "ref": "code:app/filter-state.mjs",
+      "provenance": "declared"
+    },
+    {
+      "ref": "code:app/filter-state.test.mjs",
+      "provenance": "declared"
+    }
+  ],
+  "outputs": {
+    "reports": [
+      {
+        "file": "plan.md"
+      },
+      {
+        "file": "impl.md"
+      },
+      {
+        "file": "verification.md"
+      }
+    ],
+    "artifacts": []
+  },
+  "processData": {
+    "hookHealth": "unknown",
+    "provenance": "declared",
+    "complete": false
+  },
+  "phaseRef": "end_to_end_acceptance",
+  "extensions": {
+    "legacy": {
+      "targetPhase": "end_to_end_acceptance",
+      "stages": {
+        "solution_design": {
+          "status": "confirmed",
+          "summary": "结论：复用分组模型升级完成态筛选并保留空分组语义；证据：v2默认与完成态原型；变更：增加跨分组筛选行为测试；验证：3/4筛选与4/4恢复真实浏览器验收；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:49:35.333Z"
+        },
+        "development": {
+          "status": "confirmed",
+          "summary": "结论：筛选后保留两个分组并只显示三项已完成事项，恢复后回到四项；证据：filter-state测试通过2/2；变更：app/filter-state.test.mjs；验证：3/4到4/4可逆；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:49:39.943Z"
+        },
+        "end_to_end_acceptance": {
+          "status": "confirmed",
+          "summary": "结论：跨分组筛选和恢复旅程通过；证据：两张1200x1000完整卡片截图并绑定两条冻结AC；变更：无；验证：3/4筛选与4/4恢复符合v2；风险/下一步：无",
+          "updatedAt": "2026-10-26T07:50:00.130Z"
+        }
+      },
+      "checkpoints": [
+        {
+          "at": "2026-10-26T07:49:35.333Z",
+          "targetPhase": "solution_design",
+          "status": "validated",
+          "summary": "结论：复用分组模型升级完成态筛选并保留空分组语义；证据：v2默认与完成态原型；变更：增加跨分组筛选行为测试；验证：3/4筛选与4/4恢复真实浏览器验收；风险/下一步：无",
+          "validatedAt": "2026-10-26T07:49:36.872Z"
+        },
+        {
+          "at": "2026-10-26T07:49:39.943Z",
+          "targetPhase": "development",
+          "status": "validated",
+          "summary": "结论：筛选后保留两个分组并只显示三项已完成事项，恢复后回到四项；证据：filter-state测试通过2/2；变更：app/filter-state.test.mjs；验证：3/4到4/4可逆；风险/下一步：无",
+          "validatedAt": "2026-10-26T07:49:41.526Z"
+        },
+        {
+          "at": "2026-10-26T07:50:00.130Z",
+          "targetPhase": "end_to_end_acceptance",
+          "status": "reached",
+          "summary": "结论：跨分组筛选和恢复旅程通过；证据：两张1200x1000完整卡片截图并绑定两条冻结AC；变更：无；验证：3/4筛选与4/4恢复符合v2；风险/下一步：无"
+        }
+      ],
+      "summary": "跨分组完成态筛选和恢复已通过自动化与浏览器验收",
+      "tests": "node--test通过2/2；Playwright筛选与恢复通过"
+    }
+  },
+  "timeline": [
+    {
+      "at": "2026-10-26T07:49:33.671Z",
+      "event": "claimed",
+      "by": "agent:end_to_end_acceptance"
+    },
+    {
+      "at": "2026-10-26T07:49:33.671Z",
+      "event": "attempt:attempt-1:start",
+      "by": "agent:solution_design"
+    },
+    {
+      "at": "2026-10-26T07:49:36.872Z",
+      "event": "attempt:attempt-1:end",
+      "by": "agent:solution_design"
+    },
+    {
+      "at": "2026-10-26T07:49:38.325Z",
+      "event": "attempt:attempt-2:start",
+      "by": "agent:development"
+    },
+    {
+      "at": "2026-10-26T07:49:41.526Z",
+      "event": "attempt:attempt-2:end",
+      "by": "agent:development"
+    },
+    {
+      "at": "2026-10-26T07:49:42.958Z",
+      "event": "attempt:attempt-3:start",
+      "by": "agent:end_to_end_acceptance"
+    },
+    {
+      "at": "2026-10-26T07:50:02.563Z",
+      "event": "attempt:attempt-3:end",
+      "by": "agent:end_to_end_acceptance"
+    }
+  ],
+  "createdAt": "2026-10-26T07:49:33.671Z",
+  "updatedAt": "2026-10-26T07:50:02.563Z",
+  "legacy": {
+    "executionFile": "delivery-runs/20261026-074915Z-跨分组筛选升级交付/executions/upgrade-cross-group-filter.json"
+  }
+}

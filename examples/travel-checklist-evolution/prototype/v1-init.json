@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "type": "html",
+    "location": "prototype/v1.html"
+  },
+  "scope": {
+    "mode": "full",
+    "observableBoundary": "本地旅行清单合成原型；只核验页面可见列表与筛选交互。"
+  }
+}

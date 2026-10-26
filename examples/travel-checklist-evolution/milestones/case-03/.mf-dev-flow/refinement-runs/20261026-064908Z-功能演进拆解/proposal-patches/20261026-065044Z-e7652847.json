@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "remove": {
+    "groups": [
+      "trip-list"
+    ],
+    "features": [],
+    "migrationsFrom": [],
+    "impactReviews": []
+  },
+  "appliedAt": "2026-10-26T06:50:44.144Z",
+  "previousProposalUpdatedAt": "2026-10-26T06:50:26.848Z",
+  "source": "evidence/planning-v1-remove-legacy-group.json"
+}

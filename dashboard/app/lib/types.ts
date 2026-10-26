@@ -134,6 +134,14 @@ export type Planning = {
   features: Feature[];
   groups: Array<{ id: string; ref?: string | null; title: string; rank?: number }>;
   actionable: Feature[];
+  prototypeImpact?: {
+    status?: string;
+    global?: boolean;
+    changedGroupIds?: string[];
+    changedEntryIds?: string[];
+    affected?: Array<{ id: string; status?: string; reasons?: string[] }>;
+    problems?: string[];
+  };
   content?: string;
 };
 

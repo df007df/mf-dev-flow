@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "batchId": "travel-prd-v2",
+  "title": "旅行清单 PRD v2 变更分析",
+  "summary": {
+    "background": "首版筛选已完成，v2 引入出行阶段分组和基于当前筛选结果的进度摘要。",
+    "direction": "保留既有筛选用户意图，但重构为分组数据结构，并让显示数量和完成数量统一从当前可见结果计算。"
+  },
+  "sources": [
+    "v2-8cf1d449d0a9"
+  ],
+  "items": [
+    {
+      "id": "P-03",
+      "kind": "principle",
+      "title": "按出行阶段分组",
+      "statement": "清单必须按出发前和旅途中两个阶段组织，默认合计四项。",
+      "severity": "high",
+      "evidence": [
+        {
+          "source": "v2-8cf1d449d0a9",
+          "locator": "变更需求",
+          "quote": "事项按“出发前”和“旅途中”两个出行阶段分组展示。"
+        },
+        {
+          "source": "v2-8cf1d449d0a9",
+          "locator": "变更需求",
+          "quote": "默认显示四项事项：“出发前”三项，“旅途中”一项。"
+        }
+      ]
+    },
+    {
+      "id": "P-04",
+      "kind": "principle",
+      "title": "摘要服从当前筛选结果",
+      "statement": "进度摘要中的显示数和完成数必须基于当前可见事项计算。",
+      "severity": "high",
+      "evidence": [
+        {
+          "source": "v2-8cf1d449d0a9",
+          "locator": "变更需求",
+          "quote": "页面显示当前筛选结果的进度摘要：默认显示“当前显示 4 项 · 已完成 3 项”，筛选后显示“当前显示 3 项 · 已完成 3 项”。"
+        }
+      ]
+    },
+    {
+      "id": "R-02",
+      "kind": "redline",
+      "title": "旧平铺筛选假设必须复评",
+      "statement": "旧筛选不能继续使用单一平铺列表或全量统计。",
+      "severity": "high",
+      "evidence": [
+        {
+          "source": "v2-8cf1d449d0a9",
+          "locator": "对既有功能的调整",
+          "quote": "首版筛选逻辑不得继续假设单一平铺列表。可见数量、完成数量和分组可见性必须从当前筛选结果统一计算，不能沿用全量统计或只隐藏视觉元素。"
+        }
+      ]
+    },
+    {
+      "id": "R-03",
+      "kind": "redline",
+      "title": "继续保持本地无服务边界",
+      "statement": "v2 仍不引入编辑、账号、持久化、远程同步或外部 API。",
+      "severity": "medium",
+      "evidence": [
+        {
+          "source": "v2-8cf1d449d0a9",
+          "locator": "范围边界",
+          "quote": "本版不包含事项编辑、分组编辑、持久化、登录、远程同步或外部 API。"
+        }
+      ]
+    }
+  ]
+}

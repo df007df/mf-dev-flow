@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "code-roots",
+  "fingerprint": "e0e4e869d70253bd7624c4084000e74c17384b6af34ada41e7230e5d39071051",
+  "value": {
+    "path": "app",
+    "role": "primary",
+    "writeBoundary": "仅修改 app/ 下的公开合成示例",
+    "head": null,
+    "branch": null,
+    "changedPaths": []
+  }
+}

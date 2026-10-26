@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "deliveryContract": {
+    "id": "web-product-delivery",
+    "version": 1
+  },
+  "deliveryProcess": {
+    "id": "web-product",
+    "version": 1,
+    "sha256": "dafe22bff8c4620733cef30aeeeb81ec7002c24aaf038634c8c14f82c5b0a9bc"
+  },
+  "runId": "20261026-074915Z-跨分组筛选升级交付",
+  "source": "feature-map",
+  "intensity": "focused",
+  "prototypeRun": "travel-prototype-v2",
+  "taskDescription": "指定单一叶子功能 trip-list-filter 完整开发；按任务输入与类型约定完成交付及总控验证。",
+  "featureInputs": [
+    {
+      "id": "trip-list-filter",
+      "title": "跨分组完成态筛选",
+      "parentId": "trip-preparation",
+      "rank": 20,
+      "outcome": "旅行者可以在两个阶段中只查看已完成事项，并一键恢复全部四项。",
+      "description": "把 v1 的扁平筛选升级为保留分组语义的可逆筛选。",
+      "developmentRequirements": [
+        "默认展示两个分组共四项，其中三项完成。",
+        "开启筛选后保留两个分组，只显示三项已完成事项。",
+        "关闭筛选后恢复两个分组和四项完整列表。"
+      ],
+      "sourceEntries": [
+        "trip-groups-default",
+        "trip-groups-completed"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v2"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html",
+        "app/filter-state.mjs"
+      ],
+      "systemCardRefs": [],
+      "priority": "P0",
+      "priorityReason": "保留已交付筛选价值，但必须适配新的分组结构与四项口径。",
+      "wave": "W1",
+      "waveReason": "在分组模型完成后升级筛选，避免旧扁平实现继续扩散。",
+      "status": "not_started",
+      "dependsOn": [
+        "trip-stage-groups"
+      ],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "v2 原型同时观察到默认四项和仅已完成三项，两个状态都保留阶段分组。",
+        "code": "v1 筛选已交付但仅支持扁平三项；现有完成证据不能覆盖 v2 的跨分组结果。",
+        "systems": "筛选仍为纯前端内存状态，不需要新增外部系统契约。",
+        "scope": "复用筛选按钮与恢复路径，只调整数据结构、分组渲染和 4/3 项口径。",
+        "gaps": [
+          "旧交付需要重新验收跨分组筛选与恢复路径。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-groups-default,trip-groups-completed",
+            "note": "支持分组默认态和完成态筛选两个 observed 状态。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/index.html,app/filter-state.mjs",
+            "note": "定位既有筛选实现和渲染边界。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认无外部系统变化。"
+          }
+        ]
+      },
+      "kind": "product",
+      "planningRevision": "20261026-074049Z-功能演进拆解",
+      "reassessment": {
+        "status": "reviewed",
+        "runId": "20261026-074049Z-功能演进拆解",
+        "prototypeFingerprint": "3b3eba1dddfd8dcf0e66552f6e09366461485a7ebd46aaad13ec3f735481d52f",
+        "reviews": [
+          {
+            "featureId": "trip-list-filter",
+            "decision": "split",
+            "deliveryImpact": "revalidate",
+            "targets": [
+              "trip-stage-groups",
+              "trip-list-filter",
+              "visible-progress-summary"
+            ],
+            "reason": "PRD v2 新增阶段分组与结果摘要，旧筛选的数据结构、统计口径和验收范围均发生实质变化。",
+            "checks": {
+              "scope": "由扁平三项筛选扩展为分组基础、跨分组筛选和当前结果摘要。",
+              "status": "三个目标均回到 not_started，不能继承 v1 done。",
+              "dependencies": "分组是筛选前置，分组与筛选共同作为摘要前置。",
+              "priority": "分组和筛选保持 P0，摘要为 P1。",
+              "wave": "按 W0、W1、W2 顺序重新交付。",
+              "acceptance": "v1 三条 AC 将被替换为 v2 分组、筛选和摘要 AC。"
+            },
+            "evidence": [
+              {
+                "kind": "prototype",
+                "ref": "prototype:trip-groups-default,trip-groups-completed",
+                "note": "v2 observed 截图显示两个分组、四项和 4/3 摘要。"
+              },
+              {
+                "kind": "code",
+                "ref": "app/filter-state.mjs",
+                "note": "现有实现仅支持扁平三项和 3/2 口径。"
+              },
+              {
+                "kind": "system",
+                "ref": ".mf-dev-flow/project.json",
+                "note": "系统边界保持本地静态 Web，无外部变化。"
+              }
+            ],
+            "taskDecisions": [
+              {
+                "runId": "20261026-070829Z-行前清单筛选首轮交付",
+                "taskId": "implement-trip-list-filter",
+                "action": "historical",
+                "reason": "v1 交付已终态保留为历史证据，v2 不复用其完成结论。"
+              }
+            ]
+          }
+        ]
+      },
+      "labelHistory": [
+        {
+          "at": "2026-10-26T06:50:46.940Z",
+          "runId": "20261026-064908Z-功能演进拆解",
+          "from": {
+            "priority": null,
+            "wave": null
+          },
+          "to": {
+            "priority": "P0",
+            "wave": "W0"
+          },
+          "priorityReason": "这是 PRD v1 的唯一核心用户闭环，也是后续清单演进的基础。",
+          "waveReason": "首个开发批次先验证无持久化的最小筛选能力。"
+        },
+        {
+          "at": "2026-10-26T07:43:58.966Z",
+          "runId": "20261026-074049Z-功能演进拆解",
+          "from": {
+            "priority": "P0",
+            "wave": "W0"
+          },
+          "to": {
+            "priority": "P0",
+            "wave": "W1"
+          },
+          "priorityReason": "保留已交付筛选价值，但必须适配新的分组结构与四项口径。",
+          "waveReason": "在分组模型完成后升级筛选，避免旧扁平实现继续扩散。"
+        }
+      ],
+      "stages": {
+        "prototype_alignment": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        },
+        "api_mock": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        },
+        "technical_implementation": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        },
+        "end_to_end_acceptance": {
+          "status": "pending",
+          "summary": null,
+          "updatedAt": null
+        }
+      },
+      "updatedAt": "2026-10-26T07:43:58.966Z"
+    }
+  ],
+  "featureAcceptanceCases": {
+    "trip-list-filter": {
+      "schemaVersion": 1,
+      "kind": "feature-acceptance-snapshot",
+      "featureId": "trip-list-filter",
+      "registryRevision": 11,
+      "cases": [
+        {
+          "id": "AC-v2-filter-completed",
+          "title": "跨分组筛选仅显示三项已完成事项",
+          "detail": "点击仅看已完成后保留两个分组，只显示三项已完成事项，并提供显示全部项目按钮。",
+          "evidenceHints": [
+            "浏览器大截图包含两个分组、三项已完成事项与恢复按钮。"
+          ],
+          "revision": 1,
+          "origin": "user"
+        },
+        {
+          "id": "AC-v2-filter-restore",
+          "title": "关闭筛选恢复两个分组和四项",
+          "detail": "点击显示全部项目后恢复出发前 3 项和旅途中 1 项，并恢复仅看已完成按钮。",
+          "evidenceHints": [
+            "恢复态大截图包含完整卡片、两个分组和四项事项。"
+          ],
+          "revision": 1,
+          "origin": "user"
+        }
+      ],
+      "fingerprint": "1ecd891414c441a28566351826a3419667fb7ac93911fd6eaddbeb8cff18062a"
+    }
+  },
+  "carriedRisks": [],
+  "extraction": {
+    "sourceFile": "planning/feature-map.json",
+    "sourceRun": "20261026-074049Z-功能演进拆解",
+    "selection": "single_leaf_feature_gate",
+    "featureId": "trip-list-filter",
+    "gateCheckedAt": "2026-10-26T07:49:15.788Z"
+  },
+  "stages": [
+    {
+      "id": "solution_design",
+      "title": "方案确认（范围、状态与验证）",
+      "ownerRoles": [
+        "ui-client"
+      ],
+      "objective": "把需求与原型收敛为可实施的 Web 方案，明确状态变化、写入范围与验证方法。",
+      "documentation": {
+        "description": "核对冻结需求、原型状态和现有代码边界，形成最小可交付方案。"
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "implementable-scope",
+          "title": "方案可直接实施",
+          "detail": "方案明确用户行为、页面状态、文件范围、失败恢复和验证路径。"
+        }
+      ],
+      "evidenceGates": [
+        "risk_ledger"
+      ],
+      "reportFields": [
+        "结论",
+        "证据",
+        "变更",
+        "验证",
+        "风险/下一步"
+      ],
+      "agent": {
+        "id": "solution_design",
+        "file": "agents/solution-design.md",
+        "sha256": "8f2d3d4a951117d3dae2bb732a01888728a8818d649196c199c2eb8a9e7aaff7",
+        "instructions": "# Web 方案确认 Agent\n\n读取冻结的功能输入、验收用例、原型证据和现有页面代码，将本次功能收敛为可直接实施的方案。\n\n必须说明用户动作、状态变化、写入文件、失败与恢复路径、自动化和浏览器验收方法。不得把未验证的假设写成既有事实；总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+      },
+      "status": "confirmed",
+      "summary": "结论：复用分组模型升级完成态筛选并保留空分组语义；证据：v2默认与完成态原型；变更：增加跨分组筛选行为测试；验证：3/4筛选与4/4恢复真实浏览器验收；风险/下一步：无",
+      "updatedAt": "2026-10-26T07:49:35.333Z"
+    },
+    {
+      "id": "development",
+      "title": "开发与自动化验证",
+      "ownerRoles": [
+        "ui-client"
+      ],
+      "objective": "按已确认方案实现浏览器端功能，并运行与改动风险匹配的自动化验证。",
+      "documentation": {
+        "description": "在声明写范围内实现功能，记录真实文件和测试结果。"
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "implemented-and-tested",
+          "title": "功能已实现并验证",
+          "detail": "实现与方案一致，自动化测试结果如实记录。"
+        }
+      ],
+      "evidenceGates": [
+        "risk_ledger"
+      ],
+      "reportFields": [
+        "结论",
+        "证据",
+        "变更",
+        "验证",
+        "风险/下一步"
+      ],
+      "agent": {
+        "id": "development",
+        "file": "agents/development.md",
+        "sha256": "71ee00b8f216bd606d0096e517678e3afc083993e66bb9f40c474411c8990a45",
+        "instructions": "# Web 开发 Agent\n\n只在任务声明的写入范围内按已确认方案实现功能。优先用行为测试固定用户可观察结果，再完成最小实现；运行与改动风险匹配的自动化检查，并如实记录文件和命令。\n\n不得用静态截图替代可运行页面，也不得把未执行的测试写为通过。总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+      },
+      "status": "confirmed",
+      "summary": "结论：筛选后保留两个分组并只显示三项已完成事项，恢复后回到四项；证据：filter-state测试通过2/2；变更：app/filter-state.test.mjs；验证：3/4到4/4可逆；风险/下一步：无",
+      "updatedAt": "2026-10-26T07:49:39.943Z"
+    },
+    {
+      "id": "end_to_end_acceptance",
+      "title": "端到端验收（真实浏览器 + 截图）",
+      "ownerRoles": [
+        "ui-client"
+      ],
+      "objective": "在真实浏览器中复现用户旅程，归档本阶段大图并逐条记录冻结验收用例结论。",
+      "documentation": {
+        "description": "用真实页面完成关键状态与恢复路径，截图包含功能卡片及所在区块。"
+      },
+      "acceptanceCriteria": [
+        {
+          "id": "e2e-screenshot-archived",
+          "title": "真实浏览器截图已登记",
+          "detail": "至少一张本阶段产生的大图通过 stage-artifact 登记，并说明状态与复现动作。"
+        }
+      ],
+      "evidenceGates": [
+        "e2e_screenshot_evidence",
+        "risk_ledger"
+      ],
+      "reportFields": [
+        "结论",
+        "证据",
+        "变更",
+        "验证",
+        "风险/下一步"
+      ],
+      "terminal": true,
+      "agent": {
+        "id": "end_to_end_acceptance",
+        "file": "agents/e2e-acceptance.md",
+        "sha256": "d2aa131cd80c4797c71db4726e7d72f4ae3bb5e2ad08dc5b0af0a83b61b3b891",
+        "instructions": "# Web 端到端验收 Agent\n\n在真实浏览器中从入口复现完整用户旅程，覆盖功能的关键状态和恢复路径。结果截图必须包含目标卡片及其所在页面区块，不能裁成只剩控件的小图。\n\n把本阶段截图保存后执行 `delivery stage-artifact --stage end_to_end_acceptance --kind e2e_screenshot` 登记；随后用 `delivery acceptance` 逐条记录冻结验收用例。失败必须给出可复现步骤，不得以文字自述替代截图和测试证据。总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+      },
+      "status": "confirmed",
+      "summary": "结论：跨分组筛选和恢复旅程通过；证据：两张1200x1000完整卡片截图并绑定两条冻结AC；变更：无；验证：3/4筛选与4/4恢复符合v2；风险/下一步：无",
+      "updatedAt": "2026-10-26T07:50:00.130Z",
+      "artifacts": [
+        {
+          "kind": "e2e_screenshot",
+          "file": "evidence/stage-artifacts/upgrade-cross-group-filter/end_to_end_acceptance/20261026-074943Z-app-v2-completed.png",
+          "caption": "筛选状态完整卡片保留两个分组并显示三项已完成",
+          "bytes": 56351,
+          "sha256": "82425f74559399e8340970eef4f95e0f7aae854af7efe816e0767b38ff7819aa",
+          "addedAt": "2026-10-26T07:49:43.950Z"
+        },
+        {
+          "kind": "e2e_screenshot",
+          "file": "evidence/stage-artifacts/upgrade-cross-group-filter/end_to_end_acceptance/20261026-074944Z-app-v2-restored.png",
+          "caption": "恢复状态完整卡片重新显示两个分组共四项",
+          "bytes": 61152,
+          "sha256": "d63cf9ec285a45a72f753bf1c47ca5496b65cfa48612911b80f99c6d42c243a5",
+          "addedAt": "2026-10-26T07:49:44.054Z"
+        }
+      ]
+    }
+  ],
+  "createdAt": "2026-10-26T07:49:15.788Z",
+  "updatedAt": "2026-10-26T07:50:00.130Z"
+}

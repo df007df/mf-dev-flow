@@ -15,6 +15,7 @@ import {
   DELIVERY_CONTRACT,
   GENERIC_DELIVERY_CONTRACT,
   MINIAPP_DELIVERY_CONTRACT,
+  WEB_DELIVERY_CONTRACT,
   isGenericDelivery,
   taskStageDefinitions,
   DELIVERY_FINAL_STAGE,
@@ -2386,18 +2387,26 @@ export function deliveryReportProblems(run) {
   const acceptance = stageRecord(input, "end_to_end_acceptance");
   if (["confirmed", "done"].includes(acceptance?.status)) {
     const screenshotDirectory = path.join(run.dir, "screenshots");
-    const screenshots = fs.existsSync(screenshotDirectory)
+    const archivedScreenshots = fs.existsSync(screenshotDirectory)
       ? fs
           .readdirSync(screenshotDirectory, { recursive: true })
           .filter((file) => /\.(png|jpe?g|webp)$/i.test(file))
+          .map((file) => `screenshots/${file}`)
       : [];
+    const stageScreenshots = (acceptance.artifacts ?? [])
+      .filter(
+        (artifact) =>
+          artifact.kind === "e2e_screenshot" &&
+          /\.(png|jpe?g|webp)$/i.test(String(artifact.file ?? "")) &&
+          fs.existsSync(path.resolve(run.dir, artifact.file)),
+      )
+      .map((artifact) => artifact.file);
+    const screenshots = [...new Set([...archivedScreenshots, ...stageScreenshots])];
     const verification = fs.existsSync(path.join(run.dir, "verification.md"))
       ? fs.readFileSync(path.join(run.dir, "verification.md"), "utf8")
       : "";
     if (!screenshots.length) problems.push("全链路验收缺少归档的 E2E 截图");
-    else if (
-      !screenshots.some((file) => verification.includes(`screenshots/${file}`))
-    )
+    else if (!screenshots.some((file) => verification.includes(file)))
       problems.push("测试与原型回归未引用归档的 E2E 截图");
     problems.push(...visualRegionReviewProblems(run));
   }
@@ -2428,7 +2437,9 @@ export function createDeliveryRun({ title, prototypeRun, input }) {
     ? loadDeliveryProcess(requestedProcess)
     : null;
   const deliveryContract = deliveryProcess
-    ? MINIAPP_DELIVERY_CONTRACT
+    ? deliveryProcess.deliveryContract === WEB_DELIVERY_CONTRACT.id
+      ? WEB_DELIVERY_CONTRACT
+      : MINIAPP_DELIVERY_CONTRACT
     : GENERIC_DELIVERY_CONTRACT;
   const run = {
     schemaVersion: 1,

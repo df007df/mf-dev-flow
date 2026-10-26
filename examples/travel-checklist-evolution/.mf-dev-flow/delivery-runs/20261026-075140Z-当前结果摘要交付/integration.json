@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-075140Z-当前结果摘要交付",
+  "status": "passed",
+  "commands": "node--test-app/filter-state.test.mjs；Playwright-1200x1000-summary",
+  "summary": "当前结果进度摘要默认与筛选态验收通过",
+  "verifiedAt": "2026-10-26T07:52:48.386Z",
+  "auditWarnings": [],
+  "reconciliation": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

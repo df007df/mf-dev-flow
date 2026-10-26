@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "web-product",
+  "version": 1,
+  "title": "Web 产品三阶段交付流程",
+  "deliveryContract": "web-product-delivery",
+  "taskPhase": "delivery",
+  "closedStatuses": ["confirmed", "done", "not_applicable"],
+  "statuses": ["pending", "in_progress", "confirmed", "blocked", "not_applicable", "done"],
+  "reportFiles": [
+    {"file": "plan.md", "label": "开发计划", "sections": ["实施切片", "技术方案与实施决策"]},
+    {"file": "implementation.md", "label": "实现记录", "sections": ["关键技术方案", "实际改动与行为", "未完成项和风险"]},
+    {"file": "verification.md", "label": "测试与原型回归", "sections": ["测试执行记录", "逻辑复核与原型对照", "截图证据与偏差处理"]}
+  ],
+  "stages": [
+    {
+      "id": "solution_design",
+      "title": "方案确认（范围、状态与验证）",
+      "ownerRoles": ["ui-client"],
+      "objective": "把需求与原型收敛为可实施的 Web 方案，明确状态变化、写入范围与验证方法。",
+      "agentFile": "agents/solution-design.md",
+      "documentation": {"description": "核对冻结需求、原型状态和现有代码边界，形成最小可交付方案。"},
+      "acceptanceCriteria": [{"id": "implementable-scope", "title": "方案可直接实施", "detail": "方案明确用户行为、页面状态、文件范围、失败恢复和验证路径。"}],
+      "evidenceGates": ["risk_ledger"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "development",
+      "title": "开发与自动化验证",
+      "ownerRoles": ["ui-client"],
+      "objective": "按已确认方案实现浏览器端功能，并运行与改动风险匹配的自动化验证。",
+      "agentFile": "agents/development.md",
+      "documentation": {"description": "在声明写范围内实现功能，记录真实文件和测试结果。"},
+      "acceptanceCriteria": [{"id": "implemented-and-tested", "title": "功能已实现并验证", "detail": "实现与方案一致，自动化测试结果如实记录。"}],
+      "evidenceGates": ["risk_ledger"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"]
+    },
+    {
+      "id": "end_to_end_acceptance",
+      "title": "端到端验收（真实浏览器 + 截图）",
+      "ownerRoles": ["ui-client"],
+      "objective": "在真实浏览器中复现用户旅程，归档本阶段大图并逐条记录冻结验收用例结论。",
+      "agentFile": "agents/e2e-acceptance.md",
+      "documentation": {"description": "用真实页面完成关键状态与恢复路径，截图包含功能卡片及所在区块。"},
+      "acceptanceCriteria": [{"id": "e2e-screenshot-archived", "title": "真实浏览器截图已登记", "detail": "至少一张本阶段产生的大图通过 stage-artifact 登记，并说明状态与复现动作。"}],
+      "evidenceGates": ["e2e_screenshot_evidence", "risk_ledger"],
+      "reportFields": ["结论", "证据", "变更", "验证", "风险/下一步"],
+      "terminal": true
+    }
+  ]
+}

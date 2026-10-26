@@ -9,11 +9,63 @@ import { DataFlowDiagram, type DataFlowSpec } from "./data-flow-diagram";
 import { FeatureAcceptanceCases } from "./feature-acceptance-cases";
 
 const stageNames: Record<string, string> = {
+  solution_design: "方案设计",
+  development: "功能开发",
   prototype_alignment: "原型对齐",
   api_mock: "API / Mock",
   technical_implementation: "技术实现",
   end_to_end_acceptance: "端到端验收",
 };
+
+const impactReasonNames: Record<string, string> = {
+  prototype_entry_changed: "原型入口变化",
+  prototype_group_changed: "原型分组变化",
+  global_or_unattributed_change: "全局或未归属变化",
+  migration_descendant: "迁移关系影响",
+};
+
+function impactReasonLabel(reason: string) {
+  if (impactReasonNames[reason]) return impactReasonNames[reason];
+  if (reason.startsWith("descendant:")) return `上级范围变化（${reason.slice("descendant:".length)}）`;
+  return reason;
+}
+
+function FeatureImpactReview({ planning }: { planning: Planning }) {
+  const impact = planning.prototypeImpact;
+  if (!impact || impact.status !== "review_required" || !impact.affected?.length) return null;
+  const features = new Map(planning.features.map((feature) => [feature.id, feature]));
+  return (
+    <section className="feature-impact-review" aria-label="功能变更影响">
+      <div className="feature-impact-review-heading">
+        <div>
+          <span className="feature-impact-kicker">PRD / 原型已变化</span>
+          <h3>变更影响待复评</h3>
+          <p>
+            已检测到 {impact.changedGroupIds?.length ?? 0} 个原型分组变化、
+            {impact.changedEntryIds?.length ?? 0} 个原型入口变化；旧功能状态会保留，但在复评前不能沿用旧规划继续开发。
+          </p>
+        </div>
+        <span className="feature-impact-count">{impact.affected.length} 个受影响功能</span>
+      </div>
+      <div className="feature-impact-list">
+        {impact.affected.map((item) => {
+          const feature = features.get(item.id);
+          return (
+            <article key={item.id}>
+              <div>
+                <strong>{feature?.title ?? item.id}</strong>
+                <code>{item.id}</code>
+              </div>
+              <Badge status="review_required" />
+              <p>{(item.reasons ?? []).map(impactReasonLabel).join(" · ") || "需要复评"}</p>
+            </article>
+          );
+        })}
+      </div>
+      {impact.problems?.length ? <p className="error">{impact.problems.join("；")}</p> : null}
+    </section>
+  );
+}
 
 type StageEvidence = { path: string; label?: string; action?: string };
 type AcceptanceCriterion = { id: string; title: string; detail: string };
@@ -703,6 +755,7 @@ export function FeatureGroupListSection({
     <Section title="功能点分组列表">
       {planning ? (
         <>
+          <FeatureImpactReview planning={planning} />
           <FeatureAcceptanceCases planning={planning} refreshedAt={refreshedAt} />
           <div className="planning-groups">
             {order(planning.groups).map((group) => (

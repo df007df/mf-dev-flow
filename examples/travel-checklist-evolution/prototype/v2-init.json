@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "type": "html",
+    "location": "prototype/v2.html"
+  },
+  "scope": {
+    "mode": "full",
+    "observableBoundary": "本地旅行清单 v2 合成原型；核验阶段分组、筛选、当前结果摘要及恢复路径。"
+  }
+}

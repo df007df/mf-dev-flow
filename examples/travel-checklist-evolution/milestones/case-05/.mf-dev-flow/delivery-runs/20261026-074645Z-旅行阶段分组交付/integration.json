@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-074645Z-旅行阶段分组交付",
+  "status": "passed",
+  "commands": "node--test-app/filter-state.test.mjs；Playwright-1200x1000-groups",
+  "summary": "分组模型与默认态真实浏览器验收通过",
+  "verifiedAt": "2026-10-26T07:48:16.715Z",
+  "auditWarnings": [],
+  "reconciliation": {
+    "unresolved": [],
+    "resolved": []
+  }
+}

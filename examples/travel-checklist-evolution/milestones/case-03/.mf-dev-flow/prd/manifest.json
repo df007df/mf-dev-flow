@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "v1-a1650f2cd8d2",
+      "title": "v1",
+      "origin": {
+        "kind": "file",
+        "path": "/private/tmp/mf-dev-flow-travel-demo/prd/v1.md"
+      },
+      "format": "text",
+      "ingestedAt": "2026-10-26T06:44:08.749Z",
+      "sourceSha256": "a1650f2cd8d2305af7752757048790e063f0d730efb5ff1a41396583b6c321cc",
+      "snapshotSha256": "a1650f2cd8d2305af7752757048790e063f0d730efb5ff1a41396583b6c321cc",
+      "bytes": 636
+    }
+  ],
+  "updatedAt": "2026-10-26T06:44:08.750Z"
+}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <title>旅行清单</title>
+    <style>
+      :root { color: #172033; background: #eef3f9; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 40px 20px; }
+      main { width: min(760px, 100%); background: #fff; border: 1px solid #d7e0eb; border-radius: 24px; box-shadow: 0 24px 64px rgba(35, 55, 80, .12); padding: 36px; }
+      header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+      .eyebrow { margin: 0 0 8px; color: #3666a7; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      h1 { font-size: 34px; margin: 0; }
+      .intro { color: #657386; margin: 10px 0 0; line-height: 1.55; }
+      button { border: 0; border-radius: 999px; padding: 12px 18px; background: #1d5dab; color: #fff; font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap; }
+      button[aria-pressed="true"] { background: #123866; }
+      .summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 24px 0 20px; }
+      .summary > div { padding: 15px 16px; border: 1px solid #d9e4f0; border-radius: 14px; background: #f4f8fc; }
+      .summary span, .summary strong { display: block; }
+      .summary span { color: #657386; font-size: 12px; }
+      .summary strong { margin-top: 3px; color: #173c6b; font-size: 22px; }
+      .group + .group { margin-top: 22px; }
+      .group-heading { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 10px; }
+      .group-heading h2 { margin: 0; font-size: 17px; }
+      .group-heading span { color: #738096; font-size: 12px; }
+      ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+      li { display: flex; justify-content: space-between; gap: 16px; padding: 18px; border: 1px solid #dfe7f0; border-radius: 14px; background: #fbfcfe; }
+      li[hidden] { display: none; }
+      .done { color: #14734a; font-weight: 650; } .todo { color: #a05b00; font-weight: 650; }
+    </style>
+  </head>
+  <body>
+    <main data-entry-id="trip-groups-default">
+      <header>
+        <div>
+          <p class="eyebrow">可运行页面 · v2</p>
+          <h1>旅行清单</h1>
+          <p class="intro">按出行阶段核对准备事项与途中动作。</p>
+        </div>
+        <button id="filter" type="button" aria-pressed="false">仅看已完成</button>
+      </header>
+      <section class="summary" aria-label="当前结果进度" aria-live="polite">
+        <div><span>当前结果</span><strong id="visible-count">4 项</strong></div>
+        <div><span>已完成</span><strong id="completed-count">3 项</strong></div>
+      </section>
+      <section class="group" data-trip-group="before">
+        <div class="group-heading"><h2>出发前</h2><span>3 项准备</span></div>
+        <ul>
+          <li data-trip-item data-id="hotel" data-group="before" data-done="true"><span>确认酒店入住时间</span><strong class="done">已完成</strong></li>
+          <li data-trip-item data-id="map" data-group="before" data-done="false"><span>下载离线地图</span><strong class="todo">待完成</strong></li>
+          <li data-trip-item data-id="passport" data-group="before" data-done="true"><span>准备护照与证件复印件</span><strong class="done">已完成</strong></li>
+        </ul>
+      </section>
+      <section class="group" data-trip-group="during">
+        <div class="group-heading"><h2>旅途中</h2><span>1 项动作</span></div>
+        <ul>
+          <li data-trip-item data-id="boarding" data-group="during" data-done="true"><span>保存登机牌到手机</span><strong class="done">已完成</strong></li>
+        </ul>
+      </section>
+    </main>
+    <script type="module">
+      import { deriveFilterView, toggleFilter } from './filter-state.mjs';
+
+      const button = document.querySelector('#filter');
+      const elements = [...document.querySelectorAll('[data-trip-item]')];
+      const items = elements.map((element) => ({
+        id: element.dataset.id,
+        group: element.dataset.group,
+        done: element.dataset.done === 'true',
+      }));
+      const visibleCount = document.querySelector('#visible-count');
+      const completedCount = document.querySelector('#completed-count');
+      let completedOnly = false;
+
+      const render = () => {
+        const view = deriveFilterView(items, completedOnly);
+        const visible = new Set(view.visibleIds);
+        elements.forEach((element) => { element.hidden = !visible.has(element.dataset.id); });
+        button.setAttribute('aria-pressed', String(view.completedOnly));
+        button.textContent = view.buttonText;
+        visibleCount.textContent = `${view.summary.visibleCount} 项`;
+        completedCount.textContent = `${view.summary.completedCount} 项`;
+      };
+
+      button.addEventListener('click', () => {
+        completedOnly = toggleFilter(completedOnly);
+        render();
+      });
+      render();
+    </script>
+  </body>
+</html>

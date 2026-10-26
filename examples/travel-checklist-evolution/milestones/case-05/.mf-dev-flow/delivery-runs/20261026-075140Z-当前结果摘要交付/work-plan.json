@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261026-075140Z-当前结果摘要交付",
+  "runType": "delivery",
+  "createdAt": "2026-10-26T07:51:40.280Z",
+  "tasks": [
+    {
+      "id": "add-visible-progress-summary",
+      "title": "增加当前结果进度摘要",
+      "kind": "ui",
+      "phase": "delivery",
+      "stageDefinitions": [
+        {
+          "id": "solution_design",
+          "title": "方案确认（范围、状态与验证）",
+          "ownerRoles": [
+            "ui-client"
+          ],
+          "objective": "把需求与原型收敛为可实施的 Web 方案，明确状态变化、写入范围与验证方法。",
+          "documentation": {
+            "description": "核对冻结需求、原型状态和现有代码边界，形成最小可交付方案。"
+          },
+          "acceptanceCriteria": [
+            {
+              "id": "implementable-scope",
+              "title": "方案可直接实施",
+              "detail": "方案明确用户行为、页面状态、文件范围、失败恢复和验证路径。"
+            }
+          ],
+          "evidenceGates": [
+            "risk_ledger"
+          ],
+          "reportFields": [
+            "结论",
+            "证据",
+            "变更",
+            "验证",
+            "风险/下一步"
+          ],
+          "agent": {
+            "id": "solution_design",
+            "file": "agents/solution-design.md",
+            "sha256": "8f2d3d4a951117d3dae2bb732a01888728a8818d649196c199c2eb8a9e7aaff7",
+            "instructions": "# Web 方案确认 Agent\n\n读取冻结的功能输入、验收用例、原型证据和现有页面代码，将本次功能收敛为可直接实施的方案。\n\n必须说明用户动作、状态变化、写入文件、失败与恢复路径、自动化和浏览器验收方法。不得把未验证的假设写成既有事实；总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+          }
+        },
+        {
+          "id": "development",
+          "title": "开发与自动化验证",
+          "ownerRoles": [
+            "ui-client"
+          ],
+          "objective": "按已确认方案实现浏览器端功能，并运行与改动风险匹配的自动化验证。",
+          "documentation": {
+            "description": "在声明写范围内实现功能，记录真实文件和测试结果。"
+          },
+          "acceptanceCriteria": [
+            {
+              "id": "implemented-and-tested",
+              "title": "功能已实现并验证",
+              "detail": "实现与方案一致，自动化测试结果如实记录。"
+            }
+          ],
+          "evidenceGates": [
+            "risk_ledger"
+          ],
+          "reportFields": [
+            "结论",
+            "证据",
+            "变更",
+            "验证",
+            "风险/下一步"
+          ],
+          "agent": {
+            "id": "development",
+            "file": "agents/development.md",
+            "sha256": "71ee00b8f216bd606d0096e517678e3afc083993e66bb9f40c474411c8990a45",
+            "instructions": "# Web 开发 Agent\n\n只在任务声明的写入范围内按已确认方案实现功能。优先用行为测试固定用户可观察结果，再完成最小实现；运行与改动风险匹配的自动化检查，并如实记录文件和命令。\n\n不得用静态截图替代可运行页面，也不得把未执行的测试写为通过。总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+          }
+        },
+        {
+          "id": "end_to_end_acceptance",
+          "title": "端到端验收（真实浏览器 + 截图）",
+          "ownerRoles": [
+            "ui-client"
+          ],
+          "objective": "在真实浏览器中复现用户旅程，归档本阶段大图并逐条记录冻结验收用例结论。",
+          "documentation": {
+            "description": "用真实页面完成关键状态与恢复路径，截图包含功能卡片及所在区块。"
+          },
+          "acceptanceCriteria": [
+            {
+              "id": "e2e-screenshot-archived",
+              "title": "真实浏览器截图已登记",
+              "detail": "至少一张本阶段产生的大图通过 stage-artifact 登记，并说明状态与复现动作。"
+            },
+            {
+              "id": "AC-v2-summary-completed",
+              "title": "筛选后摘要同步为当前三项已完成三项",
+              "detail": "仅看已完成状态的摘要立即更新为当前 3 项、已完成 3 项。",
+              "evidenceHints": [
+                "筛选态大截图同时包含摘要区、筛选按钮和两个分组。"
+              ],
+              "origin": "feature-acceptance-case",
+              "revision": 1
+            },
+            {
+              "id": "AC-v2-summary-default",
+              "title": "默认摘要显示当前四项已完成三项",
+              "detail": "默认状态的当前结果摘要显示当前 4 项、已完成 3 项。",
+              "evidenceHints": [
+                "默认态大截图包含摘要区和完整分组卡片。"
+              ],
+              "origin": "feature-acceptance-case",
+              "revision": 1
+            }
+          ],
+          "evidenceGates": [
+            "e2e_screenshot_evidence",
+            "risk_ledger"
+          ],
+          "reportFields": [
+            "结论",
+            "证据",
+            "变更",
+            "验证",
+            "风险/下一步"
+          ],
+          "terminal": true,
+          "agent": {
+            "id": "end_to_end_acceptance",
+            "file": "agents/e2e-acceptance.md",
+            "sha256": "d2aa131cd80c4797c71db4726e7d72f4ae3bb5e2ad08dc5b0af0a83b61b3b891",
+            "instructions": "# Web 端到端验收 Agent\n\n在真实浏览器中从入口复现完整用户旅程，覆盖功能的关键状态和恢复路径。结果截图必须包含目标卡片及其所在页面区块，不能裁成只剩控件的小图。\n\n把本阶段截图保存后执行 `delivery stage-artifact --stage end_to_end_acceptance --kind e2e_screenshot` 登记；随后用 `delivery acceptance` 逐条记录冻结验收用例。失败必须给出可复现步骤，不得以文字自述替代截图和测试证据。总结中的每条“风险/下一步”都要用 `--risk` 登记到功能点，确无留项时写“无”。\n"
+          },
+          "featureAcceptanceSnapshot": {
+            "featureId": "visible-progress-summary",
+            "registryRevision": 11,
+            "fingerprint": "97b7a066ba7a102400274994dd39cf62da932bf4fc5ec7906fbd09cbdb47f75d"
+          }
+        }
+      ],
+      "scope": "product",
+      "leafFeatureIds": [
+        "visible-progress-summary"
+      ],
+      "featureRevision": "20261026-074049Z-功能演进拆解",
+      "relatedFeatureIds": [],
+      "deliveryTargets": [],
+      "deliveryTarget": null,
+      "reads": [
+        "prototype/v2.html",
+        "prd/v2.md"
+      ],
+      "writes": [
+        "app"
+      ],
+      "dependsOn": [],
+      "coupling": "无共享写入、状态或契约耦合",
+      "verification": "浏览器验证默认4/3与筛选3/3摘要",
+      "createdAt": "2026-10-26T07:51:54.878Z"
+    }
+  ]
+}

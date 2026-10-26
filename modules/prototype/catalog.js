@@ -6,6 +6,7 @@ import { digest, EXTRACTOR_REVISION } from './core/html-source.js';
 import { readAnalysisRequirements, requirementsBrief, resolveAnalysisRequirements } from './core/analysis-requirements.mjs';
 import { parsePrototypeSpecifier, loadPrototypeProcess, loadPrototypeAdapter, composePrototypeWorkflow } from './processes.mjs';
 import { normalizeRuntimeSource } from './core/runtime-source.mjs';
+import { resolvePortableHtmlSource } from './core/source-location.mjs';
 import { assertWorkflowCommand, markWorkflowAccepted, transitionWorkflow, workflowBrief, workflowSummary } from './core/workflow.mjs';
 import { STORE_DIRECTORY, storePath } from '../skill-identity.mjs';
 export const catalogDirectory = root => path.join(path.resolve(root), STORE_DIRECTORY, 'prototype');
@@ -486,8 +487,11 @@ export class PrototypeCatalog {
     } catch (error) { problems.push(`已接受证据不可核验：${error.message}`); }
     return problems;
   }
+  resolvedSource(source = this.meta('source')) {
+    return resolvePortableHtmlSource(source, this.root);
+  }
   sourceState() {
-    const source = this.meta('source'); if (!source) return { fresh: false, problems: ['No prototype source'], files: [] };
+    const source = this.resolvedSource(); if (!source) return { fresh: false, problems: ['No prototype source'], files: [] };
     const accepted = this.meta('accepted');
     const pending = !accepted || accepted.sourceFingerprint !== source.fingerprint;
     if (source.type === 'runtime') {
@@ -669,7 +673,7 @@ export class PrototypeCatalog {
     return { status: 'ready', semanticRevision: report.semanticRevision, currentSemanticRevision: revision, batchId: report.batchId, formatVersion: report.formatVersion };
   }
   status() {
-    const revision = this.revision(), source = this.meta('source'), counts = {};
+    const revision = this.revision(), source = this.resolvedSource(), counts = {};
     for (const type of ['group', 'entry', 'question', 'requirement', 'note']) counts[type] = this.db.prepare('SELECT count(*) n FROM semantic WHERE type=?').get(type).n;
     const reportStatus = this.reportStatus();
     const sourceSummary = source?.type === 'runtime' ? { type: source.type, adapter: source.adapter, revision: source.revision } : source ? { type: source.type, location: source.location } : null;

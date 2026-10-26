@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "freshness": {
+    "fresh": true,
+    "changedFiles": [],
+    "extractorChanged": false,
+    "analysisRequirementsChanged": false,
+    "invalidation": "none",
+    "metrics": {
+      "files": 2,
+      "hits": 2,
+      "parsed": 0,
+      "sourceBytes": 3381
+    }
+  },
+  "snapshotId": "673f930e-7cce-42c6-877c-c492935a1ec8",
+  "createdAt": "2026-10-26T06:44:09.360Z",
+  "revision": 4,
+  "source": {
+    "type": "html",
+    "workspaceRoot": "/private/tmp/mf-dev-flow-travel-demo",
+    "location": "/private/tmp/mf-dev-flow-travel-demo/prototype/v1.html"
+  },
+  "scope": {
+    "mode": "full",
+    "observableBoundary": "本地旅行清单合成原型；只核验页面可见列表与筛选交互。",
+    "analysisRequirements": {
+      "schemaVersion": 1,
+      "kind": "analysis-requirements-snapshot",
+      "origin": "frozen-registry",
+      "registryRevision": null,
+      "selection": {
+        "mode": "default-active",
+        "ids": null,
+        "labels": []
+      },
+      "records": [],
+      "fingerprint": "b88b9a49fc2fb80ab84a9c3eab868ebe5f2605fd468d153613e09c9dfbde57d7",
+      "legacyUnclassified": null
+    },
+    "analysisRequirementSelection": {
+      "mode": "default-active",
+      "ids": null,
+      "labels": []
+    }
+  },
+  "counts": {
+    "file": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "candidate": {
+      "total": 9,
+      "complete": 9,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "node": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "edge": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "space": {
+      "total": 1,
+      "complete": 1,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "vector": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "control": {
+      "total": 1,
+      "complete": 0,
+      "pending": 1,
+      "blocked": 0,
+      "retired": 0
+    },
+    "occurrence": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "sweep": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "entry": {
+      "total": 2,
+      "complete": 2,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "group": {
+      "total": 1,
+      "complete": 0,
+      "pending": 1,
+      "blocked": 0,
+      "retired": 0
+    },
+    "question": {
+      "total": 0,
+      "complete": 0,
+      "pending": 0,
+      "blocked": 0,
+      "retired": 0
+    },
+    "evidence": {
+      "total": 3,
+      "complete": 0,
+      "pending": 3,
+      "blocked": 0,
+      "retired": 0
+    }
+  },
+  "artifacts": {
+    "database": "index.sqlite",
+    "sourceMap": "source-map.json",
+    "report": "report.md",
+    "brief": "brief.json"
+  },
+  "complete": true,
+  "problemCount": 0,
+  "evidenceProfile": null,
+  "reportFormatVersion": 2
+}

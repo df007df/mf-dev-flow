@@ -1,0 +1,341 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "trip-preparation",
+      "title": "旅行准备与途中执行",
+      "rank": 10,
+      "sourceFeatureIds": [
+        "trip-groups"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "trip-stage-groups",
+      "title": "按出行阶段分组清单",
+      "parentId": "trip-preparation",
+      "rank": 10,
+      "outcome": "旅行者可以按出发前和旅途中两个阶段理解四项清单内容。",
+      "description": "把扁平清单重组为两个稳定阶段，并保留每项完成状态。",
+      "developmentRequirements": [
+        "默认状态展示出发前 3 项和旅途中 1 项。",
+        "分组标题、事项数量与完成状态必须同时可见。",
+        "不加入编辑、持久化或远程同步。"
+      ],
+      "sourceEntries": [
+        "trip-groups-default"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v2"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html",
+        "app/filter-state.mjs"
+      ],
+      "systemCardRefs": [],
+      "priority": "P0",
+      "priorityReason": "新的分组数据结构是筛选与进度摘要的共同前置。",
+      "wave": "W0",
+      "waveReason": "先建立稳定分组模型，避免后续功能重复改写数据结构。",
+      "status": "not_started",
+      "dependsOn": [],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "v2 原型默认态明确展示出发前和旅途中两个分组及四项事项。",
+        "code": "现有 filter-state.mjs 只返回扁平三项列表，需要先升级为分组模型。",
+        "systems": "项目仍是本地静态 Web 页面，没有外部服务、账号或持久化依赖。",
+        "scope": "只建立两个阶段和四项固定数据；筛选和进度反馈由后续叶子功能承接。",
+        "gaps": [
+          "现有扁平数据结构尚不能表达阶段归属。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-groups-default",
+            "note": "默认态提供两个阶段的 observed 大截图。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/filter-state.mjs",
+            "note": "定位需要升级的扁平状态模型。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认本地静态 Web 项目的系统边界。"
+          }
+        ]
+      },
+      "kind": "product"
+    },
+    {
+      "id": "trip-list-filter",
+      "title": "跨分组完成态筛选",
+      "parentId": "trip-preparation",
+      "rank": 20,
+      "outcome": "旅行者可以在两个阶段中只查看已完成事项，并一键恢复全部四项。",
+      "description": "把 v1 的扁平筛选升级为保留分组语义的可逆筛选。",
+      "developmentRequirements": [
+        "默认展示两个分组共四项，其中三项完成。",
+        "开启筛选后保留两个分组，只显示三项已完成事项。",
+        "关闭筛选后恢复两个分组和四项完整列表。"
+      ],
+      "sourceEntries": [
+        "trip-groups-default",
+        "trip-groups-completed"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v2"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html",
+        "app/filter-state.mjs"
+      ],
+      "systemCardRefs": [],
+      "priority": "P0",
+      "priorityReason": "保留已交付筛选价值，但必须适配新的分组结构与四项口径。",
+      "wave": "W1",
+      "waveReason": "在分组模型完成后升级筛选，避免旧扁平实现继续扩散。",
+      "status": "not_started",
+      "dependsOn": [
+        "trip-stage-groups"
+      ],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "v2 原型同时观察到默认四项和仅已完成三项，两个状态都保留阶段分组。",
+        "code": "v1 筛选已交付但仅支持扁平三项；现有完成证据不能覆盖 v2 的跨分组结果。",
+        "systems": "筛选仍为纯前端内存状态，不需要新增外部系统契约。",
+        "scope": "复用筛选按钮与恢复路径，只调整数据结构、分组渲染和 4/3 项口径。",
+        "gaps": [
+          "旧交付需要重新验收跨分组筛选与恢复路径。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-groups-default,trip-groups-completed",
+            "note": "支持分组默认态和完成态筛选两个 observed 状态。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/index.html,app/filter-state.mjs",
+            "note": "定位既有筛选实现和渲染边界。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认无外部系统变化。"
+          }
+        ]
+      },
+      "kind": "product"
+    },
+    {
+      "id": "visible-progress-summary",
+      "title": "当前结果进度摘要",
+      "parentId": "trip-preparation",
+      "rank": 30,
+      "outcome": "旅行者可以立即知道当前筛选结果的可见项数和已完成项数。",
+      "description": "在筛选变化时同步显示当前结果的可见数量与完成数量。",
+      "developmentRequirements": [
+        "默认状态显示当前 4 项、已完成 3 项。",
+        "仅看已完成状态显示当前 3 项、已完成 3 项。",
+        "摘要必须随筛选与恢复即时更新。"
+      ],
+      "sourceEntries": [
+        "trip-groups-default",
+        "trip-groups-completed"
+      ],
+      "scopeRefs": [
+        "prd:travel-prd-v2"
+      ],
+      "moduleRefs": [
+        "travel-checklist"
+      ],
+      "codeRefs": [
+        "app/index.html",
+        "app/filter-state.mjs"
+      ],
+      "systemCardRefs": [],
+      "priority": "P1",
+      "priorityReason": "进度摘要增强理解效率，但依赖分组和筛选结果稳定后才能准确计算。",
+      "wave": "W2",
+      "waveReason": "最后接入统一派生状态，确保统计口径只实现一次。",
+      "status": "not_started",
+      "dependsOn": [
+        "trip-stage-groups",
+        "trip-list-filter"
+      ],
+      "blockers": [],
+      "taskRefs": [],
+      "analysis": {
+        "prototype": "v2 默认态和完成态分别明确当前 4/3、已完成 3/3 的摘要文案。",
+        "code": "v1 只有可见/总数文本，没有独立的当前结果完成数模型。",
+        "systems": "摘要由前端已加载的固定清单派生，不增加系统或数据源依赖。",
+        "scope": "只展示当前筛选结果的可见数与完成数，不引入百分比、历史趋势或持久化。",
+        "gaps": [
+          "需要新增统一派生摘要并覆盖筛选前后测试。"
+        ],
+        "sources": [
+          {
+            "kind": "prototype",
+            "ref": "prototype:trip-groups-default,trip-groups-completed",
+            "note": "两个状态提供明确的当前结果摘要。"
+          },
+          {
+            "kind": "code",
+            "ref": "app/filter-state.mjs",
+            "note": "摘要应复用筛选后的派生状态。"
+          },
+          {
+            "kind": "system",
+            "ref": ".mf-dev-flow/project.json",
+            "note": "确认摘要不依赖外部系统。"
+          }
+        ]
+      },
+      "kind": "product"
+    }
+  ],
+  "migrations": [
+    {
+      "type": "split",
+      "from": [
+        "trip-list-filter"
+      ],
+      "to": [
+        "trip-stage-groups",
+        "trip-list-filter",
+        "visible-progress-summary"
+      ],
+      "reason": "v2 把已交付的扁平筛选重构为分组基础、跨分组筛选和结果摘要三个可独立验收且有依赖顺序的功能。"
+    }
+  ],
+  "impactReviews": [
+    {
+      "featureId": "trip-list-filter",
+      "decision": "split",
+      "deliveryImpact": "revalidate",
+      "targets": [
+        "trip-stage-groups",
+        "trip-list-filter",
+        "visible-progress-summary"
+      ],
+      "reason": "PRD v2 新增阶段分组与结果摘要，旧筛选的数据结构、统计口径和验收范围均发生实质变化。",
+      "checks": {
+        "scope": "由扁平三项筛选扩展为分组基础、跨分组筛选和当前结果摘要。",
+        "status": "三个目标均回到 not_started，不能继承 v1 done。",
+        "dependencies": "分组是筛选前置，分组与筛选共同作为摘要前置。",
+        "priority": "分组和筛选保持 P0，摘要为 P1。",
+        "wave": "按 W0、W1、W2 顺序重新交付。",
+        "acceptance": "v1 三条 AC 将被替换为 v2 分组、筛选和摘要 AC。"
+      },
+      "evidence": [
+        {
+          "kind": "prototype",
+          "ref": "prototype:trip-groups-default,trip-groups-completed",
+          "note": "v2 observed 截图显示两个分组、四项和 4/3 摘要。"
+        },
+        {
+          "kind": "code",
+          "ref": "app/filter-state.mjs",
+          "note": "现有实现仅支持扁平三项和 3/2 口径。"
+        },
+        {
+          "kind": "system",
+          "ref": ".mf-dev-flow/project.json",
+          "note": "系统边界保持本地静态 Web，无外部变化。"
+        }
+      ],
+      "taskDecisions": [
+        {
+          "runId": "20261026-070829Z-行前清单筛选首轮交付",
+          "taskId": "implement-trip-list-filter",
+          "action": "historical",
+          "reason": "v1 交付已终态保留为历史证据，v2 不复用其完成结论。"
+        }
+      ]
+    },
+    {
+      "featureId": "trip-stage-groups",
+      "decision": "add",
+      "deliveryImpact": "revalidate",
+      "targets": [
+        "trip-stage-groups"
+      ],
+      "reason": "PRD v2 和原型 v2 新增两个出行阶段，是后续筛选和摘要的基础。",
+      "checks": {
+        "scope": "新增分组基础。",
+        "status": "not_started。",
+        "dependencies": "无前置。",
+        "priority": "P0。",
+        "wave": "W0。",
+        "acceptance": "新增分组 AC。"
+      },
+      "evidence": [
+        {
+          "kind": "prototype",
+          "ref": "prototype:trip-groups-default",
+          "note": "观察到两个阶段与四项事项。"
+        },
+        {
+          "kind": "code",
+          "ref": "app/filter-state.mjs",
+          "note": "现有扁平模型不支持阶段。"
+        },
+        {
+          "kind": "system",
+          "ref": ".mf-dev-flow/project.json",
+          "note": "无外部系统依赖。"
+        }
+      ],
+      "taskDecisions": []
+    },
+    {
+      "featureId": "visible-progress-summary",
+      "decision": "add",
+      "deliveryImpact": "revalidate",
+      "targets": [
+        "visible-progress-summary"
+      ],
+      "reason": "PRD v2 新增当前结果的可见数与完成数反馈。",
+      "checks": {
+        "scope": "新增结果摘要。",
+        "status": "not_started。",
+        "dependencies": "依赖分组和筛选。",
+        "priority": "P1。",
+        "wave": "W2。",
+        "acceptance": "新增筛选前后摘要 AC。"
+      },
+      "evidence": [
+        {
+          "kind": "prototype",
+          "ref": "prototype:trip-groups-default,trip-groups-completed",
+          "note": "观察到 4/3 与 3/3 两种摘要。"
+        },
+        {
+          "kind": "code",
+          "ref": "app/filter-state.mjs",
+          "note": "现有状态缺少完成数摘要。"
+        },
+        {
+          "kind": "system",
+          "ref": ".mf-dev-flow/project.json",
+          "note": "摘要是纯前端派生数据。"
+        }
+      ],
+      "taskDecisions": []
+    }
+  ],
+  "appliedAt": "2026-10-26T07:43:40.562Z",
+  "previousProposalUpdatedAt": "2026-10-26T07:40:49.617Z",
+  "source": "evidence/planning-v2-patch.json"
+}

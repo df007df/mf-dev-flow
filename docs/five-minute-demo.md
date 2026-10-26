@@ -1,81 +1,40 @@
-# 五分钟最小闭环：旅行清单筛选
+# 五分钟最小闭环：从功能点到真实浏览器验收
 
-这是一条可以在小功能中看清价值的完整链路，而不是对所有命令的演示。所有名称、需求和状态均为合成示例；它们可以安全地随仓库公开。
+仓库自带的旅行清单示例用于回答一个问题：`mf-dev-flow` 是否能让一次 Agent 开发变得更可控、可续做、可核查？
 
-## 场景
-
-已有一个旅行清单页面。用户提出：
-
-> 我只想看已经完成的行程，方便核对准备情况。
-
-若直接把这句话交给编码代理，容易漏掉默认状态、空结果、可访问性和回归范围。示例将它收束为一个独立可交付的叶子功能：`completed-filter`。
-
-```mermaid
-flowchart LR
-    A[用户需求\n只看已完成项目] --> B[功能点\ncompleted-filter]
-    B --> C[写入范围\napp/index.html]
-    B --> D[验收用例\n默认全量 / 只看已完成]
-    C --> E[实现与本地验证]
-    D --> E
-    E --> F[交付记录\n结论与证据]
-```
-
-## 用示例查看结果（约 2 分钟）
-
-从仓库根目录运行：
+## 运行
 
 ```bash
-cd examples/five-minute-cycle
+cd examples/travel-checklist-evolution
+npm --prefix ../../modules/prototype ci
 pnpm --dir ../../dashboard install
+node scripts/select-case.mjs case-03
 node ../../scripts/mf-dev-flow.mjs dashboard
 ```
 
-访问 <http://127.0.0.1:4173/>。示例状态是只读的：看板不会修改 `.mf-dev-flow/` 中的任何内容。
+打开 <http://127.0.0.1:4173/>，重点查看：
 
-1. 在“功能点看板”找到“仅看已完成项目”。它显示目标、优先级、实现边界和当前阶段。
-2. 在“功能点分组列表”打开该功能，查看来源、需求、阶段和最终验收用例。
-3. 打开 [`examples/five-minute-cycle/app/index.html`](../examples/five-minute-cycle/app/index.html)，点击“仅看已完成”体验目标交互。
+1. “功能点分组列表”：一个用户结果、三条最终 AC、一个完整功能卡。
+2. “运行历史”：方案确认、开发、真实浏览器验收和总控验证。
+3. `app/index.html`：点击“仅看已完成”，再恢复全部项目。
 
-![示例状态在本地观察台中的实际呈现](images/five-minute-dashboard.png)
+![最小闭环的功能、AC 与三阶段状态](../examples/travel-checklist-evolution/screenshots/case-03/dashboard-feature-group.png)
 
-页面结果按功能和验收 case 的逐条截图映射见 [`examples/five-minute-cycle/cases.md`](../examples/five-minute-cycle/cases.md)。
+这个 Case 的 `.mf-dev-flow` 由实际命令产生，三张浏览器截图也登记在交付阶段中。它展示的是“真的完成了什么”，而不是一份预先写好的看板 mock。
 
-## 从需求到交付（约 3 分钟）
+## 五分钟后继续看什么
 
-当这个场景出现在你的项目中，最小实践并不要求一次用完所有流程。只做以下四件事即可：
+- 想看最初如何从 PRD 和原型拆出功能：读 [Case 01](../examples/travel-checklist-evolution/cases/01-prd-and-prototype-baseline.md) 和 [Case 02](../examples/travel-checklist-evolution/cases/02-prototype-analysis-and-planning.md)。
+- 想看需求变化后的主动影响分析：读 [Case 04](../examples/travel-checklist-evolution/cases/04-prd-change-impact.md)。
+- 想看一个旧功能如何演进为三个有依赖关系的新功能：读 [Case 05](../examples/travel-checklist-evolution/cases/05-replan-and-final-delivery.md)。
 
-1. **固定结果**：功能点写成“用户可以仅看已完成项目”，而不是“加一个按钮”。
-2. **限制写入范围**：本例只允许改 `app/index.html`，避免代理顺手重构无关文件。
-3. **先写验收**：默认仍显示全部项目；开启筛选后只显示已完成项目，且空结果可理解。
-4. **留下验证结论**：记录实际执行的检查和截图/浏览器证据；未完成的证据保持待补充，不能伪称通过。
+完整索引与快照切换命令见 [示例 README](../examples/travel-checklist-evolution/README.md)。
 
-其中第 2 和第 3 步是这个工具在小需求上的实际价值：让开发任务具有可验证的边界，而不是只留下自然语言聊天记录。
+## 什么时候值得用
 
-## 何时值得使用
-
-| 使用场景 | 建议 |
+| 场景 | 建议 |
 | --- | --- |
-| 一个需求会交给多名代理或需要跨轮次续做 | 使用：范围、阶段和证据能减少上下文丢失。 |
-| UI 原型、PRD 和实现必须能相互追溯 | 使用：先冻结来源，再做规划和交付。 |
-| 只有一次小改动，且同一人从头做到尾 | 按需使用：记录功能点和验收即可，无需展开完整流程。 |
-| 临时试验或一次性脚本 | 不建议：流程成本通常高于收益。 |
-
-## 迁移到自己的项目
-
-示例的 `.mf-dev-flow/` 是公开的合成快照，不能复制到生产项目。实际接入时，从项目基线开始：
-
-```bash
-# 在你的项目根目录；D 指向已安装的技能目录。
-D=.codex/skills/mf-dev-flow/scripts/mf-dev-flow.mjs
-node "$D" init \
-  --name "你的项目" \
-  --background "本轮要解决的用户问题" \
-  --prototype-kind html \
-  --prototype-location "相对原型路径或公开 URL" \
-  --code-root .
-
-# 明确选择入口，再按该入口文档继续。
-node "$D" flow route --session <session-id> --flow planning
-```
-
-之后由相应流程创建真实状态。不要提交真实 `.mf-dev-flow/`、截图、原型来源、运行日志或凭据；这些只应保留在消费项目本地。
+| 需求会跨多轮、多人或多个 Agent 继续 | 使用：范围、状态和证据不会只留在聊天记录里 |
+| PRD、原型、功能与实现必须可追溯 | 使用：来源和验收可以冻结并复评 |
+| 已完成能力会被后续需求改动 | 使用：影响分析会阻止沿用过期结论 |
+| 一次性小脚本或一行样式修改 | 不必展开完整闭环 |

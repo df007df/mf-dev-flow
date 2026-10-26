@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "name": "旅行清单示例",
+    "background": "演示从 PRD 与原型到功能变更影响的完整开发闭环。"
+  },
+  "prototype": {
+    "primary": true,
+    "kind": "html",
+    "location": "prototype/v1.html",
+    "access": "本地 HTML 文件，无账号或网络依赖",
+    "version": "sha256:6c539dd9122ab1f8a3417c014c5dc1b48cf9b80b14728249ef310ae8050afd7a"
+  },
+  "codeRoots": [
+    {
+      "path": "app",
+      "role": "primary",
+      "writeBoundary": "仅修改 app/ 下的公开合成示例"
+    }
+  ],
+  "testCommands": {
+    "unit": "node --test scripts/*.test.mjs",
+    "e2e": "使用 Playwright 对本地 HTML 页面进行浏览器验证"
+  },
+  "confirmedAt": "2026-10-26T06:43:50.224Z",
+  "createdAt": "2026-10-26T06:43:50.224Z",
+  "changeLog": [
+    {
+      "at": "2026-10-26T06:43:50.224Z",
+      "summary": "创建项目基线；原型访问方式、版本和测试入口待确认。"
+    },
+    {
+      "at": "2026-10-26T06:43:50.224Z",
+      "summary": "确认本地 HTML 原型、app 写入边界与浏览器验证方式。"
+    }
+  ]
+}
