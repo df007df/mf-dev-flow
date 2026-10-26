@@ -75,9 +75,15 @@ node "$D" coordination status --json
 
 各流程的第一条命令、可写位置和完成条件由 [`modules/workflow/registry.json`](modules/workflow/registry.json) 统一登记。只在选定流程的入口文档及其链接协议中继续阅读，避免将全部历史和数据加载进上下文。
 
-## 五分钟看懂一次闭环
+## 五分钟看懂一次 Agent 开发闭环
 
 不必先接入真实项目。仓库附带一个可公开、可运行的旅行清单项目。它从 PRD 与原型基线开始，先交付简单筛选，再通过 PRD v2 演进为“阶段分组 → 跨分组筛选 → 当前结果摘要”三个功能。
+
+真实使用时，推荐先和 Agent 对话，而不是自己逐条拼 CLI：
+
+> 请基于已确认的旅行清单功能和 AC 开始开发。写入范围只允许在 `app/`。先说明实现方案，再修改代码；完成后运行测试，在真实浏览器里验证，并告诉我每条 AC 对应的证据。
+
+Agent 负责调用 `mf-dev-flow`、修改业务代码和组织验证；你负责确认目标、范围和验收标准。完整的基本流程图、五轮示例对话以及 Agent/代码分工见[旅行清单演进 Demo](examples/travel-checklist-evolution/README.md)。下面的命令只用于在五分钟内观察已冻结的真实结果：
 
 ```bash
 git clone <repository-url> mf-dev-flow
@@ -87,7 +93,7 @@ cd mf-dev-flow/examples/travel-checklist-evolution
 npm --prefix ../../modules/prototype ci
 pnpm --dir ../../dashboard install
 
-# 选择五分钟最小闭环里程碑；看板只读，不改写状态。
+# 选择五分钟最小闭环里程碑；这里只复现结果，不重新执行开发。
 node scripts/select-case.mjs case-03
 node ../../scripts/mf-dev-flow.mjs dashboard
 ```

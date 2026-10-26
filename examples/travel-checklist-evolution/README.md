@@ -4,9 +4,48 @@
 
 所有里程碑中的 `.mf-dev-flow` 都是在中性临时工作区实际执行本仓库 CLI 后冻结的状态，不是为了截图手工拼装的数据。生成方法、命令哈希与验证方式见 [`generation/README.md`](generation/README.md)。
 
+## 先看懂：一个功能如何进入开发
+
+日常使用时，不需要先记住一长串 CLI。你先用自然语言告诉 Agent 目标、输入和边界；Agent 负责选择流程、调用 `mf-dev-flow`、修改业务代码并组织验证。需要你决定的需求、范围和验收标准仍由你确认。
+
+```mermaid
+flowchart TD
+    A[提供需求、PRD 与原型] --> B[与 Agent 确认目标和边界]
+    B --> C[冻结来源并分析真实页面]
+    C --> D[拆成功能点、依赖与 AC]
+    D --> E{范围与 AC 已确认?}
+    E -->|否| D
+    E -->|是| F[Agent 实现一个可交付功能]
+    F --> G[代码测试与真实浏览器验收]
+    G --> H{证据满足 AC?}
+    H -->|否| F
+    H -->|是| I[功能完成并保留交付证据]
+    I --> J{需求是否变化?}
+    J -->|否| K([本轮交付结束])
+    J -->|是| L[分析影响面并阻断旧规划]
+    L --> M[重规划关联功能与依赖顺序]
+    M --> E
+```
+
+这张图刻意把“确认”放在“开发”之前，把“影响分析”放在“直接改代码”之前。`mf-dev-flow` 的价值不是替 Agent 写代码，而是让 Agent 的判断、代码改动、测试和验收处在同一条可追溯链路上。
+
+## 推荐使用方式：和 Agent 对话推进
+
+下面五句话就是这个示例的用户操作主线。每轮先让 Agent 汇报结论和待确认项，再决定是否继续。
+
+| 阶段 | 你可以对 Agent 说 | 你应该收到的结果 |
+| --- | --- | --- |
+| 建立基线 | “这是 PRD 和原型。先登记并冻结输入，不要开始开发。” | 来源版本、当前未分析状态和下一步建议 |
+| 分析规划 | “分析真实原型，拆成可交付功能和 AC，先给我确认。” | 一个用户结果、功能边界和可验证 AC |
+| 开发交付 | “按已确认 AC 开发第一个功能，完成后给我测试与浏览器证据。” | 业务代码、自动化测试、截图和交付结论 |
+| 需求变化 | “PRD 和原型改了。先分析影响面，不要直接在旧功能上改代码。” | 被影响功能、过期 AC 和复评原因 |
+| 重规划 | “根据影响分析重排功能和依赖，按顺序逐个交付。” | 三个关联功能、依赖关系和最终验收证据 |
+
+每个 Case 都会继续说明两层内容：前半部分是你如何与 Agent 协作；后半部分是 Agent、`mf-dev-flow` CLI、业务代码、测试/浏览器和看板实际上如何分工。文末的命令用于审计和复现，不是要求用户手工代替 Agent 执行整个工作流。
+
 ## 五分钟最小闭环
 
-如果只想判断它是否有用：
+如果只想判断它是否有用，可以直接观察已经完成 Case 03 的冻结状态：
 
 ```bash
 npm --prefix ../../modules/prototype ci
@@ -21,13 +60,13 @@ node ../../scripts/mf-dev-flow.mjs dashboard
 
 ## 完整演进索引
 
-| Case | 难度 | 项目状态 | 核心价值 |
+| Case | 你与 Agent 的目标 | 项目状态 | 核心价值 |
 | --- | --- | --- | --- |
-| [01 · PRD 与原型基线](cases/01-prd-and-prototype-baseline.md) | 入门 | 来源已冻结，尚未分析 | 不把“收到文档”伪装成“已理解” |
-| [02 · 原型分析与功能拆解](cases/02-prototype-analysis-and-planning.md) | 入门进阶 | 原型 ready，功能 not_started | 用真实状态证据拆出用户结果和 AC |
-| [03 · 交付第一个功能](cases/03-first-delivery.md) | 进阶 | v1 功能 done | 方案、开发、浏览器验收和总控验证闭环 |
-| [04 · PRD 变化与影响分析](cases/04-prd-change-impact.md) | 进阶 | 旧功能 review_required | 保留旧事实，主动阻止沿用过期规划 |
-| [05 · 重规划与最终交付](cases/05-replan-and-final-delivery.md) | 完整闭环 | 3 个功能全部 done | 拆分依赖、替代旧 AC、逐功能重新交付 |
+| [01 · PRD 与原型基线](cases/01-prd-and-prototype-baseline.md) | 只冻结输入，不开发 | 来源已冻结，尚未分析 | 不把“收到文档”伪装成“已理解” |
+| [02 · 原型分析与功能拆解](cases/02-prototype-analysis-and-planning.md) | 先给功能与 AC，再确认 | 原型 ready，功能 not_started | 用真实状态证据拆出用户结果和 AC |
+| [03 · 交付第一个功能](cases/03-first-delivery.md) | 按 AC 实现并提交证据 | v1 功能 done | 方案、开发、浏览器验收和总控验证闭环 |
+| [04 · PRD 变化与影响分析](cases/04-prd-change-impact.md) | 先分析影响，不直接改代码 | 旧功能 review_required | 保留旧事实，主动阻止沿用过期规划 |
+| [05 · 重规划与最终交付](cases/05-replan-and-final-delivery.md) | 重排依赖并逐项交付 | 3 个功能全部 done | 拆分依赖、替代旧 AC、逐功能重新交付 |
 
 ## 最终效果
 
@@ -36,6 +75,8 @@ node ../../scripts/mf-dev-flow.mjs dashboard
 ![旧 AC、v2 AC 和三个完成的功能同屏](screenshots/case-05/dashboard-final-feature-group.png)
 
 ## 切换任意里程碑
+
+以下命令只用于阅读已经冻结的示例状态，不会重新执行开发：
 
 ```bash
 node scripts/select-case.mjs case-01
